@@ -8,7 +8,7 @@
 	sleep
 	clear
 
-	va := 30
+	va := 2
 	vb := 30
 	vc := text_splash_title
 	draw_text_ns
