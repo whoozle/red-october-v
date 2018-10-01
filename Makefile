@@ -6,7 +6,7 @@ all: game.hex
 
 $(PREFIX)/tiles.8o: Makefile\
 assets/tiles/*
-		./generate-texture.py assets/tiles/splash.png splash 2 16 > $@
+		./generate-texture.py --map0=2 --map2=1 assets/tiles/splash.png splash 2 16 > $@
 
 $(PREFIX)/font.8o $(PREFIX)/font-data.8o: Makefile generate-font.py assets/font/5.font
 		./generate-font.py assets/font/5.font font 1100 $(PREFIX)
