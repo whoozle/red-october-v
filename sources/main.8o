@@ -20,6 +20,8 @@
 	hires
 	plane 3
 
+	splash_draw
+
 	loop
 	again
 

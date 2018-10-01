@@ -1,0 +1,94 @@
+:const draw_text_line_interval 7
+
+: text_get_offset
+	i := long data_text_index
+	i += vc
+	i += vc
+	load v2 - v3
+
+	v0 := data_text_hi
+	v1 := data_text_lo
+
+	v1 += v2
+	v0 += vf
+	v0 += v3
+	return
+
+: draw_text
+	i := draw_text_last_x
+	save va - va
+
+	text_get_offset
+
+	i := draw_text_instruction_addr
+	save v1
+	v7 := 1
+
+: draw_text_loop
+	0xf0 0x00 #i := long XXXX
+: draw_text_instruction_addr
+	0 0
+
+	load vc - vc
+	if vc == 0 then return
+
+	_draw_font_char
+	va += v0
+
+	i := draw_text_instruction_addr
+	load v1
+	v1 += v7 #+1
+	v0 += vf
+	i := draw_text_instruction_addr
+	save v1
+
+	if vc == 0xff begin
+		i := draw_text_last_x
+		load va - va
+		vb += draw_text_line_interval
+		jump draw_text_loop
+	end
+
+#	i := long audio_text_beep
+#	audio_play_sync
+
+	jump draw_text_loop
+
+: draw_text_ns
+	i := draw_text_last_x
+	save va - va
+
+	text_get_offset
+
+	i := draw_text_ns_instruction_addr
+	save v1
+	v7 := 1
+
+: draw_text_ns_loop
+	0xf0 0x00 #i := long XXXX
+: draw_text_ns_instruction_addr
+	0 0
+
+	load vc - vc
+	if vc == 0 then return
+
+	_draw_font_char
+	va += v0
+
+	i := draw_text_ns_instruction_addr
+	load v1
+	v1 += v7 #+1
+	v0 += vf
+	i := draw_text_ns_instruction_addr
+	save v1
+
+	if vc == 0xff begin
+		i := draw_text_last_x
+		load va - va
+		vb += draw_text_line_interval
+	end
+
+	jump draw_text_ns_loop
+
+: draw_text_last_x
+	0

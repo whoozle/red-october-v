@@ -1,0 +1,17 @@
+: splash_draw
+	clear
+
+	i := long tile_splash_data
+	draw_fullscreen_tile
+
+	va := 120
+	sleep
+	clear
+
+	va := 30
+	vb := 30
+	vc := text_splash_title
+	draw_text_ns
+
+	va := 120
+	jump sleep
