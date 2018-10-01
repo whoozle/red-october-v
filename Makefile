@@ -12,7 +12,7 @@ $(PREFIX)/font.8o $(PREFIX)/font-data.8o: Makefile generate-font.py assets/font/
 		./generate-font.py assets/font/5.font font 1100 $(PREFIX)
 
 $(PREFIX)/texts.8o $(PREFIX)/texts_data.8o: Makefile assets/en.json generate-text.py
-		./generate-text.py $(PREFIX) 2000 assets/en.json \
+		./generate-text.py $(PREFIX) 1000 assets/en.json \
 
 $(PREFIX)/signature.8o: Makefile ./generate-string.py
 		./generate-string.py "DEFINITELY NO FISH HERE ©COWNAMEDSQUIRREL 2018" > $@
