@@ -1,9 +1,39 @@
+:const battle_menu_x 10
+:const battle_menu_y 34
+:const sfx_index_menu 0
+
 : battle_menu
+	v0 := 0
+	i := battle_menu_pos
+	save v0 - v0
+
+	va := battle_menu_x
+	vb := 34
+	vc := text_battle_menu_attack
+
+	draw_text_ns
+	va := battle_menu_x
+	vb := 41
+	vc := text_battle_menu_skill
+	draw_text_ns
+
+	va := battle_menu_x
+	vb := 48
+	vc := text_battle_menu_charge
+	draw_text_ns
+
+	va := battle_menu_x
+	vb := 55
+	vc := text_battle_menu_escape
+	draw_text_ns
+
+	battle_menu_draw_highlight
+
 	loop
 		sound_tick
 		v0 := 5
 		if v0 key begin
-			va := 0
+			va := sfx_index_menu
 			sfx_play
 
 			loop
@@ -13,3 +43,32 @@
 			again
 		end
 	again
+
+: battle_menu_highlight
+0xff 0xff 0xff 0xff 0xff 0xff 0xff 0
+0xff 0xff 0xff 0xff 0xff 0xff 0xff 0
+
+: battle_menu_pos
+	0
+
+: battle_menu_draw_highlight
+	i := battle_menu_pos
+	load v0 - v0
+	v1 := v0
+	v1 += v1
+	v1 += v1
+	v1 += v1 # * 8
+	v1 -= v9 # * 7
+	v1 += battle_menu_y
+	v0 := battle_menu_x
+	v0 += -1
+	v1 += -1
+	i := battle_menu_highlight
+	v2 := 6
+	loop
+		sprite v0 v1 8
+		v0 += 8
+		v2 += -1
+		if v2 != 0 then
+	again
+	return
