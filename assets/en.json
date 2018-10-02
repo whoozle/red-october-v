@@ -1,3 +1,13 @@
 {
-	"splash_title": "PREVIOUSLY ON RED OCTOBER..."
+	"splash_title": "PREVIOUSLY ON RED OCTOBER...",
+
+	"battle_menu_attack": "ATTACK",
+	"battle_menu_skill": "SKILL",
+	"battle_menu_skill_repair": "REPAIR",
+	"battle_menu_skill_emp_shield": "EMP SHIELD",
+	"battle_menu_skill_ice_shield": "ICE SHIELD",
+	"battle_menu_skill_hack": "HACK",
+	"battle_menu_skill_sabotage": "SABOTAGE",
+	"battle_menu_guard": "GUARD",
+	"battle_menu_escape": "ESCAPE"
 }

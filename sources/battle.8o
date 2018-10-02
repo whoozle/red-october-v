@@ -1,0 +1,15 @@
+: battle_menu
+	loop
+		sound_tick
+		v0 := 5
+		if v0 key begin
+			va := 0
+			sfx_play
+
+			loop
+				sound_tick
+				v0 := 5
+				if v0 key then
+			again
+		end
+	again

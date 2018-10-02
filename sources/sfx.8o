@@ -1,0 +1,51 @@
+: sfx_table
+	offset audio_menu
+	:byte audio_menu_size
+
+: sfx_timer
+	0
+
+: sfx_play_next_addr
+	0xf0 0x00 # i := long sfx addr
+: sfx_next_addr
+	0x00 0x00
+	audio
+	vf := 2
+	buzzer := vf
+	delay := vf
+
+	i := sfx_next_addr
+	load v0 - v1
+	vf := 16
+	v1 += vf
+	v0 += vf
+	save v0 - v1
+
+	return
+
+
+: sfx_play
+	i := sfx_table
+	i += va
+	i += va
+	i += va
+	load v0 - v2
+	i := sfx_next_addr
+	save v0 - v1
+	i := sfx_timer
+	save v2 - v2
+
+: sound_tick
+: sfx_play_next
+	vf := delay
+	if vf == 0 begin
+		i := sfx_timer
+		load vf - vf
+		if vf != 0 begin
+			vf += -1
+			save vf - vf
+
+			jump sfx_play_next_addr
+		end
+	end
+	return

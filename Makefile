@@ -17,11 +17,15 @@ $(PREFIX)/texts.8o $(PREFIX)/texts_data.8o: Makefile assets/en.json generate-tex
 $(PREFIX)/signature.8o: Makefile ./generate-string.py
 		./generate-string.py "DEFINITELY NO FISH HERE ©COWNAMEDSQUIRREL 2018" > $@
 
+$(PREFIX)/sfx.8o: Makefile ./generate-sfx.py
+		./generate-sfx.py -c 0 assets/sfx/menu4000.wav menu > $@
+
 game.8o: Makefile \
 $(PREFIX)/font.8o \
 $(PREFIX)/texts.8o \
 $(PREFIX)/texts_data.8o \
 $(PREFIX)/tiles.8o \
+$(PREFIX)/sfx.8o \
 $(PREFIX)/signature.8o \
 assets/* assets/*/* sources/*.8o generate-texture.py
 		cat $(PREFIX)/texts.8o > $@
@@ -30,7 +34,11 @@ assets/* assets/*/* sources/*.8o generate-texture.py
 		cat sources/utils.8o >> $@
 		cat sources/tiles.8o >> $@
 		cat sources/splash.8o >> $@
+		cat sources/battle.8o >> $@
 		cat $(PREFIX)/font.8o >> $@
+
+		cat $(PREFIX)/sfx.8o >> $@
+		cat sources/sfx.8o >> $@
 
 		cat $(PREFIX)/tiles.8o >> $@
 		cat $(PREFIX)/font_data.8o >> $@
@@ -45,6 +53,9 @@ game.hex: game.bin ./generate-hex.py
 
 xclip: game.hex
 	cat game.hex | xclip
+
+xclip-src: game.8o
+	cat game.8o | xclip
 
 pbcopy: game.hex
 	cat game.hex | pbcopy
