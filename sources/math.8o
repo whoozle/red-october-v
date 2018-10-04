@@ -57,5 +57,4 @@
 	ve += v4
 	v0 := ve
 
-	:breakpoint result
 	return
