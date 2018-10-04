@@ -1,0 +1,61 @@
+: f8_mul_split
+	v0 := va
+	v1 := va
+
+	vf := 15
+	v1 &= vf
+
+	v0 >>= v0
+	v0 >>= v0
+	v0 >>= v0
+	v0 >>= v0
+	return
+
+: f8_mul_n
+	v4 := 0
+	v5 := 1
+	loop
+		vf := va
+		vf &= v5
+		if vf != 0 then
+			v4 += vb
+		vb <<= vb
+		va >>= va
+		if va != 0 then
+	again
+	return
+
+: f8_mul_n_shift_4
+	f8_mul_n
+	v4 += 15
+	v4 >>= v4
+	v4 >>= v4
+	v4 >>= v4
+	v4 >>= v4
+	return
+
+: f8_mul
+	f8_mul_split
+	v2 := v0
+	v3 := v1
+	va := vb
+	f8_mul_split
+
+	va := v0
+	vb := v2
+	f8_mul_n
+	ve := v4
+
+	va := v0
+	vb := v3
+	f8_mul_n_shift_4
+	ve += v4
+
+	va := v1
+	vb := v2
+	f8_mul_n_shift_4
+	ve += v4
+	v0 := ve
+
+	:breakpoint result
+	return
