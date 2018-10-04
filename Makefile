@@ -30,6 +30,7 @@ $(PREFIX)/signature.8o \
 assets/* assets/*/* sources/*.8o generate-texture.py
 		cat $(PREFIX)/texts.8o > $@
 		cat sources/main.8o >> $@
+		cat sources/math.8o >> $@
 		cat sources/text.8o >> $@
 		cat sources/utils.8o >> $@
 		cat sources/tiles.8o >> $@
