@@ -1,6 +1,9 @@
 :const battle_menu_x 10
 :const battle_menu_y 34
 :const sfx_index_menu 0
+:const battle_tick_freq_base	0x10
+:const battle_tick_freq_random	0x0f
+
 
 : menu_check_key
 	ve := va
@@ -34,6 +37,9 @@
 
 
 : battle_menu
+	clear
+	battle_draw_init
+
 	v0 := 0
 	i := battle_menu_pos
 	save v0 - v0
@@ -101,8 +107,6 @@
 	again
 	return
 
-:const battle_tick_freq_base 10
-
 : battle_tick_last_t
 	0
 
@@ -111,6 +115,68 @@
 	0
 	0
 	0
+
+: battle_object_tiles
+	0
+	0
+	0
+	0
+
+: battle_object_draw
+	i := battle_object_tiles
+	i += vd
+	load v0 - v0
+
+	i := long tile_robot_tank_front_data
+	i += v0
+
+	v0 := vd
+	v0 <<= v0
+	v0 <<= v0
+	v0 <<= v0
+	v1 := v0
+	v0 <<= v0
+	v0 += v1
+	v1 := 10
+	v0 += 16
+	sprite v0 v1 0
+	return
+
+: battle_object_swap_tiles
+	i := battle_object_tiles
+	i += vd
+	load v0 - v0
+	v1 := 64
+	v0 =- v1
+	save v0 - v0
+	return
+
+: battle_object_tick
+	i := battle_tick_delay
+	i += vd
+	load v0 - v0
+	if v0 != 0 begin
+		v0 += -1
+		save v0 - v0
+		return
+	end
+	v0 := random battle_tick_freq_random
+	v0 += battle_tick_freq_base
+	save v0 - v0
+
+	battle_object_draw
+	battle_object_swap_tiles
+	battle_object_draw
+	return
+
+: battle_draw_init
+	vd := 0
+	loop
+		battle_object_draw
+		vd += 1
+		if vd != 4 then
+	again
+	return
 
 : battle_tick
 	i := battle_tick_last_t
@@ -126,35 +192,9 @@
 
 	vd := 0
 	loop
-		battle_tick_object
+		battle_object_tick
 		vd += 1
 		if vd != 4 then
 	again
 	return
 
-: battle_tick_object
-	i := battle_tick_delay
-	i += vd
-	load v0 - v0
-	if v0 != 0 begin
-		v0 += -1
-		save v0 - v0
-		return
-	end
-	v0 := random 0x3
-	v0 += battle_tick_freq_base
-	save v0 - v0
-
-	i := long tile_robot_tank_front_data
-	v0 := vd
-	v0 <<= v0
-	v0 <<= v0
-	v0 <<= v0
-	v1 := v0
-	v0 <<= v0
-	v0 += v1
-	v1 := 10
-	v0 += 16
-	sprite v0 v1 0
-
-	return
