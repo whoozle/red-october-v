@@ -1,0 +1,5 @@
+: battle_object_tiles
+	offset tile_robot_tank_front_data
+	offset tile_robot_engineer_front_data
+	offset tile_robot_hacker_front_data
+	offset tile_robot_repairbot_front_data

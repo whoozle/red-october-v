@@ -116,19 +116,46 @@
 	0
 	0
 
-: battle_object_tiles
+: battle_object_animation
 	0
 	0
 	0
 	0
 
-: battle_object_draw
-	i := battle_object_tiles
+0xde 0xde 0xde
+: battle_object_type
+	:byte battle_robot_tank
+	:byte battle_robot_engineer
+	:byte battle_robot_hacker
+	:byte battle_robot_repairbot
+
+#inline it?
+: battle_object_get_tile
+	i := battle_object_type
+	i += vd
+	load v0 - v0
+	v0 += v0
+
+	i := long battle_object_tiles
+	i += v0
+	load v0 - v1
+
+	i := battle_object_get_tile_addr
+	save v0 - v1
+
+	i := battle_object_animation
 	i += vd
 	load v0 - v0
 
-	i := long tile_robot_tank_front_data
+	0xf0 0x00
+: battle_object_get_tile_addr
+	0 0
+	:breakpoint addr
 	i += v0
+	return
+
+: battle_object_draw
+	battle_object_get_tile
 
 	v0 := vd
 	v0 <<= v0
@@ -143,7 +170,7 @@
 	return
 
 : battle_object_swap_tiles
-	i := battle_object_tiles
+	i := battle_object_animation
 	i += vd
 	load v0 - v0
 	v1 := 64
@@ -197,4 +224,3 @@
 		if vd != 4 then
 	again
 	return
-

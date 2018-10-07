@@ -42,6 +42,7 @@ $(PREFIX)/signature.8o \
 assets/* assets/*/* sources/*.8o generate-texture.py
 		cat $(PREFIX)/texts.8o > $@
 		cat sources/main.8o >> $@
+		cat sources/objects.8o >> $@
 		cat sources/math.8o >> $@
 		cat sources/text.8o >> $@
 		cat sources/utils.8o >> $@
@@ -56,6 +57,7 @@ assets/* assets/*/* sources/*.8o generate-texture.py
 		cat $(PREFIX)/texts_data.8o >> $@ #org 1000
 		cat $(PREFIX)/font_data.8o >> $@
 		cat $(PREFIX)/tiles.8o >> $@
+		cat sources/battle_object_tiles.8o >> $@
 		cat $(PREFIX)/signature.8o >> $@
 
 game.bin: game.8o

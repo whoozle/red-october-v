@@ -1,0 +1,5 @@
+
+:const battle_robot_tank 		0
+:const battle_robot_engineer 	1
+:const battle_robot_hacker 		2
+:const battle_robot_repairbot	3
