@@ -75,5 +75,8 @@ xclip-src: game.8o
 pbcopy: game.hex
 	cat game.hex | pbcopy
 
+xomod: game.bin
+	xomod game.bin
+
 clean:
 		rm -f game.bin game.8o game.hex .compiled/*
