@@ -13,5 +13,5 @@
 	vc := text_splash_title
 	draw_text_ns
 
-	va := 120
+	va := 255
 	jump sleep
