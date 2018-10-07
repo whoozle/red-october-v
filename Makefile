@@ -4,6 +4,9 @@ PREFIX := .compiled
 
 all: game.hex
 
+$(PREFIX):
+	mkdir -p $(PREFIX)
+
 $(PREFIX)/tiles.8o: Makefile\
 assets/tiles/*
 		./generate-texture.py --map0=2 --map2=1 assets/tiles/splash.png splash 2 16 > $@
@@ -29,6 +32,7 @@ $(PREFIX)/sfx.8o: Makefile ./generate-sfx.py
 		./generate-sfx.py -c 0 assets/sfx/menu4000.wav menu > $@
 
 game.8o: Makefile \
+$(PREFIX) \
 $(PREFIX)/font.8o \
 $(PREFIX)/texts.8o \
 $(PREFIX)/texts_data.8o \
