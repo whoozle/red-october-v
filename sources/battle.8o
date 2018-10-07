@@ -150,7 +150,6 @@
 	0xf0 0x00
 : battle_object_get_tile_addr
 	0 0
-	:breakpoint addr
 	i += v0
 	return
 
