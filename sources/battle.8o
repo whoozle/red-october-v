@@ -150,9 +150,11 @@
 	v0 <<= v0
 	v0 <<= v0
 	v0 <<= v0
+	v1 := v0
 	v0 <<= v0
-	v0 <<= v0
+	v0 += v1
 	v1 := 10
+	v0 += 16
 	sprite v0 v1 0
 
 	return
