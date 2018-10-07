@@ -7,8 +7,8 @@ all: game.hex
 $(PREFIX)/tiles.8o: Makefile\
 assets/tiles/*
 		./generate-texture.py --map0=2 --map2=1 assets/tiles/splash.png splash 2 16 > $@
-		./generate-texture.py assets/tiles/tank_front.png robot_tank_front 2 16 >> $@
-		./generate-texture.py assets/tiles/tank_front_b.png robot_tank_front_b 2 16 >> $@
+		./generate-texture.py --map1=0 assets/tiles/tank_front.png robot_tank_front 2 16 >> $@
+		./generate-texture.py --map1=0 assets/tiles/tank_front_b.png robot_tank_front_b 2 16 >> $@
 
 $(PREFIX)/font.8o $(PREFIX)/font-data.8o: Makefile generate-font.py assets/font/5.font
 		./generate-font.py assets/font/5.font font 1100 $(PREFIX)
