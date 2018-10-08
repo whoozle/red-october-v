@@ -19,6 +19,9 @@ assets/tiles/*
 		./generate-texture.py --map1=0 assets/tiles/repairbot_front.png robot_repairbot_front 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/repairbot_front_b.png robot_repairbot_front_b 2 16 >> $@
 
+$(PREFIX)/map.8o $(PREFIX)/map_data.8o: Makefile generate-map.py assets/map.json
+		./generate-map.py assets/map.json 1000 $(PREFIX)
+
 $(PREFIX)/font.8o $(PREFIX)/font-data.8o: Makefile generate-font.py assets/font/5.font
 		./generate-font.py assets/font/5.font font 1100 $(PREFIX)
 
@@ -34,6 +37,7 @@ $(PREFIX)/sfx.8o: Makefile ./generate-sfx.py
 game.8o: Makefile \
 $(PREFIX) \
 $(PREFIX)/font.8o \
+$(PREFIX)/map.8o \
 $(PREFIX)/texts.8o \
 $(PREFIX)/texts_data.8o \
 $(PREFIX)/tiles.8o \
