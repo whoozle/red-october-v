@@ -10,7 +10,7 @@ $(PREFIX):
 $(PREFIX)/tiles.8o: Makefile\
 assets/tiles/*
 		echo ":org 0xc000" > $@
-		./generate-texture.py assets/tileset.png tileset 2 8 >> $@
+		./generate-texture.py --map1=0 assets/tileset.png tileset 2 8 >> $@
 		./generate-texture.py --map0=2 --map2=1 assets/tiles/splash.png splash 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/tank_front.png robot_tank_front 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/tank_front_b.png robot_tank_front_b 2 16 >> $@
