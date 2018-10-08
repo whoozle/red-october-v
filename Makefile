@@ -20,7 +20,7 @@ assets/tiles/*
 		./generate-texture.py --map1=0 assets/tiles/repairbot_front_b.png robot_repairbot_front_b 2 16 >> $@
 
 $(PREFIX)/map.8o $(PREFIX)/map_data.8o: Makefile generate-map.py assets/map.json
-		./generate-map.py assets/map.json 1000 $(PREFIX)
+		./generate-map.py assets/map.json 3000 $(PREFIX)
 
 $(PREFIX)/font.8o $(PREFIX)/font-data.8o: Makefile generate-font.py assets/font/5.font
 		./generate-font.py assets/font/5.font font 1100 $(PREFIX)
@@ -42,10 +42,12 @@ $(PREFIX)/texts.8o \
 $(PREFIX)/texts_data.8o \
 $(PREFIX)/tiles.8o \
 $(PREFIX)/sfx.8o \
+$(PREFIX)/map_data.8o \
 $(PREFIX)/signature.8o \
 assets/* assets/*/* sources/*.8o generate-texture.py
 		cat $(PREFIX)/texts.8o > $@
 		cat sources/main.8o >> $@
+		cat $(PREFIX)/map.8o >> $@
 		cat sources/objects.8o >> $@
 		cat sources/math.8o >> $@
 		cat sources/text.8o >> $@
@@ -58,6 +60,7 @@ assets/* assets/*/* sources/*.8o generate-texture.py
 		cat $(PREFIX)/sfx.8o >> $@
 		cat sources/sfx.8o >> $@
 
+		cat $(PREFIX)/map_data.8o >> $@
 		cat $(PREFIX)/texts_data.8o >> $@ #org 1000
 		cat $(PREFIX)/font_data.8o >> $@
 		cat $(PREFIX)/tiles.8o >> $@
