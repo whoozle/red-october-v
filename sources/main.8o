@@ -1,3 +1,4 @@
+
 :macro offset ADDR {
 	:calc a1 { 0xFF & ( ADDR >> 8 ) }
 	:calc a2 { 0xFF & ADDR      }
@@ -21,10 +22,21 @@
 	plane 3
 
 #	splash_draw
-
-	battle_menu
+#	battle_menu
+	map_render
 
 	loop
 	
 	again
 
+:const move_speed_left -2
+:const move_speed_right 2
+:const move_speed_up 2
+:const move_speed_down 2
+
+: screen_pos
+: screen_y 0
+: screen_x 0
+
+: party_current_pos
+	12 12

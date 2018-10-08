@@ -1,0 +1,484 @@
+: map_get_screen_index
+	i := screen_pos
+	load v0 - v1
+	v0 <<= v0
+	v0 <<= v0
+	v0 <<= v0
+	v0 |= v1
+	v0 <<= v0
+	return
+
+: map_offset_increment
+	0 1
+
+: render_line
+	v0 := 1
+	:next render_line_count
+	v1 := 0
+	i := map_offset_increment
+	load v7 - v8
+	loop
+		0xf0 0x00
+		: map_current_offset
+		0x00 0x00 #map offset + starting offset
+
+		load v4 - v4 #current tile
+
+		i := map_current_offset
+		load v5 - v6
+		v6 += v8
+		v5 += vf
+		v5 += v7
+		save v5 - v6
+
+		if v4 == 0 then
+			jump next_tile
+
+		v4 += -1
+		v3 := v4
+
+		#hi of v3:v4 << 4
+		v3 >>= v3
+		v3 >>= v3
+		v3 >>= v3
+		v3 >>= v3
+
+		v3 += 0xc0 #tiles hi offset
+
+		#lo of v3:v4 << 4
+		v4 <<= v4
+		v4 <<= v4
+		v4 <<= v4
+		v4 <<= v4
+
+		i := current_tile_offset
+		save v3 - v4
+
+		0xf0 0x00
+		: current_tile_offset
+		00 00
+
+		sprite va vb 8
+
+	: next_tile
+		:next map_line_dx
+		va += 0
+
+		:next map_line_dy
+		vb += 0
+
+		v1 += -1
+		if v1 != 0 then
+	again
+
+	return
+
+: map_is_wall
+	i := screen_pos
+	load v0 - v1
+
+	v0 <<= v0
+	v0 <<= v0
+	v0 <<= v0 #8 * screen_y
+
+	v1 <<= v1
+	v1 <<= v1
+	v1 <<= v1
+	v1 <<= v1 #16 * screen_x
+
+	#screen pos == active screen coordinates in screen coordinate system (0-8)
+
+	v2 := vb #screen y
+	v2 >>= v2
+	v2 >>= v2
+	v2 >>= v2 # y / 8
+
+	v3 := va
+	v3 >>= v3
+	v3 >>= v3
+	v3 >>= v3 # x / 8
+
+	v0 += v2 #y += pos_y / 8
+	v1 += v3 #x += pos_x / 8
+	# now we have global tile coordinates here v0 - y, v1 - x
+
+	v3 := 7
+	v3 &= v1 #x[0-8]bit in wall
+	i := map_wall_bits
+	i += v3
+	load v3 - v3
+
+	v1 >>= v1
+	v1 >>= v1
+	v1 >>= v1 #x / 8, and y pitch is only 16
+
+	v4 := v0
+
+	v4 <<= v4
+	v4 <<= v4
+	v4 <<= v4
+	v4 <<= v4
+
+	v0 >>= v0
+	v0 >>= v0
+	v0 >>= v0
+	v0 >>= v0
+
+	v1 |= v4
+	v0 += 0x30 #wall_data_hi
+
+	i := map_wall_data_offset
+	save v0 - v1
+
+	0xf0 0x00
+: map_wall_data_offset
+	0x00 0x00
+	load v0 - v0
+	v0 &= v3
+	return
+
+: map_wall_bits
+0x80 0x40 0x20 0x10 0x08 0x04 0x02 0x01
+
+: map_get_offset
+	i := screen_pos
+	load v0 - v1
+
+	v0 <<= v0
+	v0 <<= v0
+	#1024 bytes per 128x64 map
+
+	v1 <<= v1
+	v1 <<= v1
+	v1 <<= v1
+	v1 <<= v1
+
+	v0 += map_data_hi
+	return
+
+: map_render
+	clear
+
+	v0 := 16
+	i := render_line_count
+	save v0 - v0
+
+	map_get_offset
+	i := map_current_offset
+	save v0 - v1
+
+	v0 := 8
+	i := map_line_dx
+	save v0 - v0
+
+	v0 := 0
+	i := map_line_dy
+	save v0 - v0
+
+	v0 := 0
+	v1 := 1
+	i := map_offset_increment
+	save v0 - v1
+
+	vc := 0
+	vd := 0x70 # map_width - 16
+
+	loop
+		va := 0
+		vb := vc
+		render_line
+
+		i := map_current_offset
+		load v0 - v1
+		v1 += vd
+		v0 += vf
+		save v0 - v1
+
+		vc += 8
+
+		if vc < 64 then
+	again
+
+	jump objects_screen_entered
+
+: map_scroll_offset
+0 0
+
+: map_scroll_generic_h
+	v0 := 0
+	i := map_line_dx
+	save v0 - v0
+
+	v0 := 8
+	i := map_line_dy
+	save v0 - v0
+
+	v0 := 0
+	v1 := 128
+	i := map_offset_increment
+	save v0 - v1
+
+	v0 := 0
+	i := map_initial_scroll_offset_hi
+	save v0 - v0
+
+	v0 := 8
+	i := render_line_count
+	save v0 - v0
+
+	v0 := 16
+	i := map_scroll_generic_count
+	save v0 - v0
+	return
+
+: map_scroll_generic_v
+	v0 := 8
+	i := map_line_dx
+	save v0 - v0
+
+	v0 := 0
+	i := map_line_dy
+	save v0 - v0
+
+	v0 := 0
+	v1 := 1
+	i := map_offset_increment
+	save v0 - v1
+
+	v0 := 16
+	i := render_line_count
+	save v0 - v0
+
+	v0 := 8
+	i := map_scroll_generic_count
+	save v0 - v0
+	return
+
+
+: map_scroll_generic
+	map_get_offset
+	i := map_scroll_offset
+	:next map_initial_scroll_offset_lo
+	v2 := 0
+	v1 += v2
+	v0 += vf
+	:next map_initial_scroll_offset_hi
+	v0 += 0
+
+	save v0 - v1
+	i := map_current_offset
+	save v0 - v1
+
+	#music_play_sync
+	:next map_scroll_generic_count
+	vc := 0
+	loop
+		:next map_scroll_scroll_1
+		scroll-left
+		va := 1
+		sleep
+		:next map_scroll_scroll_2
+		scroll-left
+		sleep
+		#music_play
+
+		:next map_scroll_line_x
+		va := 0
+		:next map_scroll_line_y
+		vb := 0
+		render_line
+
+		i := map_scroll_offset
+		load v0 - v1
+		:next map_scroll_offset_delta_lo
+		v2 := 0
+		v1 += v2
+		v0 += vf
+
+		:next map_scroll_offset_delta_dir
+		v0 += 0
+		save v0 - v1
+		i := map_current_offset
+		save v0 - v1
+
+		vc += -1
+		if vc != 0 then
+	again
+	#music_play_sync
+	jump objects_screen_entered
+
+: map_scroll_left
+	i := screen_x
+	load v0 - v0
+	if v0 == 0 then
+		return
+
+	v0 += -1
+	save v0 - v0
+
+	i := party_current_pos
+	load va - vb
+	va := 120
+	save va - vb
+
+	v0 := 15 #start from right column
+	i := map_initial_scroll_offset_lo
+	save v0 - v0
+
+	v0 := 0  #render tiles at x = 0
+	i := map_scroll_line_x
+	save v0 - v0
+
+	i := map_scroll_line_y # at y = 0
+	save v0 - v0
+
+	v0 := 0xfb #scroll-left instruction
+	i := map_scroll_scroll_1
+	save v0 - v0
+	i := map_scroll_scroll_2
+	save v0 - v0
+
+	v0 := -1
+	i := map_scroll_offset_delta_lo
+	save v0 - v0
+	i := map_scroll_offset_delta_dir
+	save v0 - v0
+
+	map_scroll_generic_h
+	jump map_scroll_generic
+
+: map_scroll_right
+	i := screen_x
+	load v0 - v0
+	if v0 == 7 then
+		return
+
+	v0 += 1
+	save v0 - v0
+
+	i := party_current_pos
+	load va - vb
+	va := move_speed_right # just a little gap
+	save va - vb
+
+	v0 := 0
+	i := map_initial_scroll_offset_lo
+	save v0 - v0
+
+	v0 := 120
+	i := map_scroll_line_x
+	save v0 - v0
+
+	v0 := 0
+	i := map_scroll_line_y # render tiles at (120, 0)
+	save v0 - v0
+
+	v0 := 0xfc #scroll-left
+	i := map_scroll_scroll_1
+	save v0 - v0
+
+	i := map_scroll_scroll_2
+	save v0 - v0
+
+	v0 := 1
+	i := map_scroll_offset_delta_lo
+	save v0 - v0
+
+	v0 := 0
+	i := map_scroll_offset_delta_dir
+	save v0 - v0
+
+	map_scroll_generic_h
+	jump map_scroll_generic
+
+: map_scroll_down
+	i := screen_y
+	load v0 - v0
+
+	v0 += 1
+	save v0 - v0
+
+	i := party_current_pos
+	load va - vb
+	vb := 0
+	save va - vb
+
+	v0 := 0
+	i := map_initial_scroll_offset_lo
+	save v0 - v0
+	i := map_initial_scroll_offset_hi
+	save v0 - v0
+
+	v0 := 0
+	i := map_scroll_line_x
+	save v0 - v0
+
+	v0 := 56
+	i := map_scroll_line_y # render tiles at (120, 0)
+	save v0 - v0
+
+	v0 := 0xd4 #scroll-up 4
+	i := map_scroll_scroll_1
+	save v0 - v0
+
+	i := map_scroll_scroll_2
+	save v0 - v0
+
+	v0 := 128
+	i := map_scroll_offset_delta_lo
+	save v0 - v0
+
+	v0 := 0
+	i := map_scroll_offset_delta_dir
+	save v0 - v0
+
+	map_scroll_generic_v
+	jump map_scroll_generic
+
+: map_scroll_up
+	i := screen_y
+	load v0 - v0
+	if v0 == 0 then
+		return
+
+	v0 += -1
+	save v0 - v0
+
+	i := party_current_pos
+	load va - vb
+	vb := 40
+	save va - vb
+
+	v0 := 0x80
+	i := map_initial_scroll_offset_lo
+	save v0 - v0
+
+	v0 := 0x03 # -7 * 128 (0x380)
+	i := map_initial_scroll_offset_hi
+	save v0 - v0
+
+	v0 := 0
+	i := map_scroll_line_x
+	save v0 - v0
+
+	v0 := 0
+	i := map_scroll_line_y # render tiles at (120, 0)
+	save v0 - v0
+
+	v0 := 0xc4 #scroll-down 4
+	i := map_scroll_scroll_1
+	save v0 - v0
+
+	i := map_scroll_scroll_2
+	save v0 - v0
+
+	v0 := -128
+	i := map_scroll_offset_delta_lo
+	save v0 - v0
+
+	v0 := -1
+	i := map_scroll_offset_delta_dir
+	save v0 - v0
+
+	map_scroll_generic_v
+	jump map_scroll_generic

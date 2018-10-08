@@ -3,3 +3,6 @@
 :const battle_robot_engineer 	1
 :const battle_robot_hacker 		2
 :const battle_robot_repairbot	3
+
+: objects_screen_entered
+	return
