@@ -1,0 +1,28 @@
+:macro offset ADDR {
+	:calc a1 { 0xFF & ( ADDR >> 8 ) }
+	:calc a2 { 0xFF & ADDR      }
+	:byte a1
+	:byte a2
+}
+
+:macro offsethi ADDR {
+	:calc a1 { 0xFF & ( ADDR >> 8 ) }
+	:byte a1
+}
+
+:macro offsetlo ADDR {
+	:calc a1 { 0xFF & ADDR }
+	:byte a1
+}
+
+:const move_speed_left -2
+:const move_speed_right 2
+:const move_speed_up 2
+:const move_speed_down 2
+
+: screen_pos
+: screen_y 0
+: screen_x 0
+
+: party_current_pos
+	12 12

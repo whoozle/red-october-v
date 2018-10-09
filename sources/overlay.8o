@@ -1,0 +1,46 @@
+#loads overlay 0xc000 + 0x800 * id with size 0x800
+: overlay_increment_address_v9
+	load v1 - v2
+	v2 += v9
+	v1 += vf
+	save v1 - v2
+	return
+
+
+: overlay_load
+	va <<= va
+	va <<= va
+	va <<= va
+	va += 0x80
+	vb := 0
+	i := overlay_source_address_ptr
+	save va - vb
+
+	v0 := 0xa8
+	v1 := 0x00
+	i := overlay_destination_address_ptr
+	save v0 - v1
+
+	vb := 0
+	v9 := 8
+	loop
+		0xf0 0x00 # i := long addr
+: overlay_source_address_ptr
+		0 0
+		load v0 - v8
+
+: overlay_destination_address_ptr
+		0 0
+		save v0 - v8
+
+		i := overlay_source_address_ptr
+		overlay_increment_address_v9
+
+		i := overlay_destination_address_ptr
+		overlay_increment_address_v9
+
+		vb += 1
+		if vb != 0 then #256 iterations
+	again
+	:breakpoint ready
+	jump 0x800

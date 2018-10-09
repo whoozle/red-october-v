@@ -2,6 +2,9 @@ PREFIX := .compiled
 
 .PHONY = all clean xclip pbcopy
 
+%.bin: %.8o
+		./octo/octo $< $@
+
 all: game.hex
 
 $(PREFIX):
@@ -36,57 +39,102 @@ $(PREFIX)/signature.8o: Makefile ./generate-string.py
 $(PREFIX)/sfx.8o: Makefile ./generate-sfx.py
 		./generate-sfx.py -c 0 assets/sfx/menu4000.wav menu > $@
 
-game.8o: Makefile \
+$(PREFIX)/common.8o: \
+Makefile \
 $(PREFIX) \
+$(PREFIX)/texts.8o \
 $(PREFIX)/font.8o \
 $(PREFIX)/map.8o \
-$(PREFIX)/texts.8o \
+sources/*.8o
+		cat sources/globals.8o > $@
+		cat $(PREFIX)/texts.8o >> $@
+		cat sources/overlay.8o >> $@
+		cat $(PREFIX)/map.8o >> $@
+		cat sources/objects.8o >> $@
+		cat sources/utils.8o >> $@
+		cat sources/text.8o >> $@
+		cat $(PREFIX)/sfx.8o >> $@ #fixme: REMOVE IT
+		cat sources/sfx.8o >> $@
+		cat $(PREFIX)/font.8o >> $@
+
+$(PREFIX)/module_8000.8o: \
+Makefile \
+$(PREFIX) \
+$(PREFIX)/common.8o \
+sources/*.8o
+		echo -e ": main\n:org 0x800\n" > $@
+		cat sources/overworld.8o >> $@
+		cat $(PREFIX)/common.8o >> $@
+		cat sources/map.8o >> $@
+		cat $(PREFIX)/texts_data.8o >> $@ #org 0x1000, can be used as guard
+		cat $(PREFIX)/font_data.8o >> $@
+
+$(PREFIX)/module_8800.8o: \
+Makefile \
+$(PREFIX) \
+$(PREFIX)/common.8o \
+$(PREFIX)/texts_data.8o \
+$(PREFIX)/font_data.8o \
+$(PREFIX)/tiles.8o \
+sources/*.8o
+		echo -e ": main\n:org 0x800\n" > $@
+		cat sources/battle.8o >> $@
+		cat $(PREFIX)/common.8o >> $@
+		cat sources/battle_menu.8o >> $@
+		cat $(PREFIX)/texts_data.8o >> $@ #org 0x1000, can be used as guard
+		cat $(PREFIX)/font_data.8o >> $@
+		cat $(PREFIX)/tiles.8o >> $@
+		cat sources/battle_object_tiles.8o >> $@
+
+
+$(PREFIX)/module_8000.hex: $(PREFIX)/module_8000.bin generate-hex.py
+		./generate-hex.py -o 1536 -s 2048 -z $< $@ #start at 0x600, size 0x800
+
+$(PREFIX)/module_8800.hex: $(PREFIX)/module_8800.bin generate-hex.py
+		./generate-hex.py -o 1536 -s 2048 -z $< $@ #start at 0x600, size 0x800
+
+game.8o: Makefile \
+$(PREFIX) \
+$(PREFIX)/common.8o \
 $(PREFIX)/texts_data.8o \
 $(PREFIX)/tiles.8o \
 $(PREFIX)/sfx.8o \
 $(PREFIX)/map_data.8o \
+$(PREFIX)/module_8000.hex \
+$(PREFIX)/module_8800.hex \
 $(PREFIX)/signature.8o \
-assets/* assets/*/* sources/*.8o generate-texture.py
-		cat $(PREFIX)/texts.8o > $@
-		cat sources/main.8o >> $@
-		cat $(PREFIX)/map.8o >> $@
-		cat sources/objects.8o >> $@
+assets/* assets/*/* sources/*.8o
+		cat sources/main.8o > $@
+		cat $(PREFIX)/common.8o >> $@
 		cat sources/math.8o >> $@
-		cat sources/text.8o >> $@
-		cat sources/utils.8o >> $@
 		cat sources/tiles.8o >> $@
 		cat sources/splash.8o >> $@
-		cat sources/battle.8o >> $@
-		cat sources/map.8o >> $@
-		cat $(PREFIX)/font.8o >> $@
-
-		cat $(PREFIX)/sfx.8o >> $@
-		cat sources/sfx.8o >> $@
 
 		cat $(PREFIX)/map_data.8o >> $@
 		cat $(PREFIX)/texts_data.8o >> $@ #org 1000
 		cat $(PREFIX)/font_data.8o >> $@
 		cat $(PREFIX)/tiles.8o >> $@
 		cat sources/battle_object_tiles.8o >> $@
+		echo ":org 0x8000" >> $@
+		cat $(PREFIX)/module_8000.hex >> $@
+		echo ":org 0x8800" >> $@
+		cat $(PREFIX)/module_8800.hex >> $@
 		cat $(PREFIX)/signature.8o >> $@
 
-game.bin: game.8o
-	./octo/octo game.8o $@
-
 game.hex: game.bin ./generate-hex.py
-	./generate-hex.py game.bin $@
+		./generate-hex.py -l main $< $@
 
 xclip: game.hex
-	cat game.hex | xclip
+		cat $< | xclip
 
 xclip-src: game.8o
-	cat game.8o | xclip
+		cat $< | xclip
 
 pbcopy: game.hex
-	cat game.hex | pbcopy
+		cat $< | pbcopy
 
 xomod: game.bin
-	xomod game.bin
+		xomod $<
 
 clean:
 		rm -f game.bin game.8o game.hex .compiled/*

@@ -1,0 +1,21 @@
+: overworld_start
+	map_render
+
+	loop
+		i := screen_pos
+		load va - vb
+		v0 := key
+		if v0 == 5 then
+			map_scroll_up
+
+		if v0 == 7 then
+			map_scroll_left
+
+		if v0 == 8 then
+			map_scroll_down
+
+		if v0 == 9 then
+			map_scroll_right
+
+	again
+	return
