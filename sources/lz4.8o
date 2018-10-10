@@ -7,9 +7,15 @@
 
 	v0 := lz4_buffer_hi
 	v1 := lz4_buffer_lo
+
 	i := lz4_write_pos
 	save v0 - v1
 
+	vd += v1
+	vc += vf
+	vc += v0 #update end pointer
+
+: lz4_unpack_next
 # read next token
 	lz4_read_byte
 
@@ -73,7 +79,7 @@
 
 	i := lz4_write_pos
 	load v0 - v1
-	:breakpoint write
+
 	v1 -= v8 #sub offset from dst pointer
 	v0 += vf
 	v0 += -1
@@ -86,7 +92,7 @@
 	loop
 		lz4_read_match_byte
 		lz4_write_byte
-		:breakpoint MATCH
+		#:breakpoint MATCH
 
 		v5 -= v8
 		v6 += vf
@@ -96,7 +102,15 @@
 		v0 |= v6
 		if v0 != 0 then
 	again
+
+	i := lz4_write_pos
+	load v0 - v1
 	:breakpoint DONE
+	if v0 < vc
+		then jump lz4_unpack_next
+
+	if v1 < vd
+		then jump lz4_unpack_next
 
 	return
 

@@ -1,7 +1,9 @@
 : main
 
-va := 0x12
+va := 0x12 #offset of packed data
 vb := 0x34
+vc := 0x08 #unpacked size
+vd := 0x00
 lz4_unpack
 
 i := long 0x4000
