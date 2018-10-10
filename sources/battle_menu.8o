@@ -69,6 +69,11 @@
 		vb := 1
 		vc := 0
 		battle_menu_handle_key
+		va := 6
+
+		menu_check_key
+		if v0 != 0 then
+			battle_menu_attack
 	again
 
 : battle_menu_pos
@@ -161,13 +166,6 @@
 	sprite v0 v1 0
 	return
 
-: battle_object_draw_highlight
-	v0 := va
-	battle_object_get_x_by_v0
-	i := long tile_highlight_16_data
-	sprite v0 v1 0
-	return
-
 : battle_object_swap_tiles
 	i := battle_object_animation
 	i += vd
@@ -222,4 +220,48 @@
 		vd += 1
 		if vd != 4 then
 	again
+	return
+
+#==== ATTACK =============================================
+: battle_object_draw_highlight
+	i := battle_menu_attack_target
+	load v0 - v0
+	battle_object_get_x_by_v0
+	i := long tile_highlight_16_data
+	sprite v0 v1 0
+	return
+
+: battle_menu_attack_target
+	0
+
+: battle_menu_attack
+	va := 0
+	i := battle_menu_attack_target
+	save va - va
+	battle_object_draw_highlight
+
+	loop
+		va := 7 #A
+		vb := -1
+		vc := 4
+		battle_menu_attack_handle_key
+		va := 9 #D
+		vb := 1
+		vc := 0
+		battle_menu_attack_handle_key
+	again
+	return
+
+: battle_menu_attack_handle_key
+	menu_check_key
+	if v0 != 0 begin
+		battle_object_draw_highlight
+		i := battle_menu_attack_target
+		load v0 - v0
+		v0 += vb
+		if v0 > 4 then
+			v0 := vc
+		save v0 - v0
+		battle_object_draw_highlight
+	end
 	return
