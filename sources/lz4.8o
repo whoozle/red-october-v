@@ -1,2 +1,33 @@
 : lz4_unpack
-return
+	i := lz4_read_pos
+	save va - vb
+
+# read next token
+	lz4_read_byte
+
+	v1 := 0xf
+
+	v5 := v0
+	v5 &= v1
+
+	v0 >>= v0
+	v0 >>= v0
+	v0 >>= v0
+	v0 >>= v0
+	v6 := v0
+	v6 &= v1
+
+	return
+
+: lz4_read_byte
+	0xf0 0x00
+: lz4_read_pos
+	0 0
+	load v0 - v0
+
+	i := lz4_read_pos
+	load v1 - v2
+	v2 += va
+	v1 += vf
+	save v1 - v2
+	return
