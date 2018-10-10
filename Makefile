@@ -2,10 +2,13 @@ PREFIX := .compiled
 
 .PHONY = all clean xclip pbcopy xclip-src xomod
 
+all: game.hex
+
 %.bin: %.8o
 		./octo/octo $< $@
 
-all: game.hex
+%.xomod: %.bin
+		xomod $<
 
 $(PREFIX):
 	mkdir -p $(PREFIX)
@@ -144,9 +147,6 @@ xclip-src: game.8o
 
 pbcopy: game.hex
 		cat $< | pbcopy
-
-xomod: game.bin
-		xomod $<
 
 clean:
 		rm -f game.bin game.8o game.hex .compiled/*
