@@ -35,7 +35,8 @@
 		jump lz4_match_copy
 
 	v6 := 0
-	if v5 == 15 begin
+	v5 += -1 #all loops below will break if underflow happened, 0 -> -1
+	if v5 == 14 begin #15 actually
 		loop
 			lz4_read_byte
 			v5 += v0
@@ -53,14 +54,12 @@
 		v6 += vf
 		v6 -= v8
 
-		v0 := v5
-		v0 |= v6
-		if v0 != 0 then
+		if vf != 0 then
 	again
 
 : lz4_match_copy
 	v5 := v7
-	v5 += 4 #minimal match length
+	v5 += 3 #4 - minimal match length -1, loop will exit on undeflow, 0 -> -1
 	v6 := 0
 
 	lz4_read_byte #add lz4_read_word
@@ -68,7 +67,7 @@
 	lz4_read_byte
 	v7 := v0
 
-	if v5 == 19 begin
+	if v5 == 18 begin # 0x0f from token + 4 - 1 = 18
 		loop
 			lz4_read_byte
 			v5 += v0
@@ -98,9 +97,7 @@
 		v6 += vf
 		v6 -= v8
 
-		v0 := v5
-		v0 |= v6
-		if v0 != 0 then
+		if vf != 0 then
 	again
 
 	i := lz4_write_pos
