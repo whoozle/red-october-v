@@ -23,7 +23,7 @@ all: game.hex
 $(PREFIX):
 	mkdir -p $(PREFIX)
 
-$(PREFIX)/tiles.8o: Makefile\
+$(PREFIX)/tiles.8o: Makefile \
 assets/tiles/*
 		echo ":org 0xc000" > $@
 		./generate-texture.py --map1=0 assets/tileset.png tileset 2 8 >> $@
@@ -40,7 +40,7 @@ assets/tiles/*
 $(PREFIX)/map.8o $(PREFIX)/map_data.8o: Makefile generate-map.py assets/map.json
 		./generate-map.py assets/map.json 3000 $(PREFIX)
 
-$(PREFIX)/font.8o $(PREFIX)/font-data.8o: Makefile generate-font.py assets/font/5.font
+$(PREFIX)/font.8o $(PREFIX)/font_data.8o: Makefile generate-font.py assets/font/5.font
 		./generate-font.py assets/font/5.font font 1100 $(PREFIX)
 
 $(PREFIX)/texts.8o $(PREFIX)/texts_data.8o: Makefile assets/en.json generate-text.py
