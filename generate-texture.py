@@ -70,9 +70,9 @@ if args.compress:
 						for bit in xrange(0, 8):
 							byte |= get_pixel(basex + x * 8 + bit, basey + y, plane) << (7 - bit)
 						packed_data.append(byte)
-	compressed_data = compress(packed_data, mode='high_compression', compression=12, store_size=False)
+	compressed_data = compress(packed_data, return_bytearray = True, mode='high_compression', compression=12, store_size=False)
 	print "#compressed size: %d of %d\n" %(len(compressed_data), len(packed_data))
-	print " ".join(map(lambda x: "0x%02x" %ord(x), compressed_data))
+	print " ".join(map(lambda x: "0x%02x" %x, compressed_data))
 
 else:
 	print label("data"),
