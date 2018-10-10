@@ -148,6 +148,9 @@ sources/*.8o
 		cat $(PREFIX)/lz4tile.8o >> $@
 		echo ":org 0x4000 #buffer" >> $@
 
+lz4.hex: lz4.bin ./generate-hex.py
+		./generate-hex.py -l main $< $@
+
 game.hex: game.bin ./generate-hex.py
 		./generate-hex.py -l main $< $@
 
