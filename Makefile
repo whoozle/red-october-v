@@ -27,6 +27,8 @@ $(PREFIX)/tiles.8o: Makefile \
 assets/tiles/*
 		echo ":org 0xc000" > $@
 		./generate-texture.py --map1=0 assets/tileset.png tileset 2 8 >> $@
+		./generate-texture.py --map1=3 assets/tiles/highlight_menu.png highlight_menu 2 8 >> $@
+		./generate-texture.py --map0=3 assets/tiles/highlight_16.png highlight_16 2 16 >> $@
 		./generate-texture.py --map0=2 --map2=1 assets/tiles/splash.png splash 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/tank_front.png robot_tank_front 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/tank_front_b.png robot_tank_front_b 2 16 >> $@

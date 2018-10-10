@@ -71,10 +71,6 @@
 		battle_menu_handle_key
 	again
 
-: battle_menu_highlight
-0xff 0xff 0xff 0xff 0xff 0xff 0xff 0
-0xff 0xff 0xff 0xff 0xff 0xff 0xff 0
-
 : battle_menu_pos
 	0
 
@@ -90,7 +86,7 @@
 	v0 := battle_menu_x
 	v0 += -1
 	v1 += -1
-	i := battle_menu_highlight
+	i := long tile_highlight_menu_data
 	v2 := 6
 	loop
 		sprite v0 v1 8
