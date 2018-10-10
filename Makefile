@@ -119,6 +119,20 @@ assets/* assets/*/* sources/*.8o
 		cat $(PREFIX)/module_8800.hex >> $@
 		cat $(PREFIX)/signature.8o >> $@
 
+$(PREFIX)/lz4tile.8o: Makefile ./generate-texture.py assets/screens/nuke.png
+		./generate-texture.py assets/screens/nuke.png -c test 2 16 > $@
+
+lz4.8o: \
+Makefile \
+$(PREFIX)/lz4tile.8o \
+sources/*.8o
+		cat sources/lz4test.8o > $@
+		cat sources/lz4.8o >> $@
+		cat sources/tiles.8o >> $@
+		echo ":org 0x1234" >> $@
+		cat $(PREFIX)/lz4tile.8o >> $@
+		echo ":org 0x4000 #buffer" >> $@
+
 game.hex: game.bin ./generate-hex.py
 		./generate-hex.py -l main $< $@
 

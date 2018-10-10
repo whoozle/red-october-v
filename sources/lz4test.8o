@@ -1,0 +1,10 @@
+: main
+
+va := 0x12
+vb := 0x34
+lz4_unpack
+
+i := long 0x4000
+draw_fullscreen_tile
+loop
+again
