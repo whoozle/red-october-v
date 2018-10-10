@@ -1,6 +1,6 @@
 PREFIX := .compiled
 
-.PHONY = all clean xclip pbcopy
+.PHONY = all clean xclip pbcopy xclip-src xomod
 
 %.bin: %.8o
 		./octo/octo $< $@
