@@ -54,7 +54,7 @@ def get_pixel(x, y, plane):
 	bit = 1 << plane
 	return 1 if value & bit else 0
 
-if args.compress is not None:
+if args.compress:
 	from lz4.block import compress
 
 	print label("cdata")
