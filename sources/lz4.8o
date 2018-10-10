@@ -105,7 +105,7 @@
 
 	i := lz4_write_pos
 	load v0 - v1
-	:breakpoint DONE
+	#:breakpoint DONE
 	if v0 < vc
 		then jump lz4_unpack_next
 
