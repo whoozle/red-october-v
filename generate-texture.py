@@ -134,7 +134,7 @@ if args.compress:
 						packed_data.append(byte)
 	if args.algorithm == "lz4":
 		from lz4.block import compress
-		compressed_data = bytearray(compress(packed_data, mode='high_compression', compression=12, store_size=False))
+		compressed_data = bytearray(compress(packed_data, mode='high_compression', compression=12))
 	elif args.algorithm == "huffman":
 		compressed_data = huffman(packed_data)
 
