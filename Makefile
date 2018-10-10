@@ -88,10 +88,7 @@ sources/*.8o
 		cat sources/battle_object_tiles.8o >> $@
 
 
-$(PREFIX)/module_8000.hex: $(PREFIX)/module_8000.bin generate-hex.py
-		./generate-hex.py -o 1536 -s 2048 -z $< $@ #start at 0x600, size 0x800
-
-$(PREFIX)/module_8800.hex: $(PREFIX)/module_8800.bin generate-hex.py
+$(PREFIX)/module_%.hex: $(PREFIX)/module_%.bin generate-hex.py
 		./generate-hex.py -o 1536 -s 2048 -z $< $@ #start at 0x600, size 0x800
 
 game.8o: Makefile \
