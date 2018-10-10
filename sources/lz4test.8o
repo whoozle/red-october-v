@@ -1,4 +1,7 @@
 : main
+hires
+plane 3
+clear
 
 va := 0x12 #offset of packed data
 vb := 0x34
