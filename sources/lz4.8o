@@ -14,6 +14,7 @@
 	vd += v1
 	vc += vf
 	vc += v0 #update end pointer
+	v9 := 1 #const 1
 
 : lz4_unpack_next
 # read next token
@@ -45,14 +46,13 @@
 		again
 	end
 
-	v8 := 1
 	loop
 		lz4_read_byte
 		lz4_write_byte
 
-		v5 -= v8
+		v5 -= v9
 		v6 += vf
-		v6 -= v8
+		v6 -= v9
 
 		if vf != 0 then
 	again
@@ -87,15 +87,14 @@
 	i := lz4_match_pos
 	save v0 - v1
 
-	v8 := 1
 	loop
 		lz4_read_match_byte
 		lz4_write_byte
 		#:breakpoint MATCH
 
-		v5 -= v8
+		v5 -= v9
 		v6 += vf
-		v6 -= v8
+		v6 -= v9
 
 		if vf != 0 then
 	again
