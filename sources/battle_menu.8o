@@ -243,7 +243,7 @@
 	loop
 		va := 7 #A
 		vb := -1
-		vc := 4
+		vc := 3
 		battle_menu_pick_target_handle_key
 		va := 9 #D
 		vb := 1
@@ -259,7 +259,7 @@
 		i := battle_menu_pick_target_target
 		load v0 - v0
 		v0 += vb
-		if v0 > 4 then
+		if v0 > 3 then
 			v0 := vc
 		save v0 - v0
 		battle_object_draw_highlight
