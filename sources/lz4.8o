@@ -1,6 +1,14 @@
+:const lz4_buffer_hi 0x40
+:const lz4_buffer_lo 0x00
+
 : lz4_unpack
 	i := lz4_read_pos
 	save va - vb
+
+	v0 := lz4_buffer_hi
+	v1 := lz4_buffer_lo
+	i := lz4_write_pos
+	save v0 - v1
 
 # read next token
 	lz4_read_byte
@@ -35,10 +43,9 @@
 		lz4_read_byte
 		lz4_write_byte
 
-#		:breakpoint LITERAL
 		v5 -= v8
-		v6 -= vf
-		v6 += v8
+		v6 += vf
+		v6 -= v8
 
 		v0 := v5
 		v0 |= v6
@@ -52,11 +59,45 @@
 
 	lz4_read_byte #add lz4_read_word
 	v8 := v0
-	:breakpoint OL
 	lz4_read_byte
 	v7 := v0
 
-	:breakpoint MATCH
+	if v5 == 19 begin
+		loop
+			lz4_read_byte
+			v5 += v0
+			v6 += vf
+			if v0 == 255 then
+		again
+	end
+
+	i := lz4_write_pos
+	load v0 - v1
+	:breakpoint write
+	v1 -= v8 #sub offset from dst pointer
+	v0 += vf
+	v0 += -1
+	v0 -= v7
+
+	i := lz4_match_pos
+	save v0 - v1
+
+	v8 := 1
+	loop
+		lz4_read_match_byte
+		lz4_write_byte
+		:breakpoint MATCH
+
+		v5 -= v8
+		v6 += vf
+		v6 -= v8
+
+		v0 := v5
+		v0 |= v6
+		if v0 != 0 then
+	again
+	:breakpoint DONE
+
 	return
 
 : lz4_read_byte
