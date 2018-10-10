@@ -119,9 +119,8 @@
 	i := lz4_read_pos
 
 : lz4_inc_16
-	v3 := 1
 	load v1 - v2
-	v2 += v3
+	v2 += v9
 	v1 += vf
 	save v1 - v2
 	return
