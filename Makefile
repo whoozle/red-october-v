@@ -76,7 +76,8 @@ Makefile \
 $(PREFIX) \
 $(PREFIX)/common.8o \
 sources/*.8o
-		echo -e ": main\n:org 0x800\n" > $@
+		echo ": main" > $@
+		echo ":org 0x800" >> $@
 		cat sources/overworld.8o >> $@
 		cat $(PREFIX)/common.8o >> $@
 		cat sources/map.8o >> $@
@@ -91,7 +92,8 @@ $(PREFIX)/texts_data.8o \
 $(PREFIX)/font_data.8o \
 $(PREFIX)/tiles.8o \
 sources/*.8o
-		echo -e ": main\n:org 0x800\n" > $@
+		echo ": main" > $@
+		echo ":org 0x800" >> $@
 		cat sources/battle.8o >> $@
 		cat $(PREFIX)/common.8o >> $@
 		cat sources/battle_menu.8o >> $@
