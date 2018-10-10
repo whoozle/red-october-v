@@ -8,10 +8,11 @@ parser.add_argument('source', help='input file')
 parser.add_argument('name', help='name')
 parser.add_argument('planes', type=int, help='planes (1/2)')
 parser.add_argument('tile-size', type=int, help='tile size (8/16)')
+parser.add_argument('--compress', '-c', action='store_true', help='compress bitmap with lz4 algorithm')
 parser.add_argument('--map0', type=int, help='map bg color to chip8 color')
 parser.add_argument('--map1', type=int, help='map palette color 1 to chip8 color')
-parser.add_argument('--map2', type=int, help='map palette color 1 to chip8 color')
-parser.add_argument('--map3', type=int, help='map palette color 1 to chip8 color')
+parser.add_argument('--map2', type=int, help='map palette color 2 to chip8 color')
+parser.add_argument('--map3', type=int, help='map palette color 3 to chip8 color')
 args = parser.parse_args()
 
 tex = png.Reader(args.source)
@@ -53,19 +54,40 @@ def get_pixel(x, y, plane):
 	bit = 1 << plane
 	return 1 if value & bit else 0
 
-print label("data"),
-for ty in xrange(0, ny):
-	basey = ty * th
-	if nx > 1 or ny > 1:
-		print "\n" + label("row_%d" %ty)
-	for tx in xrange(0, nx):
-		basex = tx * tw
+if args.compress is not None:
+	from lz4.block import compress
+
+	print label("cdata")
+	packed_data = bytearray()
+	for ty in xrange(0, ny):
+		basey = ty * th
+		for tx in xrange(0, nx):
+			basex = tx * tw
+			for plane in xrange(0, args.planes):
+				for y in xrange(0, th):
+					for x in xrange(0, tw / 8):
+						byte = 0
+						for bit in xrange(0, 8):
+							byte |= get_pixel(basex + x * 8 + bit, basey + y, plane) << (7 - bit)
+						packed_data.append(byte)
+	compressed_data = compress(packed_data, mode='high_compression', compression=12, store_size=False)
+	print "#compressed size: %d of %d\n" %(len(compressed_data), len(packed_data))
+	print " ".join(map(lambda x: "0x%02x" %ord(x), compressed_data))
+
+else:
+	print label("data"),
+	for ty in xrange(0, ny):
+		basey = ty * th
 		if nx > 1 or ny > 1:
-			print "\n" + label("%d_%d" %(ty, tx))
-		for plane in xrange(0, args.planes):
-			for y in xrange(0, th):
-				for x in xrange(0, tw / 8):
-					byte = 0
-					for bit in xrange(0, 8):
-						byte |= get_pixel(basex + x * 8 + bit, basey + y, plane) << (7 - bit)
-					print "0x%02x" %byte ,
+			print "\n" + label("row_%d" %ty)
+		for tx in xrange(0, nx):
+			basex = tx * tw
+			if nx > 1 or ny > 1:
+				print "\n" + label("%d_%d" %(ty, tx))
+			for plane in xrange(0, args.planes):
+				for y in xrange(0, th):
+					for x in xrange(0, tw / 8):
+						byte = 0
+						for bit in xrange(0, 8):
+							byte |= get_pixel(basex + x * 8 + bit, basey + y, plane) << (7 - bit)
+						print "0x%02x" %byte ,
