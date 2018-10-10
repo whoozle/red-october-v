@@ -133,7 +133,7 @@ assets/* assets/*/* sources/*.8o
 		cat $(PREFIX)/signature.8o >> $@
 
 $(PREFIX)/lz4tile.8o: Makefile ./generate-texture.py assets/screens/nuke.png
-		./generate-texture.py assets/screens/nuke.png -c test 2 16 > $@
+		./generate-texture.py assets/tiles/splash.png -c test 2 16 > $@
 
 lz4.8o: \
 Makefile \
