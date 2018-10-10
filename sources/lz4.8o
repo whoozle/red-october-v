@@ -7,18 +7,18 @@
 
 	v1 := 0xf
 
-	v5 := v0
-	v5 &= v1
-
-	v0 >>= v0
-	v0 >>= v0
-	v0 >>= v0
-	v0 >>= v0
 	v7 := v0
 	v7 &= v1
 
+	v0 >>= v0
+	v0 >>= v0
+	v0 >>= v0
+	v0 >>= v0
+	v5 := v0
+	v5 &= v1
+
 	if v5 == 0 then
-		jump lz4_no_copy
+		jump lz4_match_copy
 
 	v6 := 0
 	if v5 == 15 begin
@@ -30,20 +30,33 @@
 		again
 	end
 
+	v8 := 1
 	loop
 		lz4_read_byte
 		lz4_write_byte
-	:breakpoint LITERAL
-		v0 := 1
-		v5 -= v0
-		v0 -= vf
-		v6 -= v0
+
+#		:breakpoint LITERAL
+		v5 -= v8
+		v6 -= vf
+		v6 += v8
+
 		v0 := v5
 		v0 |= v6
 		if v0 != 0 then
 	again
 
-: lz4_no_copy
+: lz4_match_copy
+	v5 := v7
+	v5 += 4 #minimal match length
+	v6 := 0
+
+	lz4_read_byte #add lz4_read_word
+	v8 := v0
+	:breakpoint OL
+	lz4_read_byte
+	v7 := v0
+
+	:breakpoint MATCH
 	return
 
 : lz4_read_byte
@@ -55,8 +68,9 @@
 	i := lz4_read_pos
 
 : lz4_inc_16
+	v3 := 1
 	load v1 - v2
-	v2 += va
+	v2 += v3
 	v1 += vf
 	save v1 - v2
 	return
@@ -74,3 +88,12 @@
 : lz4_copy_byte
 	lz4_read_byte
 	jump lz4_write_byte
+
+: lz4_read_match_byte
+	0xf0 0x00
+: lz4_match_pos
+	0 0
+	load v0 - v0
+
+	i := lz4_match_pos
+	jump lz4_inc_16
