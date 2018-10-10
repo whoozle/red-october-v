@@ -135,10 +135,6 @@
 	i := lz4_write_pos
 	jump lz4_inc_16
 
-: lz4_copy_byte
-	lz4_read_byte
-	jump lz4_write_byte
-
 : lz4_read_match_byte
 	0xf0 0x00
 : lz4_match_pos
