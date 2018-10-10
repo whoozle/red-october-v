@@ -1,6 +1,6 @@
 PREFIX := .compiled
 
-.PHONY = all clean xclip pbcopy xclip-src xomod
+.PHONY = all clean %.xclip %.pbcopy %.xclip-src %.xomod
 
 all: game.hex
 
@@ -9,6 +9,16 @@ all: game.hex
 
 %.xomod: %.bin
 		xomod $<
+
+%.xclip: %.hex
+		cat $< | xclip
+
+%.xclip-src: %.8o
+		cat $< | xclip
+
+%.pbcopy: %.hex
+		cat $< | pbcopy
+
 
 $(PREFIX):
 	mkdir -p $(PREFIX)
@@ -138,15 +148,6 @@ sources/*.8o
 
 game.hex: game.bin ./generate-hex.py
 		./generate-hex.py -l main $< $@
-
-xclip: game.hex
-		cat $< | xclip
-
-xclip-src: game.8o
-		cat $< | xclip
-
-pbcopy: game.hex
-		cat $< | pbcopy
 
 clean:
 		rm -f game.bin game.8o game.hex .compiled/*
