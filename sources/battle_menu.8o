@@ -142,10 +142,7 @@
 	i += v0
 	return
 
-: battle_object_draw
-	battle_object_get_tile
-
-	v0 := vd
+: battle_object_get_x_by_v0
 	v0 <<= v0
 	v0 <<= v0
 	v0 <<= v0
@@ -154,6 +151,20 @@
 	v0 += v1
 	v1 := 10
 	v0 += 16
+	return
+
+: battle_object_draw
+	battle_object_get_tile
+
+	v0 := vd
+	battle_object_get_x_by_v0
+	sprite v0 v1 0
+	return
+
+: battle_object_draw_highlight
+	v0 := va
+	battle_object_get_x_by_v0
+	i := long tile_highlight_16_data
 	sprite v0 v1 0
 	return
 
