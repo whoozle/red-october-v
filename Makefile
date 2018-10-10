@@ -43,8 +43,9 @@ $(PREFIX)/common.8o: \
 Makefile \
 $(PREFIX) \
 $(PREFIX)/texts.8o \
-$(PREFIX)/font.8o \
 $(PREFIX)/map.8o \
+$(PREFIX)/sfx.8o \
+$(PREFIX)/font.8o \
 sources/*.8o
 		cat sources/globals.8o > $@
 		cat $(PREFIX)/texts.8o >> $@
