@@ -1,6 +1,6 @@
 PREFIX := .compiled
 
-.PHONY = all clean %.xclip %.pbcopy %.xclip-src %.xomod
+.PHONY = all clean %.xclip %.pbcopy %.xclip-src %.xomod $(PREFIX)
 
 all: game.hex
 
