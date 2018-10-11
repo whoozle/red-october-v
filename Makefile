@@ -105,6 +105,7 @@ sources/*.8o
 		cat sources/battle_object_tiles.8o >> $@
 
 
+.SECONDARY: $(PREFIX)/module_%.hex: $(PREFIX)/module_%.bin generate-hex.py
 $(PREFIX)/module_%.hex: $(PREFIX)/module_%.bin generate-hex.py
 		./generate-hex.py -o 1536 -s 2048 -z $< $@ #start at 0x600, size 0x800
 
