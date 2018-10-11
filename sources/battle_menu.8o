@@ -104,6 +104,9 @@
 : battle_tick_last_t
 	0
 
+: battle_object_count
+	4
+
 : battle_tick_delay
 	0
 	0
@@ -198,7 +201,9 @@
 	loop
 		battle_object_draw
 		vd += 1
-		if vd != 4 then
+		i := battle_object_count
+		load v0 - v0
+		if vd != v0 then
 	again
 	return
 
@@ -256,10 +261,13 @@
 	menu_check_key
 	if v0 != 0 begin
 		battle_object_draw_highlight
+		i := battle_object_count
+		load v1 - v1
+
 		i := battle_menu_pick_target_target
 		load v0 - v0
 		v0 += vb
-		if v0 > 3 then
+		if v0 >= v1 then
 			v0 := vc
 		save v0 - v0
 		battle_object_draw_highlight
