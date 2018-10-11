@@ -246,6 +246,7 @@
 	battle_object_draw_highlight
 
 	loop
+		sound_tick
 		va := 7 #A
 		vb := -1
 		vc := 3
@@ -254,7 +255,12 @@
 		vb := 1
 		vc := 0
 		battle_menu_pick_target_handle_key
+		v0 := 4
+		if v0 -key then
 	again
+	va := sfx_index_menu
+	sfx_play
+	battle_object_draw_highlight
 	return
 
 : battle_menu_pick_target_handle_key
