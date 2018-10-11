@@ -60,12 +60,12 @@
 	battle_menu_draw_highlight
 
 	loop
-		va := 5
+		va := OCTO_KEY_W
 		vb := -1
 		vc := 3
 		battle_menu_handle_key
 
-		va := 8
+		va := OCTO_KEY_S
 		vb := 1
 		vc := 0
 		battle_menu_handle_key
@@ -247,11 +247,11 @@
 
 	loop
 		sound_tick
-		va := 7 #A
+		va := OCTO_KEY_A
 		vb := -1
 		vc := 3
 		battle_menu_pick_target_handle_key
-		va := 9 #D
+		va := OCTO_KEY_D
 		vb := 1
 		vc := 0
 		battle_menu_pick_target_handle_key
