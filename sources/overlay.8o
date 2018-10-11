@@ -27,11 +27,11 @@
 		0xf0 0x00 # i := long addr
 : overlay_source_address_ptr
 		0 0
-		load v0 - v8
+		load v0 - v7
 
 : overlay_destination_address_ptr
 		0 0
-		save v0 - v8
+		save v0 - v7
 
 		i := overlay_source_address_ptr
 		overlay_increment_address_v9
