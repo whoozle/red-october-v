@@ -262,19 +262,19 @@
 
 #==== ATTACK =============================================
 : battle_object_draw_highlight
-	i := battle_menu_pick_target_target
+	i := battle_menu_target
 	load v0 - v0
 	battle_object_get_x_by_v0
 	i := long tile_highlight_16_data
 	sprite v0 v1 0
 	return
 
-: battle_menu_pick_target_target
-	0
+: battle_menu_target
+	-1
 
 : battle_menu_pick_target
 	va := 0
-	i := battle_menu_pick_target_target
+	i := battle_menu_target
 	save va - va
 	battle_object_draw_highlight
 
@@ -284,16 +284,31 @@
 		vb := -1
 		vc := 3
 		battle_menu_pick_target_handle_key
+
 		va := OCTO_KEY_D
 		vb := 1
 		vc := 0
 		battle_menu_pick_target_handle_key
-		v0 := 4
-		if v0 -key then
+
+		va := OCTO_KEY_E
+		menu_check_key
+		if v0 != 0 then
+			jump battle_menu_pick_target_ok
+
+		va := OCTO_KEY_Q
+		menu_check_key
+		if v0 == 0 then
 	again
+	v5 := -1
+	jump battle_menu_pick_target_cancel
+: battle_menu_pick_target_ok
+	i := battle_menu_target
+	load v5 - v5
+: battle_menu_pick_target_cancel
 	va := sfx_index_menu
 	sfx_play
 	battle_object_draw_highlight
+	v0 := v5
 	return
 
 : battle_menu_pick_target_handle_key
@@ -303,7 +318,7 @@
 		i := battle_object_count
 		load v1 - v1
 
-		i := battle_menu_pick_target_target
+		i := battle_menu_target
 		load v0 - v0
 		v0 += vb
 		if v0 >= v1 then
