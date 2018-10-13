@@ -138,7 +138,7 @@
 	v0 := vd
 	battle_object_get_x_by_v0
 	#v0 v1 is object coordiates
-	v0 += 16
+	v0 += 17
 
 	i := battle_object_hp
 	i += vd
