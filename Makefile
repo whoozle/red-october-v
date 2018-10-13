@@ -54,6 +54,7 @@ $(PREFIX)/signature.8o: Makefile ./generate-string.py
 $(PREFIX)/sfx.8o: Makefile ./generate-sfx.py
 		./generate-sfx.py -c 0 assets/sfx/menu4000.wav menu > $@
 		./generate-sfx.py -c 0 assets/sfx/hit4000.wav hit >> $@
+		./generate-sfx.py -c 0 assets/sfx/explosion4000.wav explosion >> $@
 
 $(PREFIX)/common.8o: \
 Makefile \
