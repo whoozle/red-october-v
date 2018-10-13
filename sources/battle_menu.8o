@@ -77,11 +77,7 @@
 			if v0 != -1 begin
 				vd := v0
 				battle_object_draw_hp_bar
-				i := battle_object_hp
-				i += vd
-				load v0 - v0
-				v0 += -32
-				save v0 - v0
+				battle_attack
 				battle_object_draw_hp_bar
 				va := sfx_index_hit
 				sfx_play
@@ -117,9 +113,6 @@
 : battle_tick_last_t
 	0
 
-: battle_object_count
-	4
-
 : battle_tick_delay
 	0
 	0
@@ -131,12 +124,6 @@
 	0
 	0
 	0
-
-: battle_object_hp
-	255
-	255
-	255
-	255
 
 : battle_object_hp_indicator
 	0xc0 0xc0
@@ -156,6 +143,8 @@
 	i := battle_object_hp
 	i += vd
 	load v2 - v2
+	if v2 == 0 then
+		return
 	v2 >>= v2
 	v2 >>= v2
 	v2 >>= v2

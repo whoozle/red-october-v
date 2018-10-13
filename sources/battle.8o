@@ -6,4 +6,30 @@
 :const battle_tick_freq_random	0x0f
 
 : battle_start
+	v0 := 255
+	i := battle_object_hp
+	save v0
+	save v0
+	save v0
+	save v0
 	jump battle_menu
+
+: battle_object_count
+	4
+
+: battle_object_hp
+	255
+	255
+	255
+	255
+
+: battle_attack
+	i := battle_object_hp
+	i += vd
+	load v0 - v0
+	v1 := random 0x3f
+	v0 -= v1
+	if vf == 0 then
+		v0 := 0
+	save v0 - v0
+	return
