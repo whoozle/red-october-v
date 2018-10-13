@@ -119,12 +119,44 @@
 	0
 	0
 
-0xde 0xde 0xde
+: battle_object_hp
+	255
+	255
+	255
+	255
+
+: battle_object_hp_indicator
+	0xc0 0xc0
+
 : battle_object_type
 	:byte battle_robot_tank
 	:byte battle_robot_engineer
 	:byte battle_robot_hacker
 	:byte battle_robot_repairbot
+
+: battle_object_draw_hp_bar
+	v0 := vd
+	battle_object_get_x_by_v0
+	#v0 v1 is object coordiates
+	v0 += 16
+
+	i := battle_object_hp
+	i += vd
+	load v2 - v2
+	v2 >>= v2
+	v2 >>= v2
+	v2 >>= v2
+	v2 += 1
+	v2 >>= v2
+
+	loop
+		v2 += -1
+		i := battle_object_hp_indicator
+		sprite v0 v1 1
+		v1 += 1
+		if v2 != 0 then
+	again
+	return
 
 #inline it?
 : battle_object_get_tile
@@ -200,6 +232,7 @@
 	vd := 0
 	loop
 		battle_object_draw
+		battle_object_draw_hp_bar
 		vd += 1
 		i := battle_object_count
 		load v0 - v0

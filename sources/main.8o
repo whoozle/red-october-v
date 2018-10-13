@@ -5,7 +5,6 @@
 
 	va := 0
 	overlay_load
-#	splash_draw
-#	battle_menu
+
 	loop
 	again
