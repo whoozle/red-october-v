@@ -1,6 +1,7 @@
 :const battle_menu_x 10
 :const battle_menu_y 34
 :const sfx_index_menu 0
+:const sfx_index_hit 1
 :const battle_tick_freq_base	0x10
 :const battle_tick_freq_random	0x0f
 

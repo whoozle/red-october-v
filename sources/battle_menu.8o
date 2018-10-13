@@ -72,8 +72,21 @@
 		va := 6
 
 		menu_check_key
-		if v0 != 0 then
+		if v0 != 0 begin
 			battle_menu_pick_target
+			if v0 != -1 begin
+				vd := v0
+				battle_object_draw_hp_bar
+				i := battle_object_hp
+				i += vd
+				load v0 - v0
+				v0 += -32
+				save v0 - v0
+				battle_object_draw_hp_bar
+				va := sfx_index_hit
+				sfx_play
+			end
+		end
 	again
 
 : battle_menu_pos
@@ -148,6 +161,9 @@
 	v2 >>= v2
 	v2 += 1
 	v2 >>= v2
+
+	v1 += 16
+	v1 -= v2
 
 	loop
 		v2 += -1
@@ -299,16 +315,16 @@
 		menu_check_key
 		if v0 == 0 then
 	again
-	v5 := -1
-	jump battle_menu_pick_target_cancel
-: battle_menu_pick_target_ok
-	i := battle_menu_target
-	load v5 - v5
-: battle_menu_pick_target_cancel
+
 	va := sfx_index_menu
 	sfx_play
 	battle_object_draw_highlight
-	v0 := v5
+	v0 := -1
+	return
+
+	: battle_menu_pick_target_ok
+	i := battle_menu_target
+	load v0 - v0
 	return
 
 : battle_menu_pick_target_handle_key

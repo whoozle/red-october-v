@@ -1,6 +1,8 @@
 : sfx_table
 	offset audio_menu
 	:byte audio_menu_size
+	offset audio_hit
+	:byte audio_hit_size
 
 : sfx_timer
 	0
@@ -34,6 +36,8 @@
 	save v0 - v1
 	i := sfx_timer
 	save v2 - v2
+	vf := 0
+	delay := vf
 
 : sound_tick
 : sfx_play_next
