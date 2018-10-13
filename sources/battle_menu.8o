@@ -323,6 +323,7 @@
 	return
 
 	: battle_menu_pick_target_ok
+	battle_object_draw_highlight
 	i := battle_menu_target
 	load v0 - v0
 	return
