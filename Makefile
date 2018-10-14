@@ -38,6 +38,7 @@ assets/tiles/*
 		./generate-texture.py --map1=0 assets/tiles/hacker_front_b.png robot_hacker_front_b 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/repairbot_front.png robot_repairbot_front 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/repairbot_front_b.png robot_repairbot_front_b 2 16 >> $@
+		./generate-texture.py --map1=0 assets/tiles/dead_robot.png read_robot 2 16 >> $@
 
 $(PREFIX)/map.8o $(PREFIX)/map_data.8o: Makefile generate-map.py assets/map.json assets/tileset.png
 		./generate-map.py assets/map.json 3000 $(PREFIX)
@@ -101,6 +102,7 @@ sources/*.8o
 		cat sources/battle.8o >> $@
 		cat $(PREFIX)/common.8o >> $@
 		cat sources/battle_menu.8o >> $@
+		cat sources/battle_objects.8o >> $@
 		cat $(PREFIX)/texts_data.8o >> $@ #org 0x1000, can be used as guard
 		cat $(PREFIX)/font_data.8o >> $@
 		cat $(PREFIX)/tiles.8o >> $@

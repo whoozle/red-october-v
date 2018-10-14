@@ -110,129 +110,6 @@
 	again
 	return
 
-: battle_tick_last_t
-	0
-
-: battle_tick_delay
-	0
-	0
-	0
-	0
-
-: battle_object_animation
-	0
-	0
-	0
-	0
-
-: battle_object_hp_indicator
-	0xc0 0xc0
-
-: battle_object_type
-	:byte battle_robot_tank
-	:byte battle_robot_engineer
-	:byte battle_robot_hacker
-	:byte battle_robot_repairbot
-
-: battle_object_draw_hp_bar
-	v0 := vd
-	battle_object_get_x_by_v0
-	#v0 v1 is object coordiates
-	v0 += 17
-
-	i := battle_object_hp
-	i += vd
-	load v2 - v2
-	if v2 == 0 then
-		return
-	v2 >>= v2
-	v2 >>= v2
-	v2 >>= v2
-	v2 += 1
-	v2 >>= v2
-
-	v1 += 16
-	v1 -= v2
-
-	loop
-		v2 += -1
-		i := battle_object_hp_indicator
-		sprite v0 v1 1
-		v1 += 1
-		if v2 != 0 then
-	again
-	return
-
-#inline it?
-: battle_object_get_tile
-	i := battle_object_type
-	i += vd
-	load v0 - v0
-	v0 += v0
-
-	i := long battle_object_tiles
-	i += v0
-	load v0 - v1
-
-	i := battle_object_get_tile_addr
-	save v0 - v1
-
-	i := battle_object_animation
-	i += vd
-	load v0 - v0
-
-	0xf0 0x00
-: battle_object_get_tile_addr
-	0 0
-	i += v0
-	return
-
-: battle_object_get_x_by_v0
-	v0 <<= v0
-	v0 <<= v0
-	v0 <<= v0
-	v1 := v0
-	v0 <<= v0
-	v0 += v1
-	v1 := 10
-	v0 += 16
-	return
-
-: battle_object_draw
-	battle_object_get_tile
-
-	v0 := vd
-	battle_object_get_x_by_v0
-	sprite v0 v1 0
-	return
-
-: battle_object_swap_tiles
-	i := battle_object_animation
-	i += vd
-	load v0 - v0
-	v1 := 64
-	v0 =- v1
-	save v0 - v0
-	return
-
-: battle_object_tick
-	i := battle_tick_delay
-	i += vd
-	load v0 - v0
-	if v0 != 0 begin
-		v0 += -1
-		save v0 - v0
-		return
-	end
-	v0 := random battle_tick_freq_random
-	v0 += battle_tick_freq_base
-	save v0 - v0
-
-	battle_object_draw
-	battle_object_swap_tiles
-	battle_object_draw
-	return
-
 : battle_draw_init
 	vd := 0
 	loop
@@ -242,26 +119,6 @@
 		i := battle_object_count
 		load v0 - v0
 		if vd != v0 then
-	again
-	return
-
-: battle_tick
-	i := battle_tick_last_t
-	load v0 - v0
-	v1 := delay
-	if v1 == 0 begin
-		v1 := 6
-		delay := v1
-	end
-	if v1 == v0 then
-		return
-	save v1 - v1
-
-	vd := 0
-	loop
-		battle_object_tick
-		vd += 1
-		if vd != 4 then
 	again
 	return
 
@@ -311,7 +168,7 @@
 	v0 := -1
 	return
 
-	: battle_menu_pick_target_ok
+: battle_menu_pick_target_ok
 	battle_object_draw_highlight
 	i := battle_menu_target
 	load v0 - v0
