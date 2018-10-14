@@ -28,9 +28,13 @@
 	i := battle_object_hp
 	i += vd
 	load v0 - v0
+	if v0 == 0 then
+		return
+
 	v1 := random 0x7f
 	if v1 == 0 then #MISS
 		return
+
 	v0 -= v1
 	if vf == 0 begin
 		battle_object_draw
