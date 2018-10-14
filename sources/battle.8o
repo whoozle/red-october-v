@@ -40,6 +40,7 @@
 		battle_object_draw
 		v0 := 0
 		i := battle_object_hp
+		i += vd
 	end
 	save v0 - v0
 
