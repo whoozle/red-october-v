@@ -30,7 +30,15 @@
 	load v0 - v0
 	v1 := random 0x7f
 	v0 -= v1
-	if vf == 0 then
+	if vf == 0 begin
+		battle_object_draw
 		v0 := 0
+		i := battle_object_hp
+	end
 	save v0 - v0
+
+	if v0 != 0 then
+		return
+
+	battle_object_draw
 	return

@@ -107,8 +107,18 @@
 	return
 
 : battle_object_draw
+	i := battle_object_hp
+	i += vd
+	load v0 - v0
+
+	if v0 == 0 begin
+		i := long tile_dead_robot_data
+		jump battle_object_draw_impl
+	end
+
 	battle_object_get_tile
 
+: battle_object_draw_impl
 	v0 := vd
 	battle_object_get_x_by_v0
 	sprite v0 v1 0

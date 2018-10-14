@@ -38,7 +38,7 @@ assets/tiles/*
 		./generate-texture.py --map1=0 assets/tiles/hacker_front_b.png robot_hacker_front_b 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/repairbot_front.png robot_repairbot_front 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/repairbot_front_b.png robot_repairbot_front_b 2 16 >> $@
-		./generate-texture.py --map1=0 assets/tiles/dead_robot.png read_robot 2 16 >> $@
+		./generate-texture.py --map1=0 assets/tiles/dead_robot.png dead_robot 2 16 >> $@
 
 $(PREFIX)/map.8o $(PREFIX)/map_data.8o: Makefile generate-map.py assets/map.json assets/tileset.png
 		./generate-map.py assets/map.json 3000 $(PREFIX)
