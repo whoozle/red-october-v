@@ -135,8 +135,10 @@
 	-1
 
 : battle_menu_pick_target
-	va := 0
 	i := battle_menu_target
+	load va - va
+	if va == -1 then
+		va := 0
 	save va - va
 	battle_object_draw_highlight
 
