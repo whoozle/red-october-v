@@ -28,7 +28,7 @@
 	i := battle_object_hp
 	i += vd
 	load v0 - v0
-	v1 := random 0x3f
+	v1 := random 0x7f
 	v0 -= v1
 	if vf == 0 then
 		v0 := 0
