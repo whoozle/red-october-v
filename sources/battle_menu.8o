@@ -44,17 +44,17 @@
 	draw_text_ns
 	va := battle_menu_x
 	vb := 41
-	vc := text_battle_menu_skill
+	vc := text_battle_menu_engi
 	draw_text_ns
 
 	va := battle_menu_x
 	vb := 48
-	vc := text_battle_menu_charge
+	vc := text_battle_menu_repair
 	draw_text_ns
 
 	va := battle_menu_x
 	vb := 55
-	vc := text_battle_menu_escape
+	vc := text_battle_menu_hack
 	draw_text_ns
 
 	battle_menu_draw_highlight

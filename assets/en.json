@@ -2,13 +2,31 @@
 	"splash_title": "PREVIOUSLY ON RED OCTOBER...",
 
 	"battle_menu_attack": "ATTACK",
-	"battle_menu_skill": "SKILL",
-	"battle_menu_skill_repair": "REPAIR",
-	"battle_menu_skill_emp_shield": "EMP SHIELD",
-	"battle_menu_skill_ice_shield": "ICE SHIELD",
-	"battle_menu_skill_hack": "HACK",
-	"battle_menu_skill_sabotage": "SABOTAGE",
-	"battle_menu_guard": "GUARD",
-	"battle_menu_charge": "CHARGE",
-	"battle_menu_escape": "ESCAPE"
+
+	"battle_menu_attack_bash": "BASH",
+	"battle_menu_attack_kick": "HEADBUTT",
+	"battle_menu_attack_thrust": "THRUST",
+	"battle_menu_attack_thrust": "GRAPPLE",
+
+	"battle_menu_engi": "ENGINEER",
+
+	"battle_menu_engi_solder": "SOLDER",
+	"battle_menu_engi_sc": "SHORT CIRCUIT",
+	"battle_menu_engi_dox": "BURN DOCUMENTATION",
+	"battle_menu_engi_defuse": "DEFUSE",
+
+	"battle_menu_repair": "REPAIR",
+
+	"battle_menu_repair_fix": "FIX",
+	"battle_menu_repair_solder": "SOLDER",
+	"battle_menu_repair_static_shield": "STATIC SHIELD",
+	"battle_menu_repair_disable_gun": "DISABLE GUN",
+
+	"battle_menu_hack": "HACK",
+
+	"battle_menu_hack_underclock": "UNDERCLOCK",
+	"battle_menu_hack_ice_shield": "ICE SHIELD",
+	"battle_menu_hack_erase_data": "ERASE DATA",
+	"battle_menu_hack_erase_system": "ERASE SYSTEM"
+
 }
