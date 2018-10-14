@@ -30,8 +30,6 @@
 	i := battle_object_hp
 	i += vd
 	load v2 - v2
-	if v2 == 0 then
-		return
 	v2 >>= v2
 	v2 >>= v2
 	v2 >>= v2
@@ -40,6 +38,9 @@
 
 	v1 += 16
 	v1 -= v2
+
+	if v2 == 0 then
+		return
 
 	loop
 		v2 += -1

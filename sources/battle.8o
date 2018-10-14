@@ -43,8 +43,6 @@
 	end
 	save v0 - v0
 
-	if v0 != 0 then
-		return
-
-	battle_object_draw
+	if v0 == 0 then
+		battle_object_draw
 	return
