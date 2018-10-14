@@ -42,5 +42,5 @@
 		vb += 1
 		if vb != 0 then #256 iterations
 	again
-	:breakpoint ready
+	#:breakpoint ready
 	jump 0x800
