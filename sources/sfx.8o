@@ -3,6 +3,10 @@
 	:byte audio_menu_size
 	offset audio_hit
 	:byte audio_hit_size
+	offset audio_explosion
+	:byte audio_explosion_size
+	offset audio_shoot
+	:byte audio_shoot_size
 
 : sfx_timer
 	0
