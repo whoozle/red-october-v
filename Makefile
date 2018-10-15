@@ -39,10 +39,10 @@ assets/tiles/*
 		./generate-texture.py --map1=0 assets/tiles/repairbot_front.png robot_repairbot_front 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/repairbot_front_b.png robot_repairbot_front_b 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/dead_robot.png dead_robot 2 16 >> $@
-		./generate-texture.py assets/tiles/attack_shot.png attack_shot 2 8 >> $@
-		./generate-texture.py assets/tiles/attack_engi.png attack_engi 2 8 >> $@
-		./generate-texture.py assets/tiles/attack_repair.png attack_repair 2 8 >> $@
-		./generate-texture.py assets/tiles/attack_hack.png attack_hack 2 8 >> $@
+		./generate-texture.py --map1=0 assets/tiles/attack_shot.png attack_shot 2 8 >> $@
+		./generate-texture.py --map1=0 assets/tiles/attack_engi.png attack_engi 2 8 >> $@
+		./generate-texture.py --map1=0 assets/tiles/attack_repair.png attack_repair 2 8 >> $@
+		./generate-texture.py --map1=0 assets/tiles/attack_hack.png attack_hack 2 8 >> $@
 
 $(PREFIX)/map.8o $(PREFIX)/map_data.8o: Makefile generate-map.py assets/map.json assets/tileset.png
 		./generate-map.py assets/map.json 3000 $(PREFIX)

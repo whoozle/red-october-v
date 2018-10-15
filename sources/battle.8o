@@ -1,8 +1,11 @@
 :const battle_menu_x 10
 :const battle_menu_y 34
+
 :const sfx_index_menu 0
 :const sfx_index_hit 1
 :const sfx_index_explosion 2
+:const sfx_index_shot 3
+
 :const battle_tick_freq_base	0x10
 :const battle_tick_freq_random	0x0f
 
@@ -24,7 +27,44 @@
 	255
 	255
 
+: battle_get_attack_tile
+	i := long tile_attack_shot_data
+	va += va
+	va += va
+	va += va
+	va += va
+	i += va
+	return
+
 : battle_attack
+	v5 := 4
+	v8 := random 3 #random attack for now
+	loop
+		v0 := vd
+		battle_object_get_x_by_v0
+		v6 := v0
+		v7 := v1
+		v0 := random 0x1f
+		v6 += v0
+		v6 += -8
+		v0 := random 0x1f
+		v7 += v0
+		v7 += -8
+
+		va := v8
+		battle_get_attack_tile
+		sprite v6 v7 8
+
+		va := sfx_index_shot
+		sfx_play_sync
+
+		va := v8
+		battle_get_attack_tile
+		sprite v6 v7 8
+
+		v5 += -1
+		if v5 != 0 then
+	again
 	i := battle_object_hp
 	i += vd
 	load v0 - v0

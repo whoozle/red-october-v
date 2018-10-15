@@ -27,6 +27,7 @@
 	v0 += vf
 	save v0 - v1
 
+	v0 := 1
 	return
 
 
@@ -55,5 +56,15 @@
 
 			jump sfx_play_next_addr
 		end
+		v0 := 0
+		return
 	end
+	v0 := 1
 	return
+
+: sfx_play_sync
+	sfx_play
+	loop
+		sound_tick
+		if v0 == 1 then
+	again
