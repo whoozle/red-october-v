@@ -26,6 +26,9 @@ def update_layer(data, layer):
 			offset = (y + ly) * width + x + lx
 			if data[offset] > 0:
 				raise Exception('duplicate tile at layer %s @ %d, %d' %(layer['name'], x, y))
+			if tid < 0 or tid > 255:
+				print "WARNING: layer %s @ %d,%d, tile id: 0x%08x is out of range" %(layer['name'], x, y, tid)
+				tid = 0
 			data[offset] = tid
 
 map_data_path = os.path.join(args.prefix, 'map_data.8o')
