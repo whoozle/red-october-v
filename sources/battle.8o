@@ -77,6 +77,9 @@
 
 	v0 -= v1
 	if vf == 0 begin
+		va := sfx_index_explosion
+		sfx_play_sync
+
 		battle_object_draw
 		v0 := 0
 		i := battle_object_hp
