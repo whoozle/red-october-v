@@ -2,6 +2,7 @@
 : main
 	hires
 	plane 3
+	clear
 
 	va := 0
 	overlay_load
