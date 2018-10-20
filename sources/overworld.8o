@@ -1,21 +1,80 @@
+:const player_shift			4
+:const neg_player_shift		-4
+
 : overworld_start
 	map_render
+
+	v9 := 20
+	vD := 20
+	i := player_tile
+	sprite v9 vD 15
 
 	loop
 		i := screen_pos
 		load va - vb
 		v0 := key
+
+		i := player_tile
+		sprite v9 vD 15
+
 		if v0 == 5 then
-			map_scroll_up
+			move_up
 
 		if v0 == 7 then
-			map_scroll_left
+			move_left
 
 		if v0 == 8 then
-			map_scroll_down
+			move_down
 
 		if v0 == 9 then
-			map_scroll_right
+			move_right
 
+		i := player_tile
+		sprite v9 vD 15
 	again
 	return
+
+
+: move_right
+	if v9 >= 120 begin
+		map_scroll_right
+		v9 := 0
+	else
+		v9 += player_shift
+	end
+	return
+
+
+: move_left
+	if v9 <= 0 begin
+		map_scroll_left
+		v9 := 120
+	else
+		v9 += neg_player_shift
+	end
+	return
+
+
+: move_down
+	if vD >= 48 begin
+		map_scroll_down
+		vD := 0
+	else
+		vD += player_shift
+	end
+	return
+
+
+: move_up
+	if vD <= 0 begin
+		map_scroll_up
+		vD := 48
+	else
+		vD += neg_player_shift
+	end
+	return
+
+: player_tile 0x18 0x18 0x18 0x18 0x18 0x18 0xFF 0xFF
+0x18 0x18 0x18 0x18 0x18 0x18 0x18 0x00
+0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+0x00 0x00 0x00 0x00 0x00 0x00
