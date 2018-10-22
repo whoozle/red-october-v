@@ -40,7 +40,10 @@
 		map_scroll_right
 		v9 := 0
 	else
-		v9 += player_shift
+		va := v9
+		vb := vD
+		map_is_wall
+		if v0 == 0 then v9 += player_shift
 	end
 	return
 
@@ -50,7 +53,10 @@
 		map_scroll_left
 		v9 := 120
 	else
-		v9 += neg_player_shift
+		va := v9
+		vb := vD
+		map_is_wall
+		if v0 == 0 then v9 += neg_player_shift
 	end
 	return
 
@@ -60,7 +66,10 @@
 		map_scroll_down
 		vD := 0
 	else
-		vD += player_shift
+		va := v9
+		vb := vD
+		map_is_wall
+		if v0 == 0 then vD += player_shift
 	end
 	return
 
