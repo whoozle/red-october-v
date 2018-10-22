@@ -15,6 +15,13 @@
 	:byte a1
 }
 
+:macro dump X Y {
+	:calc a1 { 0x50 | X }
+	:calc a2 { 0x0f | ( Y << 4 ) }
+	:byte a1
+	:byte a2
+}
+
 :const move_speed_left -2
 :const move_speed_right 2
 :const move_speed_up 2
