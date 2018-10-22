@@ -125,7 +125,7 @@
 	v0 >>= v0
 
 	v1 |= v4
-	v0 += 0x30 #wall_data_hi
+	v0 += 0x50 #wall_data_hi
 
 	i := map_wall_data_offset
 	save v0 - v1
