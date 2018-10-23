@@ -31,6 +31,12 @@
 	end
 	return
 
+: battle_menu_data
+	:byte text_battle_menu_attack
+	:byte text_battle_menu_engi
+	:byte text_battle_menu_repair
+	:byte text_battle_menu_hack
+
 : battle_menu
 	clear
 	battle_draw_init
@@ -39,25 +45,26 @@
 	i := battle_menu_pos
 	save v0 - v0
 
-	va := battle_menu_x
-	vb := 34
-	vc := text_battle_menu_attack
+	vd := 0
+	loop
+		i := battle_menu_data
+		i += vd
+		load vc - vc
 
-	draw_text_ns
-	va := battle_menu_x
-	vb := 41
-	vc := text_battle_menu_engi
-	draw_text_ns
+		va := battle_menu_x
+		vb := vd
+		vb += vb
+		vb += vb
+		vb += vb
+		vb -= vd #×7
+		vb += 34
+		dump 10 12
 
-	va := battle_menu_x
-	vb := 48
-	vc := text_battle_menu_repair
-	draw_text_ns
+		draw_text_ns
 
-	va := battle_menu_x
-	vb := 55
-	vc := text_battle_menu_hack
-	draw_text_ns
+		vd += 1
+		if vd != 4 then
+	again
 
 	battle_menu_draw_highlight
 
