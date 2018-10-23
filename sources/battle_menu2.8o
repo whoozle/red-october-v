@@ -1,6 +1,30 @@
 :const battle_menu2_x 60
 :const battle_menu2_y 34
 
+: battle_menu_attack_data
+	:byte text_battle_menu_attack_bash
+	:byte text_battle_menu_attack_kick
+	:byte text_battle_menu_attack_thrust
+	:byte text_battle_menu_attack_grapple
+
+: battle_menu_engi_data
+	:byte text_battle_menu_engi_solder
+	:byte text_battle_menu_engi_sc
+	:byte text_battle_menu_engi_dox
+	:byte text_battle_menu_engi_defuse
+
+: battle_menu_repair_data
+	:byte text_battle_menu_repair_fix
+	:byte text_battle_menu_repair_solder
+	:byte text_battle_menu_repair_static_shield
+	:byte text_battle_menu_repair_disable_gun
+
+: battle_menu_hack_data
+	:byte text_battle_menu_hack_underclock
+	:byte text_battle_menu_hack_ice_shield
+	:byte text_battle_menu_hack_erase_data
+	:byte text_battle_menu_hack_erase_system
+
 
 : battle_menu2_handle_key
 	menu_check_key
