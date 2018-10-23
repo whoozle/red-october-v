@@ -77,8 +77,10 @@
 		vb := 0
 		vc := 0
 		battle_menu2_handle_key
-		if v0 != 0 then
+		if v0 != 0 begin
+			vd := 0
 			jump battle_menu2_exit
+		end
 
 		va := OCTO_KEY_E
 		menu_check_key
@@ -89,8 +91,7 @@
 				battle_object_draw_hp_bar
 				battle_attack
 				battle_object_draw_hp_bar
-				va := sfx_index_hit
-				sfx_play
+				vd := 1
 				jump battle_menu2_exit
 			end
 		end
@@ -99,7 +100,7 @@
 : battle_menu2_exit
 	battle_menu2_draw_highlight
 	battle_menu2_draw
-	v0 := -1
+	v0 := vd
 	return
 
 : battle_menu2_pos
