@@ -3,19 +3,16 @@
 
 : overworld_start
 	map_render
-
-	v9 := 20
-	vD := 20
+	va := 20
+	vb := 20
 	i := player_tile
-	sprite v9 vD 15
+	sprite va vb 15
 
 	loop
-		i := screen_pos
-		load va - vb
 		v0 := key
 
 		i := player_tile
-		sprite v9 vD 15
+		sprite va vb 15
 
 		if v0 == 5 then
 			move_up
@@ -30,61 +27,83 @@
 			move_right
 
 		i := player_tile
-		sprite v9 vD 15
+		sprite va vb 15
 	again
 	return
 
 
+: hit_test
+	i := player_pos
+	save va - vb
+	map_is_wall
+	i := player_pos
+	load va - vb
+	return
+
+
 : move_right
-	if v9 >= 120 begin
+	if va >= 120 begin
+		i := player_y
+		save vb - vb
 		map_scroll_right
-		v9 := 0
+		i := player_y
+		load vb - vb
+		va := 0
 	else
-		va := v9
-		vb := vD
-		map_is_wall
-		if v0 == 0 then v9 += player_shift
+		hit_test
+		if v0 == 0 then va += player_shift
 	end
 	return
 
 
 : move_left
-	if v9 <= 0 begin
+	if va <= 0 begin
+		i := player_y
+		save vb - vb
 		map_scroll_left
-		v9 := 120
+		i := player_y
+		load vb - vb
+		va := 120
 	else
-		va := v9
-		vb := vD
-		map_is_wall
-		if v0 == 0 then v9 += neg_player_shift
+		hit_test
+		if v0 == 0 then va += neg_player_shift
 	end
 	return
 
 
 : move_down
-	if vD >= 48 begin
+	if vb >= 48 begin
+		i := player_x
+		save va - va
 		map_scroll_down
-		vD := 0
+		i := player_x
+		load va - va
+		vb := 0
 	else
-		va := v9
-		vb := vD
-		map_is_wall
-		if v0 == 0 then vD += player_shift
+		hit_test
+		if v0 == 0 then vb += player_shift
 	end
 	return
 
 
 : move_up
-	if vD <= 0 begin
+	if vb <= 0 begin
+		i := player_x
+		save va - va
 		map_scroll_up
-		vD := 48
+		i := player_x
+		load va - va
+		vb := 48
 	else
-		va := v9
-		vb := vD
-		map_is_wall
-		if v0 == 0 then vD += neg_player_shift
+		hit_test
+		if v0 == 0 then vb += neg_player_shift
 	end
 	return
+
+
+: player_pos
+: player_x 0x00
+: player_y 0x00
 
 : player_tile 0x18 0x18 0x18 0x18 0x18 0x18 0xFF 0xFF
 0x18 0x18 0x18 0x18 0x18 0x18 0x18 0xFF
