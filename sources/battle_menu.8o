@@ -37,17 +37,11 @@
 	:byte text_battle_menu_repair
 	:byte text_battle_menu_hack
 
-: battle_menu
-	clear
-	battle_draw_init
-
-	v0 := 0
-	i := battle_menu_pos
-	save v0 - v0
-
+: menu_draw
 	vd := 0
 	loop
-		i := battle_menu_data
+	: menu_data_ptr
+		i := 0
 		i += vd
 		load vc - vc
 
@@ -58,14 +52,29 @@
 		vb += vb
 		vb -= vd #×7
 		vb += 34
-		dump 10 12
 
 		draw_text_ns
 
 		vd += 1
-		if vd != 4 then
+		if vd == 4 then
+			return
 	again
 
+: battle_menu_draw
+	:unpack 0xa battle_menu_data
+	i := menu_data_ptr
+	save v0 - v1
+	jump menu_draw
+
+: battle_menu
+	clear
+	battle_draw_init
+
+	v0 := 0
+	i := battle_menu_pos
+	save v0 - v0
+
+	battle_menu_draw
 	battle_menu_draw_highlight
 
 	loop
