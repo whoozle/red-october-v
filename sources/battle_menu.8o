@@ -99,7 +99,7 @@
 		if v0 != 0 begin
 			battle_menu_2
 			if v0 != 0 then
-				return
+				battle_enemy_tick
 		end
 	again
 

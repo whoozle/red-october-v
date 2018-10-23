@@ -78,7 +78,7 @@
 		vc := 0
 		battle_menu2_handle_key
 		if v0 != 0 begin
-			vd := 0
+			v9 := 0
 			jump battle_menu2_exit
 		end
 
@@ -91,7 +91,7 @@
 				battle_object_draw_hp_bar
 				battle_attack
 				battle_object_draw_hp_bar
-				vd := 1
+				v9 := 1
 				jump battle_menu2_exit
 			end
 		end
@@ -100,7 +100,7 @@
 : battle_menu2_exit
 	battle_menu2_draw_highlight
 	battle_menu2_draw
-	v0 := vd
+	v0 := v9
 	return
 
 : battle_menu2_pos

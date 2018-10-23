@@ -15,6 +15,9 @@
 	save v0
 	jump battle_menu
 
+: battle_enemy_tick
+	return
+
 : battle_object_count
 	4
 
