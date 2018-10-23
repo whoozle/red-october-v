@@ -107,6 +107,8 @@ sources/*.8o
 		cat sources/battle.8o >> $@
 		cat $(PREFIX)/common.8o >> $@
 		cat sources/battle_menu.8o >> $@
+		cat sources/battle_menu2.8o >> $@
+		cat sources/battle_target.8o >> $@
 		cat sources/battle_objects.8o >> $@
 		cat $(PREFIX)/texts_data.8o >> $@ #org 0x1000, can be used as guard
 		cat $(PREFIX)/font_data.8o >> $@

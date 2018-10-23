@@ -1,3 +1,6 @@
+:const battle_menu_x 10
+:const battle_menu_y 34
+
 : menu_check_key
 	ve := va
 	if ve key begin
@@ -27,7 +30,6 @@
 		battle_menu_draw_highlight
 	end
 	return
-
 
 : battle_menu
 	clear
@@ -69,19 +71,11 @@
 		vb := 1
 		vc := 0
 		battle_menu_handle_key
-		va := 6
 
+		va := 6
 		menu_check_key
 		if v0 != 0 begin
-			battle_menu_pick_target
-			if v0 != -1 begin
-				vd := v0
-				battle_object_draw_hp_bar
-				battle_attack
-				battle_object_draw_hp_bar
-				va := sfx_index_hit
-				sfx_play
-			end
+			battle_menu_2
 		end
 	again
 
@@ -108,87 +102,4 @@
 		v2 += -1
 		if v2 != 0 then
 	again
-	return
-
-: battle_draw_init
-	vd := 0
-	loop
-		battle_object_draw
-		battle_object_draw_hp_bar
-		vd += 1
-		i := battle_object_count
-		load v0 - v0
-		if vd != v0 then
-	again
-	return
-
-#==== ATTACK =============================================
-: battle_object_draw_highlight
-	i := battle_menu_target
-	load v0 - v0
-	battle_object_get_x_by_v0
-	i := long tile_highlight_16_data
-	sprite v0 v1 0
-	return
-
-: battle_menu_target
-	-1
-
-: battle_menu_pick_target
-	i := battle_menu_target
-	load va - va
-	if va == -1 then
-		va := 0
-	save va - va
-	battle_object_draw_highlight
-
-	loop
-		sound_tick
-		va := OCTO_KEY_A
-		vb := -1
-		vc := 3
-		battle_menu_pick_target_handle_key
-
-		va := OCTO_KEY_D
-		vb := 1
-		vc := 0
-		battle_menu_pick_target_handle_key
-
-		va := OCTO_KEY_E
-		menu_check_key
-		if v0 != 0 then
-			jump battle_menu_pick_target_ok
-
-		va := OCTO_KEY_Q
-		menu_check_key
-		if v0 == 0 then
-	again
-
-	va := sfx_index_menu
-	sfx_play
-	battle_object_draw_highlight
-	v0 := -1
-	return
-
-: battle_menu_pick_target_ok
-	battle_object_draw_highlight
-	i := battle_menu_target
-	load v0 - v0
-	return
-
-: battle_menu_pick_target_handle_key
-	menu_check_key
-	if v0 != 0 begin
-		battle_object_draw_highlight
-		i := battle_object_count
-		load v1 - v1
-
-		i := battle_menu_target
-		load v0 - v0
-		v0 += vb
-		if v0 >= v1 then
-			v0 := vc
-		save v0 - v0
-		battle_object_draw_highlight
-	end
 	return
