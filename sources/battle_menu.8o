@@ -92,7 +92,9 @@
 		vc := 0
 		battle_menu_handle_key
 
-		va := 6
+		va := OCTO_KEY_E
+		vb := 0
+		vb := 0
 		menu_check_key
 		if v0 != 0 begin
 			battle_menu_2

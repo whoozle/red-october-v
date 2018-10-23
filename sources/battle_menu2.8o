@@ -73,7 +73,14 @@
 		vc := 0
 		battle_menu2_handle_key
 
-		va := 6
+		va := OCTO_KEY_Q
+		vb := 0
+		vc := 0
+		battle_menu2_handle_key
+		if v0 != 0 then
+			jump battle_menu2_exit
+
+		va := OCTO_KEY_E
 		menu_check_key
 		if v0 != 0 begin
 			battle_menu_pick_target
@@ -84,9 +91,16 @@
 				battle_object_draw_hp_bar
 				va := sfx_index_hit
 				sfx_play
+				jump battle_menu2_exit
 			end
 		end
 	again
+
+: battle_menu2_exit
+	battle_menu2_draw_highlight
+	battle_menu2_draw
+	v0 := -1
+	return
 
 : battle_menu2_pos
 	0
@@ -104,7 +118,7 @@
 	v0 += -1
 	v1 += -1
 	i := long tile_highlight_menu_data
-	v2 := 6
+	v2 := 8
 	loop
 		sprite v0 v1 8
 		v0 += 8
