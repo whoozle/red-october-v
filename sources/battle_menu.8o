@@ -45,7 +45,8 @@
 		i += vd
 		load vc - vc
 
-		va := battle_menu_x
+		:next menu_x_ptr
+		va := 0
 		vb := vd
 		vb += vb
 		vb += vb
@@ -64,6 +65,9 @@
 	:unpack 0xa battle_menu_data
 	i := menu_data_ptr
 	save v0 - v1
+	v0 := battle_menu_x
+	i := menu_x_ptr
+	save v0 - v0
 	jump menu_draw
 
 : battle_menu

@@ -1,6 +1,7 @@
 :const battle_menu2_x 60
 :const battle_menu2_y 34
 
+: battle_menu2_data
 : battle_menu_attack_data
 	:byte text_battle_menu_attack_bash
 	:byte text_battle_menu_attack_kick
@@ -40,27 +41,25 @@
 	end
 	return
 
+: battle_menu2_draw
+	i := battle_menu_pos
+	load v2 - v2
+	v2 += v2
+	v2 += v2
+	:unpack 0xa battle_menu2_data
+	v1 += v2
+	v0 += vf
+
+	i := menu_data_ptr
+	save v0 - v1
+
+	v0 := battle_menu2_x
+	i := menu_x_ptr
+	save v0 - v0
+	jump menu_draw
+
 : battle_menu_2
-	va := battle_menu2_x
-	vb := 34
-	vc := text_battle_menu_attack_bash
-
-	draw_text_ns
-	va := battle_menu2_x
-	vb := 41
-	vc := text_battle_menu_attack_kick
-	draw_text_ns
-
-	va := battle_menu2_x
-	vb := 48
-	vc := text_battle_menu_attack_thrust
-	draw_text_ns
-
-	va := battle_menu2_x
-	vb := 55
-	vc := text_battle_menu_attack_grapple
-	draw_text_ns
-
+	battle_menu2_draw
 	battle_menu2_draw_highlight
 
 	loop
