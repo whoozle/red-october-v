@@ -50,7 +50,11 @@
 		load vb - vb
 		va := 0
 	else
+		va += 8
+		vb += 12
 		hit_test
+		va += -8
+		vb += -12
 		if v0 == 0 then va += player_shift
 	end
 	return
@@ -65,7 +69,9 @@
 		load vb - vb
 		va := 120
 	else
+		vb += 12
 		hit_test
+		vb += -12
 		if v0 == 0 then va += neg_player_shift
 	end
 	return
@@ -80,7 +86,9 @@
 		load va - va
 		vb := 0
 	else
+		vb += 12
 		hit_test
+		vb += -12
 		if v0 == 0 then vb += player_shift
 	end
 	return
@@ -95,7 +103,9 @@
 		load va - va
 		vb := 48
 	else
+		vb += 8
 		hit_test
+		vb += -8
 		if v0 == 0 then vb += neg_player_shift
 	end
 	return
