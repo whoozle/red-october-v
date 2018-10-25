@@ -36,14 +36,24 @@
 : battle_hack_level
 	1
 
+: battle_get_current_skill_level
+	i := battle_menu_current_skill
+	load v0 - v0
+	i := battle_skill_level
+	i += v0
+	load v0 - v0
+	return
+
 : battle_menu2_handle_key
 	menu_check_key
 	if v0 != 0 begin
 		battle_menu2_draw_highlight
+		battle_get_current_skill_level
+		v1 := v0
 		i := battle_menu2_pos
 		load v0 - v0
 		v0 += vb
-		if v0 > 3 then
+		if v0 >= v1 then
 			v0 := vc
 		save v0 - v0
 		battle_menu2_draw_highlight
@@ -74,7 +84,9 @@
 	loop
 		va := OCTO_KEY_W
 		vb := -1
-		vc := 3
+		battle_get_current_skill_level
+		v0 += -1
+		vc := v0
 		battle_menu2_handle_key
 
 		va := OCTO_KEY_S
