@@ -51,10 +51,10 @@ assets/tiles/*
 		./generate-texture.py --map1=0 assets/tiles/attack_engi.png attack_engi 2 8 >> $@
 		./generate-texture.py --map1=0 assets/tiles/attack_repair.png attack_repair 2 8 >> $@
 		./generate-texture.py --map1=0 assets/tiles/attack_hack.png attack_hack 2 8 >> $@
-		./generate-texture.py --map1=0 assets/tiles/hero_front.png hero_front 2 16 >> $@
-		./generate-texture.py --map1=0 assets/tiles/hero_left.png hero_left 2 16 >> $@
-		./generate-texture.py --map1=0 assets/tiles/hero_right.png hero_right 2 16 >> $@
-		./generate-texture.py --map1=0 assets/tiles/hero_back.png hero_back 2 16 >> $@
+		./generate-texture.py --map1=0 assets/tiles/hero_front.png player_front 2 16 >> $@
+		./generate-texture.py --map1=0 assets/tiles/hero_left.png player_left 2 16 >> $@
+		./generate-texture.py --map1=0 assets/tiles/hero_right.png player_right 2 16 >> $@
+		./generate-texture.py --map1=0 assets/tiles/hero_back.png player_back 2 16 >> $@
 
 $(PREFIX)/map.8o $(PREFIX)/map_data.8o: Makefile generate-map.py assets/map.json assets/tileset.png
 		./generate-map.py assets/map.json 3000 $(PREFIX)
@@ -97,6 +97,9 @@ $(PREFIX)/module_8000.8o: \
 Makefile \
 $(PREFIX) \
 $(PREFIX)/common.8o \
+$(PREFIX)/font_data.8o \
+$(PREFIX)/texts_data.8o \
+$(PREFIX)/tiles.8o \
 sources/*.8o
 		echo ": main" > $@
 		echo ":org 0x800" >> $@
@@ -105,6 +108,7 @@ sources/*.8o
 		cat sources/map.8o >> $@
 		cat $(PREFIX)/texts_data.8o >> $@ #org 0x1000, can be used as guard
 		cat $(PREFIX)/font_data.8o >> $@
+		cat $(PREFIX)/tiles.8o >> $@
 
 $(PREFIX)/module_8800.8o: \
 Makefile \
