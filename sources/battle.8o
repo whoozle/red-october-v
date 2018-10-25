@@ -7,6 +7,7 @@
 :const battle_tick_freq_random	0x0f
 
 : battle_start
+	clear
 	i := battle_object_count
 	load v1 - v1
 	v2 := v1
@@ -21,6 +22,7 @@
 	v1 := v2
 	i := battle_object_t
 	battle_object_fill
+	battle_draw_hp_bar
 	jump battle_menu
 
 : battle_object_fill
@@ -31,8 +33,54 @@
 	again
 	return
 
+: battle_draw_hp_bar
+	i := player_hp
+	load v9 - v9
+	v9 >>= v9
+	v9 >>= v9
+	v9 += 1 #1-64
+
+	v8 := 7
+	v8 &= v9 #1/8 fraction
+
+	i := battle_draw_hp_bar_frac_sprite_ptr
+	v0 := 0x10
+	v0 |= v8
+	save v0 - v0
+
+	v9 >>= v9
+	v9 >>= v9
+	v9 >>= v9
+
+	v0 := 120
+	v1 := 0
+	i := long tile_hp_bar_data
+
+	if v9 == 0 then
+		jump battle_draw_hp_bar_frac
+	loop
+		sprite v0 v1 8
+		v1 += 8
+		v9 += -1
+		if v9 != 0 then
+	again
+
+: battle_draw_hp_bar_frac
+	if v8 == 0 then
+		return
+
+:next battle_draw_hp_bar_frac_sprite_ptr
+	sprite v0 v1 8
+	return
 
 : battle_enemy_tick
+	battle_draw_hp_bar
+	i := player_hp
+	load v0 - v0
+	v1 := random 0x1f
+	v0 -= v1
+	save v0 - v0
+	battle_draw_hp_bar
 	return
 
 : battle_object_count

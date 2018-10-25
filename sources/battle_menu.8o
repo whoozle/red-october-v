@@ -75,7 +75,6 @@
 	jump menu_draw
 
 : battle_menu
-	clear
 	battle_draw_init
 
 	v0 := 0
