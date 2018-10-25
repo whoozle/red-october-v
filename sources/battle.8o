@@ -7,19 +7,40 @@
 :const battle_tick_freq_random	0x0f
 
 : battle_start
+	i := battle_object_count
+	load v1 - v1
+	v2 := v1
+
 	v0 := 255
 	i := battle_object_hp
-	save v0
-	save v0
-	save v0
-	save v0
+	battle_object_fill
+
+	v0 := 0
+	v1 := v2
+	i := battle_object_t
+	battle_object_fill
 	jump battle_menu
+
+: battle_object_fill
+	loop
+		save v0
+		v1 += -1
+		if v1 != 0 then
+	again
+	return
+
 
 : battle_enemy_tick
 	return
 
 : battle_object_count
 	4
+
+: battle_object_t
+	0
+	0
+	0
+	0
 
 : battle_object_hp
 	255
