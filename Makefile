@@ -93,17 +93,27 @@ sources/*.8o
 		cat sources/sfx.8o >> $@
 		cat $(PREFIX)/font.8o >> $@
 
+$(PREFIX)/module_main.8o: \
+Makefile \
+$(PREFIX)
+		echo ": main" > $@
+		echo "hires" >> $@
+		echo "plane 3" >> $@
+		echo "clear" >> $@
+		echo "jump 0x800" >> $@
+		echo ":org 0x800" >> $@
+
+
 $(PREFIX)/module_8000.8o: \
 Makefile \
 $(PREFIX) \
 $(PREFIX)/common.8o \
+$(PREFIX)/module_main.8o \
 $(PREFIX)/font_data.8o \
 $(PREFIX)/texts_data.8o \
 $(PREFIX)/tiles.8o \
 sources/*.8o
-		echo ": main" > $@
-		echo "jump 0x800" >> $@
-		echo ":org 0x800" >> $@
+		cat $(PREFIX)/module_main.8o > $@
 		cat sources/overworld.8o >> $@
 		cat $(PREFIX)/common.8o >> $@
 		cat sources/map.8o >> $@
@@ -115,13 +125,12 @@ $(PREFIX)/module_8800.8o: \
 Makefile \
 $(PREFIX) \
 $(PREFIX)/common.8o \
+$(PREFIX)/module_main.8o \
 $(PREFIX)/texts_data.8o \
 $(PREFIX)/font_data.8o \
 $(PREFIX)/tiles.8o \
 sources/*.8o
-		echo ": main" > $@
-		echo "jump 0x800" >> $@
-		echo ":org 0x800" >> $@
+		cat $(PREFIX)/module_main.8o > $@
 		cat sources/battle.8o >> $@
 		cat $(PREFIX)/common.8o >> $@
 		cat sources/battle_menu.8o >> $@
