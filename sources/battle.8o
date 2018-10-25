@@ -12,6 +12,8 @@
 	v2 := v1
 
 	v0 := 255
+	i := player_hp
+	save v0 - v0
 	i := battle_object_hp
 	battle_object_fill
 
