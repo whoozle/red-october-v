@@ -38,7 +38,6 @@
 
 : battle_attack
 	v5 := 4
-	v8 := random 3 #random attack for now
 	loop
 		v0 := vd
 		battle_object_get_x_by_v0
@@ -51,14 +50,16 @@
 		v7 += v0
 		v7 += -8
 
-		va := v8
+		i := battle_menu_current_skill
+		load va - va
 		battle_get_attack_tile
 		sprite v6 v7 8
 
 		va := sfx_index_shot
 		sfx_play_sync
 
-		va := v8
+		i := battle_menu_current_skill
+		load va - va
 		battle_get_attack_tile
 		sprite v6 v7 8
 
