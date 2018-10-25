@@ -33,6 +33,7 @@ def update_layer(data, layer):
 
 map_data_path = os.path.join(args.prefix, 'map_data.8o')
 map_header_path = os.path.join(args.prefix, 'map.8o')
+objects = {}
 
 with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_header_path, 'w') as fmap_header:
 	map_json = json.load(fi)
