@@ -51,7 +51,7 @@
 	return
 
 : battle_menu2_draw
-	i := battle_menu_pos
+	i := battle_menu_current_skill
 	load v2 - v2
 	v2 += v2
 	v2 += v2

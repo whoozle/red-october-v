@@ -21,7 +21,7 @@
 	menu_check_key
 	if v0 != 0 begin
 		battle_menu_draw_highlight
-		i := battle_menu_pos
+		i := battle_menu_current_skill
 		load v0 - v0
 		v0 += vb
 		if v0 > 3 then
@@ -75,7 +75,7 @@
 	battle_draw_init
 
 	v0 := 0
-	i := battle_menu_pos
+	i := battle_menu_current_skill
 	save v0 - v0
 
 	battle_menu_draw
@@ -103,11 +103,11 @@
 		end
 	again
 
-: battle_menu_pos
+: battle_menu_current_skill
 	0
 
 : battle_menu_draw_highlight
-	i := battle_menu_pos
+	i := battle_menu_current_skill
 	load v0 - v0
 	v1 := v0
 	v1 += v1
