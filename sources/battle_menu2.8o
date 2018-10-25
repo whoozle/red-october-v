@@ -75,6 +75,11 @@
 	v0 := battle_menu2_x
 	i := menu_x_ptr
 	save v0 - v0
+
+	battle_get_current_skill_level
+	i := menu_draw_n
+	save v0 - v0
+
 	jump menu_draw
 
 : battle_menu_2

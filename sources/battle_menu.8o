@@ -57,6 +57,7 @@
 		draw_text_ns
 
 		vd += 1
+		:next menu_draw_n
 		if vd == 4 then
 			return
 	again
@@ -67,6 +68,9 @@
 	save v0 - v1
 	v0 := battle_menu_x
 	i := menu_x_ptr
+	save v0 - v0
+	i := menu_draw_n
+	v0 := 4
 	save v0 - v0
 	jump menu_draw
 
