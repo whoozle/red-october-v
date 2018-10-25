@@ -6,7 +6,7 @@
 	save v1 - v2
 	return
 
-
+:const overlay_base_address 0x800
 : overlay_load
 	va <<= va
 	va <<= va
@@ -16,8 +16,7 @@
 	i := overlay_source_address_ptr
 	save va - vb
 
-	v0 := 0xa8
-	v1 := 0x00
+	:unpack 0x0a overlay_base_address
 	i := overlay_destination_address_ptr
 	save v0 - v1
 
@@ -43,4 +42,4 @@
 		if vb != 0 then #256 iterations
 	again
 	#:breakpoint ready
-	jump 0x800
+	jump overlay_base_address
