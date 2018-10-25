@@ -51,6 +51,7 @@ assets/tiles/*
 		./generate-texture.py --map1=0 assets/tiles/attack_engi.png attack_engi 2 8 >> $@
 		./generate-texture.py --map1=0 assets/tiles/attack_repair.png attack_repair 2 8 >> $@
 		./generate-texture.py --map1=0 assets/tiles/attack_hack.png attack_hack 2 8 >> $@
+		./generate-texture.py --map1=0 assets/tiles/hp_bar.png hp_bar 1 8 >> $@
 		./generate-texture.py --map1=0 assets/tiles/hero_front.png player_front 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/hero_left.png player_left 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/hero_right.png player_right 2 16 >> $@
