@@ -17,7 +17,9 @@
 	loop
 		battle_object_tick
 		vd += 1
-		if vd != 4 then
+		i := battle_object_count
+		load v0 - v0
+		if vd != v0 then
 	again
 	return
 

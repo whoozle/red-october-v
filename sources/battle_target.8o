@@ -34,7 +34,9 @@
 		sound_tick
 		va := OCTO_KEY_A
 		vb := -1
-		vc := 3
+		i := battle_object_count
+		load vc - vc
+		vc += -1
 		battle_menu_pick_target_handle_key
 
 		va := OCTO_KEY_D
