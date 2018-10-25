@@ -102,6 +102,7 @@ $(PREFIX)/texts_data.8o \
 $(PREFIX)/tiles.8o \
 sources/*.8o
 		echo ": main" > $@
+		echo "jump 0x800" >> $@
 		echo ":org 0x800" >> $@
 		cat sources/overworld.8o >> $@
 		cat $(PREFIX)/common.8o >> $@
@@ -119,6 +120,7 @@ $(PREFIX)/font_data.8o \
 $(PREFIX)/tiles.8o \
 sources/*.8o
 		echo ": main" > $@
+		echo "jump 0x800" >> $@
 		echo ":org 0x800" >> $@
 		cat sources/battle.8o >> $@
 		cat $(PREFIX)/common.8o >> $@
