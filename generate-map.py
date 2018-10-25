@@ -62,13 +62,23 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 			update_layer(data, layer)
 		elif 'objects' in layer:
 			lobjs = layer['objects']
+			object_types = {}
+			object_type_index = 1
 			for lobj in lobjs:
-				name, x, y, w, h = lobj['name'], int(lobj['x']), int(lobj['y']), int(lobj['width']), int(lobj['height'])
+				name, type_name, x, y, w, h = lobj['name'], lobj['type'], int(lobj['x']), int(lobj['y']), int(lobj['width']), int(lobj['height'])
 				sx, sy = x / screen_width, y / screen_height #screen coordinates
 				screen_id = sy * hscreens + sx
-				#print 'screen_id', screen_id, name, x, y
+				# print 'screen_id', screen_id, name, x, y
 				screen_objects = objects.setdefault(screen_id, [])
 				screen_objects.append((name, x - sx * screen_width, y - sy * screen_height, w, h))
+
+				if not type_name in object_types:
+					object_types[type_name] = object_type_index
+					fmap_header.write(':const map_object_type_%s 0x%02x\n' %(type_name, object_type_index))
+					object_type_index += 1
+
+				fmap_data.write(': map_object_data_screen_%s\n' %screen_id)
+				fmap_data.write('0x%02x 0x%02x 0x%02x 0\n' %(object_types[type_name], sx, sy))
 		else:
 			print 'unhandled layer %s' %layer
 
