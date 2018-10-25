@@ -26,6 +26,15 @@
 	:byte text_battle_menu_hack_erase_data
 	:byte text_battle_menu_hack_erase_system
 
+: battle_skill_level
+: battle_attack_level
+	1
+: battle_engi_level
+	1
+: battle_repair_level
+	1
+: battle_hack_level
+	1
 
 : battle_menu2_handle_key
 	menu_check_key
