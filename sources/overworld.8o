@@ -5,9 +5,6 @@
 	map_render
 	va := 24
 	vb := 24
-
-	v1 := 8
-
 	i := long tile_player_front_data
 	sprite va vb 0
 
@@ -37,6 +34,14 @@
 	i := player_pos
 	save va - vb
 	map_is_wall
+
+	i := v0_store
+	save v0 - v0
+	va := 0
+	sfx_play
+	i := v0_store
+	load v0 - v0
+
 	i := player_pos
 	load va - vb
 	return
@@ -118,3 +123,5 @@
 : player_pos
 : player_x 0x00
 : player_y 0x00
+
+: v0_store 0x00
