@@ -33,3 +33,9 @@
 
 : party_current_pos
 	12 12
+
+: player_pos
+: player_x 0x00
+: player_y 0x00
+
+: v0_store 0x00

@@ -118,10 +118,3 @@
 	end
 	i := long tile_player_back_data
 	return
-
-
-: player_pos
-: player_x 0x00
-: player_y 0x00
-
-: v0_store 0x00
