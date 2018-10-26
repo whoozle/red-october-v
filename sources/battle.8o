@@ -108,7 +108,13 @@
 	return
 
 : battle_attack
-	v5 := 4
+	va := 1
+	battle_object_attack_animation
+	va := random 0x7f
+	jump battle_object_damage
+
+: battle_object_attack_animation
+	v5 := va
 	loop
 		v0 := vd
 		battle_object_get_x_by_v0
@@ -137,17 +143,18 @@
 		v5 += -1
 		if v5 != 0 then
 	again
+	return
+
+: battle_object_damage
+	if va == 0 then #MISS
+		return
 	i := battle_object_hp
 	i += vd
 	load v0 - v0
 	if v0 == 0 then
 		return
 
-	v1 := random 0x7f
-	if v1 == 0 then #MISS
-		return
-
-	v0 -= v1
+	v0 -= va
 	if vf == 0 begin
 		va := sfx_index_explosion
 		sfx_play_sync
