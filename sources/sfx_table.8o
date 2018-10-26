@@ -7,3 +7,5 @@
 	:byte audio_explosion_size
 	offset audio_shoot
 	:byte audio_shoot_size
+	offset audio_powerup
+	:byte audio_powerup_size
