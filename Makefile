@@ -69,18 +69,19 @@ $(PREFIX)/texts.8o $(PREFIX)/texts_data.8o: Makefile assets/en.json generate-tex
 $(PREFIX)/signature.8o: Makefile ./generate-string.py
 		./generate-string.py "DEFINITELY NO FISH HERE ©COWNAMEDSQUIRREL 2018" > $@
 
-$(PREFIX)/sfx.8o: Makefile ./generate-sfx.py
-		./generate-sfx.py -c 0 assets/sfx/menu4000.wav menu > $@
+$(PREFIX)/sfx.8o: Makefile ./generate-sfx.py assets/sfx/*.wav
+		echo ":org 0x5800" > $@
+		./generate-sfx.py -c 0 assets/sfx/menu4000.wav menu >> $@
 		./generate-sfx.py -c 0 assets/sfx/hit4000.wav hit >> $@
 		./generate-sfx.py -c 0 assets/sfx/explosion4000.wav explosion >> $@
 		./generate-sfx.py -c 0 assets/sfx/shoot4000.wav shoot >> $@
+		./generate-sfx.py -c 0 assets/sfx/powerup4000.wav powerup >> $@
 
 $(PREFIX)/common.8o: \
 Makefile \
 $(PREFIX) \
 $(PREFIX)/texts.8o \
 $(PREFIX)/map.8o \
-$(PREFIX)/sfx.8o \
 $(PREFIX)/font.8o \
 sources/*.8o
 		cat sources/globals.8o > $@
@@ -90,7 +91,6 @@ sources/*.8o
 		cat sources/objects.8o >> $@
 		cat sources/utils.8o >> $@
 		cat sources/text.8o >> $@
-		cat $(PREFIX)/sfx.8o >> $@ #fixme: REMOVE IT
 		cat sources/sfx.8o >> $@
 		cat $(PREFIX)/font.8o >> $@
 
@@ -123,6 +123,8 @@ sources/*.8o
 		cat $(PREFIX)/font_data.8o >> $@
 		cat $(PREFIX)/tiles.8o >> $@
 		cat $(PREFIX)/map_data.8o >> $@
+		cat $(PREFIX)/sfx.8o >> $@
+		cat sources/sfx_table.8o >> $@
 
 $(PREFIX)/module_8800.8o: \
 Makefile \
@@ -132,6 +134,7 @@ $(PREFIX)/module_main.8o \
 $(PREFIX)/texts_data.8o \
 $(PREFIX)/font_data.8o \
 $(PREFIX)/tiles.8o \
+$(PREFIX)/sfx.8o \
 sources/*.8o
 		cat $(PREFIX)/module_main.8o > $@
 		cat sources/battle.8o >> $@
@@ -144,6 +147,8 @@ sources/*.8o
 		cat $(PREFIX)/font_data.8o >> $@
 		cat $(PREFIX)/tiles.8o >> $@
 		cat sources/battle_object_tiles.8o >> $@
+		cat $(PREFIX)/sfx.8o >> $@
+		cat sources/sfx_table.8o >> $@
 
 
 .SECONDARY: $(PREFIX)/module_%.hex: $(PREFIX)/module_%.bin generate-hex.py
@@ -168,6 +173,8 @@ assets/* assets/*/* sources/*.8o
 		cat sources/splash.8o >> $@
 
 		cat $(PREFIX)/map_data.8o >> $@
+		cat $(PREFIX)/sfx.8o >> $@
+		cat sources/sfx_table.8o >> $@
 		cat $(PREFIX)/texts_data.8o >> $@ #org 1000
 		cat $(PREFIX)/font_data.8o >> $@
 		cat $(PREFIX)/tiles.8o >> $@
