@@ -78,7 +78,9 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 					object_type_index += 1
 
 				fmap_data.write(': map_object_data_screen_%s\n' %screen_id)
-				fmap_data.write('0x%02x 0x%02x 0x%02x 0\n' %(object_types[type_name], sx, sy))
+				obj_x = x - sx * screen_width
+				obj_y = y - sy * screen_height
+				fmap_data.write('0x%02x 0x%02x 0x%02x 0\n' %(object_types[type_name], obj_x, obj_y))
 		else:
 			print 'unhandled layer %s' %layer
 
