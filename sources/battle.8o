@@ -108,7 +108,8 @@
 	return
 
 : battle_attack
-	va := 1
+	battle_get_current_skill_level
+	va := v0
 	battle_object_attack_animation
 	va := random 0x7f
 	jump battle_object_damage
