@@ -50,6 +50,7 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 	data = [0 for i in xrange(size)]
 	walls_data = [0 for i in xrange(size)]
 	object_screens = {}
+	screens = ["map_object_data_screen_empty" for i in xrange(vscreens * hscreens)]
 
 	for layer in map_json['layers']:
 		if 'data' in layer:
@@ -80,7 +81,9 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 
 				obj_x = x - sx * screen_width
 				obj_y = y - sy * screen_height
-				object_screens["map_object_data_screen_%s" %screen_id] = "0x%02x 0x%02x 0x%02x 0" %(object_types[type_name], obj_x, obj_y)
+				screen_with_obj_label = "map_object_data_screen_%s" %screen_id
+				object_screens[screen_with_obj_label] = "0x%02x 0x%02x 0x%02x 0" %(object_types[type_name], obj_x, obj_y)
+				screens[screen_id] = screen_with_obj_label
 		else:
 			print 'unhandled layer %s' %layer
 
@@ -110,6 +113,11 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 	fmap_data.write(":org 0x%04x\n" %((addr + width * height + 0xff) / 0x100 * 0x100))
 	fmap_data.write(': map_walls_data\n%s\n' % ' '.join(walls_data_packed))
 
+	fmap_data.write(': map_object_data_screen_empty 0\n')
 	for obj in object_screens:
 		fmap_data.write(': %s\n' %obj)
 		fmap_data.write('%s\n' %(object_screens[obj]))
+
+	fmap_data.write(': map_object_data\n')
+	for scr in screens:
+		fmap_data.write('offset %s\n' %scr)
