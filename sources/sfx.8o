@@ -54,6 +54,7 @@
 
 : sfx_play_sync
 	sfx_play
+: sfx_wait
 	loop
 		sound_tick
 		if v0 == 1 then
