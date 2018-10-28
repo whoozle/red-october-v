@@ -5,6 +5,7 @@
 
 :const battle_tick_freq_base	0x10
 :const battle_tick_freq_random	0x0f
+:const battle_dt 0x40
 
 : battle_start
 	clear
@@ -34,15 +35,50 @@
 	return
 
 : battle_enemy_tick
-	battle_draw_hp_bar
-	i := player_hp
-	load v0 - v0
-	v1 := random 0x1f
-	v0 -= v1
-	save v0 - v0
-	va := 1
-	battle_enemy_attack_animation
-	battle_draw_hp_bar
+	sfx_wait
+	vd := 0
+	loop
+		i := battle_object_t
+		i += vd
+
+		load v0 - v0
+		v0 += battle_dt
+
+		i := battle_object_speed
+		i += vd
+		load v1 - v1
+
+		if v0 < v1 then
+			jump battle_enemy_tick_next
+
+		v2 := 0
+		loop
+			v0 -= v1
+			v2 += 1
+			if v0 >= v1 then
+		again
+
+		i += vd
+		i := battle_object_t
+		save v0 - v0
+
+		if v2 == 0 then
+			jump battle_enemy_tick_next
+
+		battle_draw_hp_bar
+		i := player_hp
+		load v0 - v0
+		v1 := random 0x1f
+		v0 -= v1
+		save v0 - v0
+		va := 1
+		battle_enemy_attack_animation
+		battle_draw_hp_bar
+
+: battle_enemy_tick_next
+		vd += 1
+		if vd != 4 then
+	again
 	return
 
 : battle_object_count
@@ -53,6 +89,12 @@
 	0
 	0
 	0
+
+: battle_object_speed
+	50
+	100
+	40
+	40
 
 : battle_object_hp
 	255
