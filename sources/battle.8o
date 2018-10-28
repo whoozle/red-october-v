@@ -65,6 +65,10 @@
 		if v2 == 0 then
 			jump battle_enemy_tick_next
 
+		v0 := vd
+		battle_object_get_x_by_v0
+		i := long tile_attack_highlight_data
+		sprite v0 v1 0
 #loop
 			battle_draw_hp_bar
 			i := player_hp
@@ -76,6 +80,13 @@
 			battle_enemy_attack_animation
 			battle_draw_hp_bar
 #loop end
+		va := 20
+		sleep
+
+		v0 := vd
+		battle_object_get_x_by_v0
+		i := long tile_attack_highlight_data
+		sprite v0 v1 0
 
 : battle_enemy_tick_next
 		vd += 1
