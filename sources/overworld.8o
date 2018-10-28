@@ -47,11 +47,24 @@
 	return
 
 
+: check_objects
+	va := 9
+	i := long map_object_data
+	i += va
+	i += va
+	load v0 - v1
+	i := map_current_objects_ptr
+	save v0 - v1
+	# TODO: impl
+	return
+
+
 : move_right
 	if va >= 112 begin
 		i := player_y
 		save vb - vb
 		map_scroll_right
+		check_objects
 		i := player_y
 		load vb - vb
 		va := 0
@@ -71,6 +84,7 @@
 		i := player_y
 		save vb - vb
 		map_scroll_left
+		check_objects
 		i := player_y
 		load vb - vb
 		va := 112
@@ -89,6 +103,7 @@
 		i := player_x
 		save va - va
 		map_scroll_down
+		check_objects
 		i := player_x
 		load va - va
 		vb := 0
@@ -107,6 +122,7 @@
 		i := player_x
 		save va - va
 		map_scroll_up
+		check_objects
 		i := player_x
 		load va - va
 		vb := 48
@@ -118,3 +134,7 @@
 	end
 	i := long tile_player_back_data
 	return
+
+
+: map_current_objects_ptr
+0 0
