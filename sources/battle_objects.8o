@@ -153,3 +153,75 @@
 	battle_object_swap_tiles
 	battle_object_draw
 	return
+
+: battle_draw_hp_bar
+	i := player_hp
+	load v9 - v9
+	v9 >>= v9
+	v9 >>= v9
+	v9 += 1 #1-64
+
+	v8 := 7
+	v8 &= v9 #1/8 fraction
+
+	v9 >>= v9
+	v9 >>= v9
+	v9 >>= v9
+
+	v0 := 120
+	v1 := 0
+	i := long tile_hp_bar_data
+
+	if v9 == 0 then
+		jump battle_draw_hp_bar_frac
+	loop
+		sprite v0 v1 8
+		v1 += 8
+		v9 += -1
+		if v9 != 0 then
+	again
+
+: battle_draw_hp_bar_frac
+	if v8 == 0 then
+		return
+
+	v3 := v0
+
+	i := tile_frac_hp_bar
+	v2 := 0
+	loop
+		v0 := 0
+		save v0
+		v2 += 1
+		if v2 != v8 then
+	again
+
+	v2 := 0
+	loop
+		v4 := 0x3
+		v4 &= v2
+		if v4 == 0 then
+			v0 := 0x1f
+		if v4 == 1 then
+			v0 := 0x01
+		if v4 == 2 then
+			v0 := 0x07
+		if v4 == 3 then
+			v0 := 0x01
+		save v0
+		v2 += 1
+		if v2 != v8 then
+	again
+
+	v0 := 0x10
+	v0 |= v8
+	i := battle_draw_hp_bar_frac_ptr
+	save v0 - v0
+
+	i := tile_frac_hp_bar
+	:next battle_draw_hp_bar_frac_ptr
+	sprite v3 v1 8
+	return
+
+: tile_frac_hp_bar
+0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0
