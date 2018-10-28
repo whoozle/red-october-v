@@ -68,43 +68,29 @@
 	return
 
 : battle_attack
-	battle_get_current_skill_level
-	va := v0
-	battle_object_attack_animation
-	va := random 0x7f
-	jump battle_object_damage
+	battle_get_current_skill
+	if v0 == 0 begin
+		battle_get_current_attack
+		v0 += 1
+		va := v0
+		battle_object_attack_animation
 
-: battle_object_attack_animation
-	v5 := va
-	loop
-		v0 := vd
-		battle_object_get_x_by_v0
-		v6 := v0
-		v7 := v1
-		v0 := random 0x1f
-		v6 += v0
-		v6 += -8
-		v0 := random 0x1f
-		v7 += v0
-		v7 += -8
-
-		i := battle_menu_current_skill
+		battle_get_current_attack
+		i := battle_base_damage_table
+		i += v0
 		load va - va
-		battle_get_attack_tile
-		sprite v6 v7 8
-
-		va := sfx_index_shot
-		sfx_play_sync
-
-		i := battle_menu_current_skill
-		load va - va
-		battle_get_attack_tile
-		sprite v6 v7 8
-
-		v5 += -1
-		if v5 != 0 then
-	again
+		vb := random 0xff
+		f8_mul
+		va := v0
+		jump battle_object_damage
+	end
 	return
+
+: battle_base_damage_table
+	20
+	50
+	80
+	128
 
 : battle_object_damage
 	if va == 0 then #MISS

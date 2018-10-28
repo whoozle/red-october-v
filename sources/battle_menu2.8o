@@ -36,9 +36,18 @@
 : battle_hack_level
 	1
 
-: battle_get_current_skill_level
+: battle_get_current_skill
 	i := battle_menu_current_skill
 	load v0 - v0
+	return
+
+: battle_get_current_attack
+	i := battle_menu2_pos
+	load v0 - v0
+	return
+
+: battle_get_current_skill_level
+	battle_get_current_skill
 	i := battle_skill_level
 	i += v0
 	load v0 - v0

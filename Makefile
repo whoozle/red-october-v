@@ -138,6 +138,7 @@ $(PREFIX)/sfx.8o \
 sources/*.8o
 		cat $(PREFIX)/module_main.8o > $@
 		cat sources/battle.8o >> $@
+		cat sources/math.8o >> $@
 		cat $(PREFIX)/common.8o >> $@
 		cat sources/battle_menu.8o >> $@
 		cat sources/battle_menu2.8o >> $@
