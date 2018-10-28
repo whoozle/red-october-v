@@ -18,7 +18,7 @@
 	:byte text_battle_menu_repair_fix
 	:byte text_battle_menu_repair_solder
 	:byte text_battle_menu_repair_static_shield
-	:byte text_battle_menu_repair_disable_gun
+	:byte text_battle_menu_repair_disable_ai
 
 : battle_menu_hack_data
 	:byte text_battle_menu_hack_underclock
