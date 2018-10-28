@@ -48,14 +48,31 @@
 
 
 : check_objects
-	va := 9
+	map_get_screen_index
+	va := v0
+	va >>= va
+
 	i := long map_object_data
 	i += va
 	i += va
 	load v0 - v1
 	i := map_current_objects_ptr
 	save v0 - v1
-	# TODO: impl
+	0xf0 0x00
+	: map_current_objects_ptr
+	0 0
+
+	load v0 - v2
+	if v0 != 0 begin
+		i := long tile_robot_engineer_front_data
+		sprite v1 v2 0
+	else
+		v1 := 0
+		v2 := 0
+	end
+	i := object_pos
+	save v1 - v2
+
 	return
 
 
@@ -136,5 +153,4 @@
 	return
 
 
-: map_current_objects_ptr
-0 0
+: object_pos 0x00 0x00
