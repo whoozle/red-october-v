@@ -56,7 +56,7 @@ assets/tiles/*
 		./generate-texture.py --map1=0 assets/tiles/hero_left.png player_left 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/hero_right.png player_right 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/hero_back.png player_back 2 16 >> $@
-		./generate-texture.py --map2=1 assets/tiles/attack.png attack 2 16 >> $@
+		./generate-texture.py --map1=3 assets/tiles/attack.png attack 2 16 >> $@
 
 $(PREFIX)/map.8o $(PREFIX)/map_data.8o: Makefile generate-map.py assets/map.json assets/tileset.png
 		./generate-map.py assets/map.json 3000 $(PREFIX)
