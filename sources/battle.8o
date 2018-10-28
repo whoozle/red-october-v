@@ -40,6 +40,8 @@
 	v1 := random 0x1f
 	v0 -= v1
 	save v0 - v0
+	va := 1
+	battle_enemy_attack_animation
 	battle_draw_hp_bar
 	return
 

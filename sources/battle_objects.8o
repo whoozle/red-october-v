@@ -257,3 +257,32 @@
 		if v5 != 0 then
 	again
 	return
+
+: battle_enemy_attack_animation
+	v5 := va
+
+	sfx_wait
+	va := 20
+	sleep
+
+	loop
+		v6 := 48
+		v7 := 24
+		v0 := random 0x1f
+		v6 += v0
+		v0 := random 0xf
+		v7 += v0
+
+		i := long tile_attack_data
+		sprite v6 v7 0
+
+		va := sfx_index_shot
+		sfx_play_sync
+
+		i := long tile_attack_data
+		sprite v6 v7 0
+
+		v5 += -1
+		if v5 != 0 then
+	again
+	return

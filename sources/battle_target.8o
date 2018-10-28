@@ -22,6 +22,11 @@
 : battle_menu_target
 	-1
 
+: battle_menu_get_current_target_pos
+	i := battle_menu_target
+	load v0 - v0
+	jump battle_object_get_x_by_v0
+
 : battle_menu_pick_target
 	i := battle_menu_target
 	load va - va
