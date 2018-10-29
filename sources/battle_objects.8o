@@ -69,10 +69,10 @@
 	0
 
 : battle_object_type
-	:byte battle_robot_tank
-	:byte battle_robot_engineer
-	:byte battle_robot_hacker
-	:byte battle_robot_repairbot
+	0
+	0
+	0
+	0
 
 #inline it?
 : battle_object_get_tile
