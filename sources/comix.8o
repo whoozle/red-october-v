@@ -75,16 +75,19 @@
 	sleep
 }
 
+:const comix_text_x1 66
+:const comix_text_x2 2
+
 : comix_intro_1
 	i := long tile_submarine_data
 	comix_screen_draw
 
-	text_line 65 6 text_intro_1_1
-	text_line 65 16 text_intro_1_2
-	text_line 65 26 text_intro_1_3
-	text_line 1 36 text_intro_1_4
-	text_line 1 46 text_intro_1_5
-	text_line 1 56 text_intro_1_6
+	text_line comix_text_x1 6 text_intro_1_1
+	text_line comix_text_x1 16 text_intro_1_2
+	text_line comix_text_x1 26 text_intro_1_3
+	text_line comix_text_x2 36 text_intro_1_4
+	text_line comix_text_x2 46 text_intro_1_5
+	text_line comix_text_x2 56 text_intro_1_6
 	va := 200
 	jump sleep
 
@@ -92,12 +95,12 @@
 	i := long tile_underthesea_data
 	comix_screen_draw
 
-	text_line 65 6 text_intro_2_1
-	text_line 65 16 text_intro_2_2
-	text_line 65 26 text_intro_2_3
-	text_line 1 36 text_intro_2_4
-	text_line 1 46 text_intro_2_5
-	text_line 1 56 text_intro_2_6
+	text_line comix_text_x1 6 text_intro_2_1
+	text_line comix_text_x1 16 text_intro_2_2
+	text_line comix_text_x1 26 text_intro_2_3
+	text_line comix_text_x2 36 text_intro_2_4
+	text_line comix_text_x2 46 text_intro_2_5
+	text_line comix_text_x2 56 text_intro_2_6
 	va := 200
 	jump sleep
 
@@ -105,12 +108,12 @@
 	i := long tile_space_data
 	comix_screen_draw
 
-	text_line 65 6 text_intro_3_1
-	text_line 65 16 text_intro_3_2
-	text_line 65 26 text_intro_3_3
-	text_line 1 36 text_intro_3_4
-	text_line 1 46 text_intro_3_5
-	text_line 1 56 text_intro_3_6
+	text_line comix_text_x1 6 text_intro_3_1
+	text_line comix_text_x1 16 text_intro_3_2
+	text_line comix_text_x1 26 text_intro_3_3
+	text_line comix_text_x2 36 text_intro_3_4
+	text_line comix_text_x2 46 text_intro_3_5
+	text_line comix_text_x2 56 text_intro_3_6
 	va := 200
 	jump sleep
 
