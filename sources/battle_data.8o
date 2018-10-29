@@ -12,7 +12,7 @@
 	:byte battle_robot_repairbot 0 0 0
 	:byte battle_robot_repairbot :byte battle_robot_repairbot :byte battle_robot_repairbot :byte battle_robot_repairbot
 	:byte battle_robot_beefcake 0 0 0
-	:byte battle_robot_smartkid battle_robot_beefcake battle_robot_smartkid 0
+	:byte battle_robot_smartkid :byte battle_robot_beefcake :byte battle_robot_smartkid 0
 
-	:byte battle_robot_ninja battle_robot_ninja 0 0
-	:byte battle_robot_ninja battle_robot_miner battle_robot_miner battle_robot_ninja
+	:byte battle_robot_ninja :byte battle_robot_ninja 0 0
+	:byte battle_robot_ninja :byte battle_robot_miner :byte battle_robot_miner :byte battle_robot_ninja
