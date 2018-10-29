@@ -175,6 +175,7 @@
 		i := battle_base_damage_table
 		i += v0
 		load va - va
+		va <<= va
 		vb := random 0xff
 		f8_mul
 		i := player_hp
@@ -193,7 +194,7 @@
 	20
 	50
 	80
-	128
+	127
 
 : battle_object_damage
 	if va == 0 then #MISS
