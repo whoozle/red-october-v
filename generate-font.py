@@ -37,6 +37,7 @@ def generate(name, file, addr, font_height = 5, space_width = 3):
 					x = width - 1 - i
 					if row[x] and not row[x + 1]:
 						shadow[x + 1] = 1
+						row[x + 1] = 1
 				#print y, row, shadow
 				rows.append(row)
 				shadows.append(shadow)
@@ -145,4 +146,3 @@ with open(os.path.join(args.target, args.name + ".8o"), "w") as f:
 
 with open(os.path.join(args.target, args.name + "_data.8o"), "w") as f:
 	f.write(defn)
-
