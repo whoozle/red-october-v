@@ -33,6 +33,8 @@
 :const sfx_index_shot 3
 :const sfx_index_powerup 4
 
+: current_overlay
+	0
 
 : screen_pos
 : screen_y 0
@@ -51,4 +53,10 @@
 	255
 
 : next_battle
+	0
+
+: intro_shown
+	0
+
+: game_over
 	0

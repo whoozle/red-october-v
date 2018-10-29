@@ -1,0 +1,101 @@
+: comix_start
+	loop
+		i := intro_shown
+		load v0 - v0
+		if v0 == 0 begin
+			v0 := 1
+			save v0 - v0
+			comix_intro
+			v0 := 0
+			i := current_overlay
+			save v0 - v0
+			return
+		end
+	again
+
+: comix_filler
+0xff 0xff 0xff 0xff
+0xff 0xff 0xff 0xff
+0xff 0xff 0xff 0xff
+0xff 0xff 0xff 0xff
+0xff 0xff 0xff 0xff
+0xff 0xff 0xff 0xff
+0xff 0xff 0xff 0xff
+0xff 0xff 0xff 0xff
+
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+
+: comix_screen_draw
+	clear
+	v1 := 0
+	v2 := 64
+	loop
+		v0 := 0
+		loop
+			sprite v0 v1 0
+			i += v2
+			v0 += 16
+			if v0 != 64 then
+		again
+		v1 += 16
+		if v1 != 32 then
+	again
+
+#	i := comix_filler
+#
+#	v1 := 0
+#	loop
+#		v0 := 64
+#		if v1 >= 32 then
+#			v0 := 0
+#		loop
+#			sprite v0 v1 0
+#			v0 += 16
+#			if v0 != 128 then
+#		again
+#		v1 += 16
+#		if v1 != 64 then
+#	again
+
+	return
+
+:macro text_line X Y T {
+	va := X
+	vb := Y
+	vc := T
+	draw_text
+}
+
+: comix_intro
+	clear
+	va := 14
+	vb := 30
+	vc := text_intro_1
+	draw_text
+	va := 0
+	sleep
+
+	i := long tile_submarine_data
+	comix_screen_draw
+
+	text_line 65 6 text_intro_1_1
+	text_line 65 16 text_intro_1_2
+	text_line 65 26 text_intro_1_3
+	text_line 1 36 text_intro_1_4
+	text_line 1 46 text_intro_1_5
+	text_line 1 56 text_intro_1_6
+
+	loop again
+	clear
+	i := long tile_underthesea_data
+	comix_screen_draw
+	loop
+	again
+	return

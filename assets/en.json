@@ -27,6 +27,16 @@
 	"battle_menu_hack_underclock": "UNDERCLOCK",
 	"battle_menu_hack_ice_shield": "ICE SHIELD",
 	"battle_menu_hack_erase_data": "ERASE DATA",
-	"battle_menu_hack_erase_system": "ERASE SYSTEM"
+	"battle_menu_hack_erase_system": "ERASE SYSTEM",
 
+	"intro_1" : "Previously on Red October...",
+
+	"intro_1_1": "Year of 1987...",
+	"intro_1_2": "Bloody americans",
+	"intro_1_3": "has finally hunted",
+	"intro_1_4": "down TYPHOON class soviet",
+	"intro_1_5": "submarine. She's now resting at",
+	"intro_1_6": "the bottom of the ocean.",
+
+	"dummy": "1"
 }

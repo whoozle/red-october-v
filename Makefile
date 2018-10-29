@@ -58,12 +58,17 @@ assets/tiles/*
 		./generate-texture.py --map1=0 assets/tiles/hero_back.png player_back 2 16 >> $@
 		./generate-texture.py --map1=3 assets/tiles/attack.png attack 2 16 >> $@
 		./generate-texture.py assets/tiles/attack_highlight.png attack_highlight 2 16 >> $@
+		./generate-texture.py --map1=0 assets/screens/crushed.png crushed 2 16 >> $@
+		./generate-texture.py --map1=0 assets/screens/nuke.png nuke 2 16 >> $@
+		./generate-texture.py --map1=0 assets/screens/space.png space 2 16 >> $@
+		./generate-texture.py --map1=0 assets/screens/submarine.png submarine 2 16 >> $@
+		./generate-texture.py --map1=0 assets/screens/underthesea.png underthesea 2 16 >> $@
 
 $(PREFIX)/map.8o $(PREFIX)/map_data.8o: Makefile generate-map.py assets/map.json assets/tileset.png
 		./generate-map.py assets/map.json 3000 $(PREFIX)
 
 $(PREFIX)/font.8o $(PREFIX)/font_data.8o: Makefile generate-font.py assets/font/5.font
-		./generate-font.py assets/font/5.font font 1100 $(PREFIX)
+		./generate-font.py assets/font/5.font font 1200 $(PREFIX)
 
 $(PREFIX)/texts.8o $(PREFIX)/texts_data.8o: Makefile assets/en.json generate-text.py
 		./generate-text.py $(PREFIX) 1000 assets/en.json \
@@ -153,6 +158,25 @@ sources/*.8o
 		cat $(PREFIX)/sfx.8o >> $@
 		cat sources/sfx_table.8o >> $@
 
+$(PREFIX)/module_9000.8o: \
+Makefile \
+$(PREFIX) \
+$(PREFIX)/common.8o \
+$(PREFIX)/module_main.8o \
+$(PREFIX)/texts_data.8o \
+$(PREFIX)/font_data.8o \
+$(PREFIX)/tiles.8o \
+$(PREFIX)/sfx.8o \
+sources/*.8o
+		cat $(PREFIX)/common.8o > $@
+		cat $(PREFIX)/module_main.8o >> $@
+		cat sources/comix.8o >> $@
+		cat $(PREFIX)/texts_data.8o >> $@ #org 0x1000, can be used as guard
+		cat $(PREFIX)/font_data.8o >> $@
+		cat $(PREFIX)/tiles.8o >> $@
+		cat $(PREFIX)/sfx.8o >> $@
+		cat sources/sfx_table.8o >> $@
+
 
 .SECONDARY: $(PREFIX)/module_%.hex: $(PREFIX)/module_%.bin generate-hex.py
 $(PREFIX)/module_%.hex: $(PREFIX)/module_%.bin generate-hex.py
@@ -167,6 +191,7 @@ $(PREFIX)/sfx.8o \
 $(PREFIX)/map_data.8o \
 $(PREFIX)/module_8000.hex \
 $(PREFIX)/module_8800.hex \
+$(PREFIX)/module_9000.hex \
 $(PREFIX)/signature.8o \
 assets/* assets/*/* sources/*.8o
 		cat $(PREFIX)/common.8o > $@
@@ -186,9 +211,11 @@ assets/* assets/*/* sources/*.8o
 		cat $(PREFIX)/module_8000.hex >> $@
 		echo ":org 0x8800" >> $@
 		cat $(PREFIX)/module_8800.hex >> $@
+		echo ":org 0x9000" >> $@
+		cat $(PREFIX)/module_9000.hex >> $@
 		cat $(PREFIX)/signature.8o >> $@
 
-$(PREFIX)/lz4tile.8o: Makefile ./generate-texture.py assets/screens/nuke.png
+$(PREFIX)/lz4tile.8o: Makefile ./generate-texture.py assets/tiles/splash.png
 		./generate-texture.py assets/tiles/splash.png -c test 2 16 > $@
 
 lz4.8o: \
