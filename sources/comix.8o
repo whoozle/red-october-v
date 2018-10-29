@@ -1,17 +1,16 @@
 : comix_start
-	loop
-		i := intro_shown
-		load v0 - v0
-		if v0 == 0 begin
-			v0 := 1
-			save v0 - v0
-			comix_intro
-			v0 := 0
-			i := current_overlay
-			save v0 - v0
-			return
-		end
-	again
+	i := intro_shown
+	load v0 - v0
+	if v0 == 0 begin
+		v0 := 1
+		save v0 - v0
+		comix_intro
+		v0 := 0
+		i := current_overlay
+		save v0 - v0
+		return
+	end
+	return
 
 : comix_filler
 0xff 0xff 0xff 0xff
