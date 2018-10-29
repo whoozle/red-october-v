@@ -8,6 +8,26 @@
 	offset tile_robot_smartkid_front_data
 	offset tile_robot_miner_front_data
 
+: battle_object_base_damage
+	128
+	0
+	0
+	50
+	255
+	10
+	10
+	100
+
+: battle_object_base_speed #dt = 0x40
+	128
+	100
+	100
+	50
+	250
+	50
+	70
+	80
+
 : battle_encounter_table
 	:byte battle_robot_repairbot 0 0 0
 	:byte battle_robot_repairbot :byte battle_robot_repairbot :byte battle_robot_repairbot :byte battle_robot_repairbot
