@@ -46,6 +46,12 @@
 	load v0 - v0
 	return
 
+: battle_reset_current_attack
+	i := battle_menu2_pos
+	v0 := 0
+	save v0 - v0
+	return
+
 : battle_get_current_skill_level
 	battle_get_current_skill
 	i := battle_skill_level

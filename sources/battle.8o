@@ -1,8 +1,3 @@
-:const sfx_index_menu 0
-:const sfx_index_hit 1
-:const sfx_index_explosion 2
-:const sfx_index_shot 3
-
 :const battle_tick_freq_base	0x10
 :const battle_tick_freq_random	0x0f
 :const battle_dt 0x40
@@ -172,6 +167,25 @@
 		f8_mul
 		va := v0
 		jump battle_object_damage
+	end
+	if v0 == 2 begin
+		#repair
+		battle_draw_hp_bar
+		battle_get_current_attack
+		i := battle_base_damage_table
+		i += v0
+		load va - va
+		vb := random 0xff
+		f8_mul
+		i := player_hp
+		load v1 - v1
+		v1 += v0
+		if vf != 0 then
+			v1 := 255
+		save v1 - v1
+		battle_draw_hp_bar
+		va := sfx_index_powerup
+		sfx_play_sync
 	end
 	return
 

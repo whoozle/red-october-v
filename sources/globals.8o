@@ -27,6 +27,13 @@
 :const move_speed_up 2
 :const move_speed_down 2
 
+:const sfx_index_menu 0
+:const sfx_index_hit 1
+:const sfx_index_explosion 2
+:const sfx_index_shot 3
+:const sfx_index_powerup 4
+
+
 : screen_pos
 : screen_y 0
 : screen_x 0

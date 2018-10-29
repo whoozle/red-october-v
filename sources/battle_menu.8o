@@ -28,6 +28,7 @@
 			v0 := vc
 		save v0 - v0
 		battle_menu_draw_highlight
+		battle_reset_current_attack
 	end
 	return
 
