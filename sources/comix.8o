@@ -8,13 +8,7 @@
 		va := 0
 		jump set_current_overlay
 	end
-
-	i := game_over
-	load v0 - v0
-	if v0 != 0 begin
-
-	end
-	return
+	jump comix_game_over
 
 : comix_screen_draw
 	clear
@@ -101,3 +95,31 @@
 	v0 := 0
 	save v0 - v0
 	return
+
+: comix_game_over
+	i := long tile_crushed_data
+	comix_screen_draw
+
+	text_line 75 14 text_game_over_1
+	va := 60
+	sleep
+
+	va := comix_text_x2
+	vb := 46
+	vc := text_game_over_2
+	draw_text_ns
+
+	va := comix_text_x2
+	vb := 56
+	vc := text_game_over_3
+	draw_text_ns
+
+	loop
+		v0 := key
+		if v0 == OCTO_KEY_R begin
+			va := 0
+			jump set_current_overlay
+		end
+		if v0 == OCTO_KEY_X then
+			exit
+	again

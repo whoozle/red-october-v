@@ -52,5 +52,9 @@
 	"intro_3_5": "Shortly, american intelligence",
 	"intro_3_6": "send a team to infiltrate it...",
 
+	"game_over_1": "YOU DIED",
+	"game_over_2": "Press R to restart.",
+	"game_over_3": "Press X to exit.",
+
 	"dummy": "1"
 }
