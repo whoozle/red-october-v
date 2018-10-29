@@ -1,11 +1,13 @@
+: current_overlay
+	0
 
 : main
 	hires
 	plane 3
-	clear
-
-	va := 0
-	overlay_load
 
 	loop
+		clear
+		i := current_overlay
+		load va - va
+		overlay_load
 	again
