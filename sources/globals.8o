@@ -42,3 +42,6 @@
 
 : player_hp
 	255
+
+: next_battle
+	0

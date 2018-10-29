@@ -117,9 +117,9 @@ $(PREFIX)/texts_data.8o \
 $(PREFIX)/tiles.8o \
 $(PREFIX)/map_data.8o \
 sources/*.8o
-		cat $(PREFIX)/module_main.8o > $@
+		cat $(PREFIX)/common.8o > $@
+		cat $(PREFIX)/module_main.8o >> $@
 		cat sources/overworld.8o >> $@
-		cat $(PREFIX)/common.8o >> $@
 		cat sources/map.8o >> $@
 		cat $(PREFIX)/texts_data.8o >> $@ #org 0x1000, can be used as guard
 		cat $(PREFIX)/font_data.8o >> $@
@@ -138,10 +138,10 @@ $(PREFIX)/font_data.8o \
 $(PREFIX)/tiles.8o \
 $(PREFIX)/sfx.8o \
 sources/*.8o
-		cat $(PREFIX)/module_main.8o > $@
+		cat $(PREFIX)/common.8o > $@
+		cat $(PREFIX)/module_main.8o >> $@
 		cat sources/battle.8o >> $@
 		cat sources/math.8o >> $@
-		cat $(PREFIX)/common.8o >> $@
 		cat sources/battle_menu.8o >> $@
 		cat sources/battle_menu2.8o >> $@
 		cat sources/battle_target.8o >> $@
@@ -149,7 +149,7 @@ sources/*.8o
 		cat $(PREFIX)/texts_data.8o >> $@ #org 0x1000, can be used as guard
 		cat $(PREFIX)/font_data.8o >> $@
 		cat $(PREFIX)/tiles.8o >> $@
-		cat sources/battle_object_tiles.8o >> $@
+		cat sources/battle_data.8o >> $@
 		cat $(PREFIX)/sfx.8o >> $@
 		cat sources/sfx_table.8o >> $@
 
@@ -169,8 +169,8 @@ $(PREFIX)/module_8000.hex \
 $(PREFIX)/module_8800.hex \
 $(PREFIX)/signature.8o \
 assets/* assets/*/* sources/*.8o
-		cat sources/main.8o > $@
-		cat $(PREFIX)/common.8o >> $@
+		cat $(PREFIX)/common.8o > $@
+		cat sources/main.8o >> $@
 		cat sources/math.8o >> $@
 		cat sources/tiles.8o >> $@
 		cat sources/splash.8o >> $@
@@ -181,7 +181,7 @@ assets/* assets/*/* sources/*.8o
 		cat $(PREFIX)/texts_data.8o >> $@ #org 1000
 		cat $(PREFIX)/font_data.8o >> $@
 		cat $(PREFIX)/tiles.8o >> $@
-		cat sources/battle_object_tiles.8o >> $@
+		cat sources/battle_data.8o >> $@
 		echo ":org 0x8000" >> $@
 		cat $(PREFIX)/module_8000.hex >> $@
 		echo ":org 0x8800" >> $@

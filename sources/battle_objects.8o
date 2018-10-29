@@ -79,6 +79,7 @@
 	i := battle_object_type
 	i += vd
 	load v0 - v0
+	v0 += -1
 	v0 += v0
 
 	i := long battle_object_tiles

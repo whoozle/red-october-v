@@ -8,10 +8,30 @@
 :const battle_dt 0x40
 
 : battle_start
-	clear
+	i := next_battle
+	load v0 - v0
+
+	i := long battle_encounter_table
+	i += v0
+	i += v0
+	i += v0
+	i += v0
+	load v0 - v3
+
+	i := battle_object_type
+	save v0 - v3
+
+	v4 := 4
+	if v3 == 0 then
+		v4 := 3
+	if v2 == 0 then
+		v4 := 2
+	if v1 == 0 then
+		v4 := 1
+
 	i := battle_object_count
-	load v1 - v1
-	v2 := v1
+	save v4 - v4
+	v1 := v4
 
 	v0 := 255
 	i := player_hp
@@ -20,7 +40,7 @@
 	battle_object_fill
 
 	v0 := 0
-	v1 := v2
+	v1 := v4
 	i := battle_object_t
 	battle_object_fill
 	battle_draw_hp_bar
