@@ -5,31 +5,16 @@
 		v0 := 1
 		save v0 - v0
 		comix_intro
-		v0 := 0
-		i := current_overlay
-		save v0 - v0
-		return
+		va := 0
+		jump set_current_overlay
+	end
+
+	i := game_over
+	load v0 - v0
+	if v0 != 0 begin
+
 	end
 	return
-
-: comix_filler
-0xff 0xff 0xff 0xff
-0xff 0xff 0xff 0xff
-0xff 0xff 0xff 0xff
-0xff 0xff 0xff 0xff
-0xff 0xff 0xff 0xff
-0xff 0xff 0xff 0xff
-0xff 0xff 0xff 0xff
-0xff 0xff 0xff 0xff
-
-0 0 0 0
-0 0 0 0
-0 0 0 0
-0 0 0 0
-0 0 0 0
-0 0 0 0
-0 0 0 0
-0 0 0 0
 
 : comix_screen_draw
 	clear
@@ -46,23 +31,6 @@
 		v1 += 16
 		if v1 != 32 then
 	again
-
-#	i := comix_filler
-#
-#	v1 := 0
-#	loop
-#		v0 := 64
-#		if v1 >= 32 then
-#			v0 := 0
-#		loop
-#			sprite v0 v1 0
-#			v0 += 16
-#			if v0 != 128 then
-#		again
-#		v1 += 16
-#		if v1 != 64 then
-#	again
-
 	return
 
 :macro text_line X Y T {

@@ -60,3 +60,8 @@
 
 : game_over
 	0
+
+: set_current_overlay
+	i := current_overlay
+	save va - va
+	return
