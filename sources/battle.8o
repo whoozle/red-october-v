@@ -38,6 +38,12 @@
 	save v0 - v0
 	i := battle_object_hp
 	battle_object_fill
+	v1 := 4
+	v1 -= v4
+	v0 := 0
+
+	if v1 != 0 then
+		battle_object_fill
 
 	v0 := 0
 	v1 := v4
@@ -58,6 +64,12 @@
 	sfx_wait
 	vd := 0
 	loop
+		i := battle_object_hp
+		i += vd
+		load v0 - v0
+		if v0 == 0 then
+			jump battle_enemy_tick_next
+
 		i := battle_object_t
 		i += vd
 
