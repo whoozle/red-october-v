@@ -482,3 +482,64 @@
 
 	map_scroll_generic_v
 	jump map_scroll_generic
+
+
+: map_scroll_to
+	v3 := v0
+	map_get_screen_index
+	va := v0
+	v0 >>= v0
+	if v3 == v0 then return
+
+	if v3 > v0 begin
+		v1 := v3
+		v1 -= v0
+		: move_vertical_1
+		if v1 >= 8 begin
+			i := screen_diff
+			save v1 - v1
+			map_scroll_down
+			i := screen_diff
+			load v1 - v1
+			v1 += -8
+			jump move_vertical_1
+		end
+
+		: move_horizontal_1
+		if v1 > 0 begin
+			i := screen_diff
+			save v1 - v1
+			map_scroll_right
+			i := screen_diff
+			load v1 - v1
+			v1 += -1
+			jump move_horizontal_1
+		end
+	else
+		v1 := v0
+		v1 -= v3
+		: move_vertical_2
+		if v1 >= 8 begin
+			i := screen_diff
+			save v1 - v1
+			map_scroll_up
+			i := screen_diff
+			load v1 - v1
+			v1 += -8
+			jump move_vertical_2
+		end
+
+		: move_horizontal_2
+		if v1 > 0 begin
+			i := screen_diff
+			save v1 - v1
+			map_scroll_left
+			i := screen_diff
+			load v1 - v1
+			v1 += -1
+			jump move_horizontal_2
+		end
+	end
+	return
+
+: screen_diff 0x00
