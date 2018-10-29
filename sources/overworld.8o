@@ -49,7 +49,7 @@
 
 : check_door
 	i := door_pos
-	load v1 - v3
+	load v1 - v5
 	if v1 != 0 then
 		if v2 != 0 begin
 			i := player_pos
@@ -60,7 +60,15 @@
 				if vb >= v2 begin
 					v2 += 8
 					if vb <= v2 begin
-						# TODO: impl v3 - screen index
+						i := player_pos
+						va := v4
+						vb := v5
+						save va - vb
+						v0 := v3
+						map_scroll_to
+						check_objects
+						i := player_pos
+						load va - vb
 					end
 				end
 			end
@@ -83,7 +91,7 @@
 	: map_current_objects_ptr
 	0 0
 
-	load v0 - v3
+	load v0 - v5
 	if v0 == 0x01 begin
 		i := long tile_robot_engineer_front_data
 		sprite v1 v2 0
@@ -95,9 +103,11 @@
 			v2 := 0
 			i := battle_pos
 			save v1 - v2
+			i := door_pos
+			save v1 - v2
 		else
 			i := door_pos
-			save v1 - v3
+			save v1 - v5
 		end
 	end
 	return
@@ -184,4 +194,4 @@
 
 
 : battle_pos 0x00 0x00
-: door_pos 0x00 0x00 0x00
+: door_pos 0x00 0x00 0x00 0x00 0x00
