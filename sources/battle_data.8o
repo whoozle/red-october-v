@@ -1,12 +1,12 @@
 : battle_object_tiles
-	offset tile_robot_beefcake_front_data
-	offset tile_robot_smartkid_front_data
-	offset tile_robot_miner_front_data
-	offset tile_robot_ninja_front_data
 	offset tile_robot_tank_front_data
 	offset tile_robot_engineer_front_data
 	offset tile_robot_hacker_front_data
 	offset tile_robot_repairbot_front_data
+	offset tile_robot_beefcake_front_data
+	offset tile_robot_smartkid_front_data
+	offset tile_robot_miner_front_data
+	offset tile_robot_ninja_front_data
 
 : battle_encounter_table
 	:byte battle_robot_repairbot 0 0 0
