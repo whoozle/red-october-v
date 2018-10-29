@@ -83,7 +83,10 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 				obj_y = y - sy * screen_height
 				screen_with_obj_label = "map_object_data_screen_%s" %screen_id
 				if type_name == "door":
-					object_screens[screen_with_obj_label] = "0x%02x 0x%02x 0x%02x 0x%02x 0" %(object_types[type_name], obj_x, obj_y, lobj['properties']['screen'])
+					door = lobj['properties']
+					door_x = door['exit_door_x']
+					door_y = door['exit_door_y']
+					object_screens[screen_with_obj_label] = "0x%02x 0x%02x 0x%02x 0x%02x 0x%02x 0x%02x 0" %(object_types[type_name], obj_x, obj_y, door['screen'], door_x, door_y)
 				else:
 					object_screens[screen_with_obj_label] = "0x%02x 0x%02x 0x%02x 0" %(object_types[type_name], obj_x, obj_y)
 				screens[screen_id] = screen_with_obj_label
