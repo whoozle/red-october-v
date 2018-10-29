@@ -71,6 +71,8 @@
 	vb := Y
 	vc := T
 	draw_text
+	va := 15
+	sleep
 }
 
 : comix_intro_1

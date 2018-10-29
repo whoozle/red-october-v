@@ -49,8 +49,9 @@
 		jump draw_text_loop
 	end
 
-#	i := long audio_text_beep
-#	audio_play_sync
+	i := long audio_text_beep
+	audio_play_sync
+
 
 	jump draw_text_loop
 

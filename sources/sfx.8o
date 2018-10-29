@@ -59,3 +59,15 @@
 		sound_tick
 		if v0 == 1 then
 	again
+
+: audio_play_sync
+	vf := 2
+: audio_play_sync_vf
+	audio
+	buzzer := vf
+	delay := vf
+	loop
+		vf := delay
+		if vf != 0 then
+	again
+	return

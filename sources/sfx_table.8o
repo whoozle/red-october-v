@@ -9,3 +9,9 @@
 	:byte audio_shoot_size
 	offset audio_powerup
 	:byte audio_powerup_size
+
+: audio_text_beep
+	0xaa 0xaa 0 0
+	0xaa 0xaa 0 0
+	0xaa 0xaa 0 0
+	0xaa 0xaa 0 0
