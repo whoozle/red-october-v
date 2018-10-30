@@ -1,7 +1,34 @@
-# v0 			v1			v2			v3			v4 - v5			v6
-# [screen x]	[screen y]	[player x]	[player y]	[encounters]	[control sum]
+# v0 			v1			v2			v3			v4 - v5			v6 					v7
+# [screen x]	[screen y]	[player x]	[player y]	[encounters]	[skills 4x2 bits]	[control sum]
 
 : game_save
+	i := battle_skill_level
+	load v0 - v3
+	v0 += -1
+	v1 += -1
+	v2 += -1
+	v3 += -1
+
+	v0 <<= v0
+	v0 <<= v0
+	v0 <<= v0
+	v0 <<= v0
+	v0 <<= v0
+	v0 <<= v0
+
+	v1 <<= v1
+	v1 <<= v1
+	v1 <<= v1
+	v1 <<= v1
+
+	v2 <<= v2
+	v2 <<= v2
+
+	v6 := v0
+	v6 |= v1
+	v6 |= v2
+	v6 |= v3
+
 	i := screen_pos
 	load v0 - v1
 	i := player_pos
@@ -9,54 +36,56 @@
 
 	v4 := 0
 	v5 := 0
-	v6 := 0
-	v7 := 1
+	v7 := 0
+	v8 := 1
 	i := encounters
 
 	loop
 		v4 <<= v4
 
-		load v8 - v8
-		i += v7
-		v4 |= v8 #or lsb bit of encounter
+		load v9 - v9
+		i += v8
+		v4 |= v9 #or lsb bit of encounter
 
-		v6 += 1
-		if v6 != 8 then
+		v7 += 1
+		if v7 != 8 then
 	again
 
-	v6 := 0
+	v7 := 0
 	loop
 		v5 <<= v5
 
-		load v8 - v8
-		i += v7
-		v5 |= v8 #or lsb bit of encounter
+		load v9 - v9
+		i += v8
+		v5 |= v9 #or lsb bit of encounter
 
-		v6 += 1
-		if v6 != 8 then
+		v7 += 1
+		if v7 != 8 then
 	again
 
-	v6 := 0xaa
-	v6 += v0
-	v6 += v1
-	v6 += v2
-	v6 += v3
-	v6 += v4
-	v6 += v5
+	v7 := 0xaa
+	v7 += v0
+	v7 += v1
+	v7 += v2
+	v7 += v3
+	v7 += v4
+	v7 += v5
+	v7 += v6
 
-	saveflags v6
+	saveflags v7
 	return
 
 : game_load
-	loadflags v6
-	v6 -= v0
-	v6 -= v1
-	v6 -= v2
-	v6 -= v3
-	v6 -= v4
-	v6 -= v5
+	loadflags v7
+	v7 -= v0
+	v7 -= v1
+	v7 -= v2
+	v7 -= v3
+	v7 -= v4
+	v7 -= v5
+	v7 -= v6
 
-	if v6 != 0xaa begin
+	if v7 != 0xaa begin
 		v0 := 0
 		return
 	end
@@ -66,33 +95,60 @@
 	i := player_pos
 	save v2 - v3
 
+	v7 := 3
+
+	v0 := v6
+	v0 >>= v0
+	v0 >>= v0
+	v0 >>= v0
+	v0 >>= v0
+	v0 >>= v0
+	v0 >>= v0
+	v0 &= v7
+	v0 += 1
+
+	v1 := v6
+	v1 &= v7
+	v1 += 1
+
+	v2 := v6
+	v2 &= v7
+	v2 += 1
+
+	v3 := v6
+	v3 &= v7
+	v3 += 1
+
+	i := battle_skill_level
+	save v0 - v3
+
 	i := encounters
 
-	v6 := 0
-	v7 := 1
+	v7 := 0
+	v8 := 1
 	loop
-		v8 := 1
-		v8 &= v4
-		save v8 - v8
+		v9 := 1
+		v9 &= v4
+		save v9 - v9
 
-		i += v7
+		i += v8
 		v4 >>= v4
 
-		v6 += 1
-		if v6 != 8 then
+		v7 += 1
+		if v7 != 8 then
 	again
 
-	v6 := 0
+	v7 := 0
 	loop
-		v8 := 1
-		v8 &= v5
-		save v8 - v8
+		v9 := 1
+		v9 &= v5
+		save v9 - v9
 
-		i += v7
+		i += v8
 		v5 >>= v5
 
-		v6 += 1
-		if v6 != 8 then
+		v7 += 1
+		if v7 != 8 then
 	again
 
 	v0 := 1
