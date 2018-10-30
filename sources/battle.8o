@@ -265,6 +265,28 @@
 
 : battle_do_engi
 	battle_get_current_attack
+
+	v0 += 1
+	v1 := 0
+	loop
+		v1 += 10
+		v0 += -1
+		if v0 != 0 then
+	again
+
+	i := battle_object_damage
+	i += vd
+	load v2 - v2
+
+	if v2 > v1 begin
+		v2 -= v1
+		save v2 - v2
+
+		battle_get_current_attack
+		va := v0
+		battle_object_attack_animation
+	end
+
 	return
 
 : battle_do_hack
