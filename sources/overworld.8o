@@ -103,35 +103,56 @@
 	va := v0
 	va >>= va
 
+	vb := 0
+	loop
 	i := long map_object_data
-	i += va
-	i += va
+	i += vb
+	i += vb
 	load v0 - v1
 	i := map_current_objects_ptr
 	save v0 - v1
 	0xf0 0x00
 	: map_current_objects_ptr
 	0 0
-
 	load v0 - v5
-	if v0 == 0x01 begin
-		i := long tile_robot_engineer_front_data
-		sprite v1 v2 0
+
+	if v0 == 0x00 begin
+		vc += 1
+		# reset all object coordinates
+		v1 := 0
+		v2 := 0
 		i := battle_pos
 		save v1 - v2
+		i := door_pos
+		save v1 - v2
+		i := power_pos
+		save v1 - v2
 	else
-		if v0 == 0x00 begin
-			v1 := 0
-			v2 := 0
-			i := battle_pos
-			save v1 - v2
-			i := door_pos
-			save v1 - v2
-		else
-			i := door_pos
-			save v1 - v5
+		if va == vc begin
+			if v0 == 0x01 begin
+				# battle
+				i := long tile_robot_engineer_front_data
+				sprite v1 v2 0
+				i := battle_pos
+				save v1 - v2
+			else
+				if v0 == 0x02 begin
+					# door
+					i := door_pos
+					save v1 - v5
+				else
+					# powerup
+					i := power_pos
+					save v1 - v2
+					i := long tile_power_up_data
+					sprite v1 v2 0
+				end
+			end
 		end
 	end
+
+	vb += 1
+	if va >= vc then again
 	return
 
 
@@ -233,3 +254,4 @@
 
 : battle_pos 0x00 0x00
 : door_pos 0x00 0x00 0x00 0x00 0x00
+: power_pos 0x00 0x00
