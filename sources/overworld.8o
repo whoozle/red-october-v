@@ -67,7 +67,7 @@
 	return
 
 : move_sfx
-	va := sfx_index_menu
+	va := sfx_index_move
 	jump sfx_play_sync
 
 : hit_test

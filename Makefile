@@ -83,6 +83,7 @@ $(PREFIX)/sfx.8o: Makefile ./generate-sfx.py assets/sfx/*.wav
 		./generate-sfx.py -c 0 assets/sfx/explosion4000.wav explosion >> $@
 		./generate-sfx.py -c 0 assets/sfx/shoot4000.wav shoot >> $@
 		./generate-sfx.py -c 0 assets/sfx/powerup4000.wav powerup >> $@
+		./generate-sfx.py -c 0 assets/sfx/move4000.wav move >> $@
 
 $(PREFIX)/common.8o: \
 Makefile \

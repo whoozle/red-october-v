@@ -32,6 +32,7 @@
 :const sfx_index_explosion 2
 :const sfx_index_shot 3
 :const sfx_index_powerup 4
+:const sfx_index_move 5
 
 : current_overlay
 	0
