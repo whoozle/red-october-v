@@ -87,9 +87,19 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 
 				if type_name == "door":
 					door = lobj['properties']
-					door_x = door['exit_door_x']
-					door_y = door['exit_door_y']
-					object_screens[screen_with_obj_label] = "0x%02x 0x%02x 0x%02x 0x%02x 0x%02x 0x%02x 0" %(object_types[type_name], obj_x, obj_y, door['screen'], door_x, door_y)
+					door_x = 0
+					door_y = 0
+					door_screen = 0
+					for door_prop in door:
+						prop_name = door_prop['name']
+						prop_value = door_prop['value']
+						if prop_name == 'exit_door_x':
+							door_x = prop_value
+						if prop_name == 'exit_door_y':
+							door_y = prop_value
+						if prop_name == 'screen':
+							door_screen = prop_value
+					object_screens[screen_with_obj_label] = "0x%02x 0x%02x 0x%02x 0x%02x 0x%02x 0x%02x 0" %(object_types[type_name], obj_x, obj_y, door_screen, door_x, door_y)
 				else:
 					object_screens[screen_with_obj_label] = "0x%02x 0x%02x 0x%02x 0" %(object_types[type_name], obj_x, obj_y)
 				screens[screen_id] = [screen_with_obj_label] + screens[screen_id]
