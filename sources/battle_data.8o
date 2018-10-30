@@ -32,19 +32,23 @@
 
 : battle_encounter_table
 	:byte battle_robot_repairbot 0 0 0
+	:byte battle_robot_repairbot :byte battle_robot_repairbot 0 0
 	:byte battle_robot_repairbot :byte battle_robot_repairbot :byte battle_robot_repairbot :byte battle_robot_repairbot
-	:byte battle_robot_smartkid :byte battle_robot_beefcake :byte battle_robot_smartkid 0
 	:byte battle_robot_engineer :byte battle_robot_repairbot :byte battle_robot_repairbot :byte battle_robot_engineer
 
 	:byte battle_robot_ninja :byte battle_robot_ninja 0 0
 	:byte battle_robot_miner :byte battle_robot_miner :byte battle_robot_miner :byte battle_robot_miner
 	:byte battle_robot_ninja :byte battle_robot_miner :byte battle_robot_miner :byte battle_robot_ninja
+	:byte battle_robot_ninja :byte battle_robot_ninja :byte battle_robot_ninja :byte battle_robot_ninja
 
 	:byte battle_robot_ninja :byte battle_robot_miner :byte battle_robot_hacker :byte battle_robot_engineer
-	:byte battle_robot_ninja :byte battle_robot_ninja :byte battle_robot_ninja :byte battle_robot_ninja
 	:byte battle_robot_beefcake 0 0 0
+	:byte battle_robot_beefcake :byte battle_robot_beefcake 0 0
 	:byte battle_robot_smartkid :byte battle_robot_beefcake :byte battle_robot_smartkid 0
 
+	:byte battle_robot_tank :byte battle_robot_tank 0 0
+	:byte battle_robot_hacker :byte battle_robot_tank :byte battle_robot_tank :byte battle_robot_hacker
+	:byte battle_robot_tank :byte battle_robot_hacker :byte battle_robot_hacker :byte battle_robot_tank
+
 	#boss
-	:byte battle_robot_hacker :byte battle_robot_hacker 0 0
 	:byte battle_robot_hacker :byte battle_robot_bomb :byte battle_robot_hacker 0
