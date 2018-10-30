@@ -30,7 +30,7 @@
 
 		load v8 - v8
 		i += v7
-		v4 |= v8 #or lsb bit of encounter
+		v5 |= v8 #or lsb bit of encounter
 
 		v6 += 1
 		if v6 != 8 then

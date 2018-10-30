@@ -3,10 +3,9 @@
 
 : overworld_start
 	map_render
-	va := 24
-	vb := 24
-	save_player_pos
 	player_draw
+
+	game_save
 
 	loop
 		v0 := OCTO_KEY_W
