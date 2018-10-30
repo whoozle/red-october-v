@@ -11,7 +11,7 @@
 : battle_menu_engi_data
 	:byte text_battle_menu_engi_solder
 	:byte text_battle_menu_engi_sc
-	:byte text_battle_menu_engi_dox
+	:byte text_battle_menu_engi_overheat
 	:byte text_battle_menu_engi_defuse
 
 : battle_menu_repair_data
