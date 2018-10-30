@@ -55,6 +55,7 @@
 	"game_over_1": "YOU DIED",
 	"game_over_2": "Press R to restart.",
 	"game_over_3": "Press X to exit.",
+	"game_over_4": "Press C to erase save file.",
 
 	"dummy": "1"
 }

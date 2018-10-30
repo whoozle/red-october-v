@@ -105,13 +105,18 @@
 	sleep
 
 	va := comix_text_x2
-	vb := 46
+	vb := 36
 	vc := text_game_over_2
 	draw_text_ns
 
 	va := comix_text_x2
-	vb := 56
+	vb := 46
 	vc := text_game_over_3
+	draw_text_ns
+
+	va := comix_text_x2
+	vb := 56
+	vc := text_game_over_4
 	draw_text_ns
 
 	loop
@@ -119,6 +124,16 @@
 		if v0 == OCTO_KEY_R begin
 			va := 0
 			jump set_current_overlay
+		end
+		if v0 == OCTO_KEY_C begin
+			v0 := 0
+			v1 := 0
+			v2 := 0
+			v3 := 0
+			v4 := 0
+			v5 := 0
+			v6 := 0
+			saveflags v6
 		end
 		if v0 == OCTO_KEY_X then
 			exit
