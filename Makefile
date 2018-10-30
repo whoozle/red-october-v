@@ -46,6 +46,8 @@ assets/tiles/*
 		./generate-texture.py --map1=0 assets/tiles/smartkid_front_b.png robot_smartkid_front_b 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/miner_front.png robot_miner_front 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/miner_front_b.png robot_miner_front_b 2 16 >> $@
+		./generate-texture.py --map1=0 assets/tiles/bomb.png robot_bomb_front 2 16 >> $@
+		./generate-texture.py --map1=0 assets/tiles/bomb_b.png robot_bomb_front_b 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/dead_robot.png dead_robot 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/attack_shot.png attack_shot 2 8 >> $@
 		./generate-texture.py --map1=0 assets/tiles/attack_engi.png attack_engi 2 8 >> $@
