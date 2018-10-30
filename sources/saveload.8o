@@ -55,7 +55,8 @@
 	v6 -= v3
 	v6 -= v4
 	v6 -= v5
-	if v0 != 0xaa begin
+
+	if v6 != 0xaa begin
 		v0 := 0
 		return
 	end
@@ -94,4 +95,5 @@
 		if v6 != 8 then
 	again
 
+	v0 := 1
 	return
