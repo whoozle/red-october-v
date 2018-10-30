@@ -45,6 +45,34 @@
 	i := battle_object_t
 	battle_object_fill
 	battle_draw_hp_bar
+
+	i := battle_object_count
+	load v1 - v1
+	v0 := 0
+	loop
+		i := battle_object_type
+		load v2 - v2
+		v2 += -1
+
+		i := long battle_object_base_damage #load speed by type
+		i += v2
+		load v3 - v3
+
+		i := battle_object_damage
+		i += v0
+		save v3 - v3
+
+		i := long battle_object_base_speed #load speed by type
+		i += v2
+		load v3 - v3
+
+		i := battle_object_speed
+		i += v0
+		save v3 - v3
+
+		v0 += 1
+		if v0 != v1 then
+	again
 	jump battle_menu
 
 : battle_object_fill
