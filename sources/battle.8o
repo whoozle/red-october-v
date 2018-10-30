@@ -151,44 +151,16 @@
 	i += va
 	return
 
+: battle_attack_table
+	jump battle_do_attack
+	jump battle_do_engi
+	jump battle_do_repair
+	jump battle_do_hack
+
 : battle_attack
 	battle_get_current_skill
-	if v0 == 0 begin
-		battle_get_current_attack
-		v0 += 1
-		va := v0
-		battle_object_attack_animation
-
-		battle_get_current_attack
-		i := battle_base_damage_table
-		i += v0
-		load va - va
-		vb := random 0xff
-		f8_mul
-		va := v0
-		jump battle_object_damage
-	end
-	if v0 == 2 begin
-		#repair
-		battle_draw_hp_bar
-		battle_get_current_attack
-		i := battle_base_damage_table
-		i += v0
-		load va - va
-		va <<= va
-		vb := random 0xff
-		f8_mul
-		i := player_hp
-		load v1 - v1
-		v1 += v0
-		if vf != 0 then
-			v1 := 255
-		save v1 - v1
-		battle_draw_hp_bar
-		va := sfx_index_powerup
-		sfx_play_sync
-	end
-	return
+	v0 += v0
+	jump0 battle_attack_table
 
 : battle_base_damage_table
 	20
@@ -219,4 +191,44 @@
 
 	if v0 == 0 then
 		battle_object_draw
+	return
+
+: battle_do_attack
+	battle_get_current_attack
+	v0 += 1
+	va := v0
+	battle_object_attack_animation
+
+	battle_get_current_attack
+	i := battle_base_damage_table
+	i += v0
+	load va - va
+	vb := random 0xff
+	f8_mul
+	va := v0
+	jump battle_object_damage
+
+: battle_do_repair
+	#repair
+	battle_draw_hp_bar
+	battle_get_current_attack
+	i := battle_base_damage_table
+	i += v0
+	load va - va
+	va <<= va
+	vb := random 0xff
+	f8_mul
+	i := player_hp
+	load v1 - v1
+	v1 += v0
+	if vf != 0 then
+		v1 := 255
+	save v1 - v1
+	battle_draw_hp_bar
+	va := sfx_index_powerup
+	sfx_play_sync
+	return
+
+: battle_do_engi
+: battle_do_hack
 	return
