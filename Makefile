@@ -70,7 +70,7 @@ $(PREFIX)/map.8o $(PREFIX)/map_data.8o: Makefile generate-map.py assets/map.json
 		./generate-map.py assets/map.json 3000 $(PREFIX)
 
 $(PREFIX)/font.8o $(PREFIX)/font_data.8o: Makefile generate-font.py assets/font/5.font
-		./generate-font.py assets/font/5.font font 1300 $(PREFIX)
+		./generate-font.py assets/font/5.font font 1400 $(PREFIX)
 
 $(PREFIX)/texts.8o $(PREFIX)/texts_data.8o: Makefile assets/en.json generate-text.py
 		./generate-text.py $(PREFIX) 1000 assets/en.json \

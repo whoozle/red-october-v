@@ -1,4 +1,9 @@
 : comix_start
+	i := game_finished
+	load v0 - v0
+	if v0 != 0 then
+		jump comix_outro
+
 	i := intro_shown
 	load v0 - v0
 	if v0 == 0 begin
@@ -137,4 +142,62 @@
 		end
 		if v0 == OCTO_KEY_X then
 			exit
+	again
+
+: comix_outro
+	i := long tile_nuke_data
+	comix_screen_draw
+
+	vd := 0
+	loop
+		va := sfx_index_explosion
+		sfx_play
+		scroll-left
+		sound_tick
+		v0 := delay
+		loop
+			vf := delay
+			if vf == v0 then
+		again
+
+		scroll-right
+		sound_tick
+		v0 := delay
+		loop
+			vf := delay
+			if vf == v0 then
+		again
+
+		scroll-up 8
+		sound_tick
+		v0 := delay
+		loop
+			vf := delay
+			if vf == v0 then
+		again
+
+		scroll-down 8
+		sound_tick
+		v0 := delay
+		loop
+			vf := delay
+			if vf == v0 then
+		again
+
+		vd += 1
+		if vd != 40 then
+	again
+
+	i := long tile_nuke_data
+	comix_screen_draw
+
+	text_line comix_text_x1 6 text_win_1
+	text_line comix_text_x1 16 text_win_2
+	text_line comix_text_x1 26 text_win_3
+	text_line comix_text_x2 36 text_win_4
+	text_line comix_text_x2 46 text_win_5
+	va := 120
+	sleep
+	text_line comix_text_x2 56 text_win_6
+	loop
 	again

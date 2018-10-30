@@ -50,12 +50,19 @@
 	"intro_3_3": "detected unusual",
 	"intro_3_4": "thermal and nuclear signatures.",
 	"intro_3_5": "Shortly, american intelligence",
-	"intro_3_6": "send a team to infiltrate it...",
+	"intro_3_6": "sent a team to infiltrate it...",
 
 	"game_over_1": "YOU DIED",
 	"game_over_2": "Press R to restart.",
 	"game_over_3": "Press X to exit.",
 	"game_over_4": "Press C to erase save file.",
+
+	"win_1": "YOU WIN",
+	"win_2": "Huge nuclear",
+	"win_3": "blast destroyed",
+	"win_4": "robocommie threat to the world.",
+	"win_5": "Killing thousands of roboorganisms.",
+	"win_6": "And you're a hero now, right?",
 
 	"dummy": "1"
 }
