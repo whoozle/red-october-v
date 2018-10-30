@@ -131,10 +131,16 @@
 	0
 
 : battle_object_speed
-	50
-	100
-	40
-	40
+	0
+	0
+	0
+	0
+
+: battle_object_damage
+	0
+	0
+	0
+	0
 
 : battle_object_hp
 	255
@@ -168,7 +174,7 @@
 	80
 	127
 
-: battle_object_damage
+: battle_damage_enemy
 	if va == 0 then #MISS
 		return
 	i := battle_object_hp
@@ -206,7 +212,7 @@
 	vb := random 0xff
 	f8_mul
 	va := v0
-	jump battle_object_damage
+	jump battle_damage_enemy
 
 : battle_do_repair
 	#repair
