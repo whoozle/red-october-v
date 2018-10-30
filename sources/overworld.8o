@@ -5,47 +5,73 @@
 	map_render
 	va := 24
 	vb := 24
-	i := long tile_player_front_data
-	sprite va vb 0
+	save_player_pos
+	player_draw
 
 	loop
-		v0 := key
-
-		sprite va vb 0
-
-		if v0 == 5 then
+		v0 := OCTO_KEY_W
+		if v0 key then
 			move_up
 
-		if v0 == 7 then
+		v0 := OCTO_KEY_A
+		if v0 key then
 			move_left
 
-		if v0 == 8 then
+		v0 := OCTO_KEY_S
+		if v0 key then
 			move_down
 
-		if v0 == 9 then
+		v0 := OCTO_KEY_D
+		if v0 key then
 			move_right
-
-		sprite va vb 0
 	again
 	return
 
+:const player_dir_front 0
+:const player_dir_left 1
+:const player_dir_right 2
+:const player_dir_back 3
 
-: hit_test
-	i := player_pos
-	save va - vb
-	map_is_wall
-
-	i := v0_store
-	save v0 - v0
-	va := 0
-	sfx_play
-	i := v0_store
-	load v0 - v0
-
+: load_player_pos
 	i := player_pos
 	load va - vb
 	return
 
+: save_player_pos
+	i := player_pos
+	save va - vb
+	return
+
+: player_dir
+	:byte player_dir_front
+
+: player_set_dir_v0
+	i := player_dir
+	save v0 - v0
+	return
+
+: player_draw
+	load_player_pos
+	i := player_dir
+	load v0 - v0
+	i := long tile_player_front_data
+	v1 := 64
+: player_draw_next_tile
+	if v0 == 0 then
+		jump player_draw_sprite
+	i += v1
+	v0 += -1
+	jump player_draw_next_tile
+: player_draw_sprite
+	sprite va vb 0
+	return
+
+: move_sfx
+	va := sfx_index_menu
+	jump sfx_play_sync
+
+: hit_test
+	jump map_is_wall
 
 : check_door
 	i := door_pos
@@ -114,6 +140,7 @@
 
 
 : move_right
+	player_draw
 	if va >= 112 begin
 		i := player_y
 		save vb - vb
@@ -131,11 +158,15 @@
 		if v0 == 0 then va += player_shift
 		check_door
 	end
-	i := long tile_player_right_data
-	return
+	save_player_pos
+	v0 := player_dir_right
+	player_set_dir_v0
+	player_draw
+	jump move_sfx
 
 
 : move_left
+	player_draw
 	if va <= 0 begin
 		i := player_y
 		save vb - vb
@@ -151,11 +182,15 @@
 		if v0 == 0 then va += neg_player_shift
 		check_door
 	end
-	i := long tile_player_left_data
-	return
+	save_player_pos
+	v0 := player_dir_left
+	player_set_dir_v0
+	player_draw
+	jump move_sfx
 
 
 : move_down
+	player_draw
 	if vb >= 44 begin
 		i := player_x
 		save va - va
@@ -170,11 +205,15 @@
 		vb += -16
 		if v0 == 0 then vb += player_shift
 	end
-	i := long tile_player_front_data
-	return
+	save_player_pos
+	v0 := player_dir_front
+	player_set_dir_v0
+	player_draw
+	jump move_sfx
 
 
 : move_up
+	player_draw
 	if vb <= 0 begin
 		i := player_x
 		save va - va
@@ -189,8 +228,11 @@
 		vb += -10
 		if v0 == 0 then vb += neg_player_shift
 	end
-	i := long tile_player_back_data
-	return
+	save_player_pos
+	v0 := player_dir_back
+	player_set_dir_v0
+	player_draw
+	jump move_sfx
 
 
 : battle_pos 0x00 0x00
