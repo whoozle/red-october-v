@@ -136,7 +136,7 @@
 				i := battle_pos
 				save v1 - v2
 			else
-				if v0 == 0x02 begin
+				if v0 == 0x03 begin
 					# door
 					i := door_pos
 					save v1 - v5
