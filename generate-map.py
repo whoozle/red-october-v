@@ -82,7 +82,6 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 
 				obj_x = x - sx * screen_width
 				obj_y = y - sy * screen_height - h
-				print "TYPE", type_name, "x", obj_x, "y", obj_y, "w", w, "h", h
 				screen_with_obj_label = "map_object_data_screen_%s" %object_counter
 				object_counter += 1
 
