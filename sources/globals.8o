@@ -52,7 +52,7 @@
 	0
 
 : intro_shown
-	0
+	1
 
 : encounters
 	1 1 1 1

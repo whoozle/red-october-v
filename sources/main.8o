@@ -2,6 +2,15 @@
 	hires
 	plane 3
 
+	game_load
+	if v0 == 1 begin
+		i := current_overlay
+		v0 := 0
+		save v0 - v0
+		i := intro_shown
+		v0 := 1
+		save v0 - v0
+	end
 	loop
 		clear
 		i := current_overlay

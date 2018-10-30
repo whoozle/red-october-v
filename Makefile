@@ -200,6 +200,7 @@ $(PREFIX)/signature.8o \
 assets/* assets/*/* sources/*.8o
 		cat $(PREFIX)/common.8o > $@
 		cat sources/main.8o >> $@
+		cat sources/saveload.8o >> $@
 		cat sources/math.8o >> $@
 		cat sources/tiles.8o >> $@
 		cat sources/splash.8o >> $@
