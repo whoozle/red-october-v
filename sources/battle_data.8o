@@ -7,6 +7,7 @@
 	offset tile_robot_ninja_front_data
 	offset tile_robot_smartkid_front_data
 	offset tile_robot_miner_front_data
+	offset tile_robot_bomb_front_data
 
 : battle_object_base_damage
 	128
