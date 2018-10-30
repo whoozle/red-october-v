@@ -7,6 +7,7 @@
 :const battle_robot_ninja		6
 :const battle_robot_smartkid	7
 :const battle_robot_miner		8
+:const battle_robot_bomb		9
 
 : objects_screen_entered
 	return

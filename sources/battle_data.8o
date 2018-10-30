@@ -17,6 +17,7 @@
 	10
 	10
 	100
+	255
 
 : battle_object_base_speed #dt = 0x40
 	128
@@ -27,6 +28,7 @@
 	50
 	70
 	80
+	50 # 2 ticks and you're done
 
 : battle_encounter_table
 	:byte battle_robot_repairbot 0 0 0
@@ -36,3 +38,6 @@
 
 	:byte battle_robot_ninja :byte battle_robot_ninja 0 0
 	:byte battle_robot_ninja :byte battle_robot_miner :byte battle_robot_miner :byte battle_robot_ninja
+
+	#boss
+	:byte battle_robot_hacker :byte battle_robot_bomb :byte battle_robot_hacker 0
