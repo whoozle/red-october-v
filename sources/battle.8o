@@ -278,14 +278,14 @@
 	i += vd
 	load v2 - v2
 
-	if v2 > v1 begin
-		v2 -= v1
-		save v2 - v2
+	v2 -= v1
+	if vf == 0 then
+		v2 := 0
+	save v2 - v2
 
-		battle_get_current_attack
-		va := v0
-		battle_object_attack_animation
-	end
+	battle_get_current_attack
+	va := v0
+	battle_object_attack_animation
 
 	return
 
@@ -303,13 +303,13 @@
 	i += vd
 	load v2 - v2
 
-	if v2 > v1 begin
-		v2 -= v1
-		save v2 - v2
+	v2 += v1
+	if v2 > 192 then
+		v2 := 192
+	save v2 - v2
 
-		battle_get_current_attack
-		va := v0
-		battle_object_attack_animation
-	end
+	battle_get_current_attack
+	va := v0
+	battle_object_attack_animation
 
 	return
