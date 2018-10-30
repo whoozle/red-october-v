@@ -316,7 +316,7 @@
 	v0 += -1
 	save v0 - v0
 
-	i := party_current_pos
+	i := player_pos
 	load va - vb
 	va := 120
 	save va - vb
@@ -356,7 +356,7 @@
 	v0 += 1
 	save v0 - v0
 
-	i := party_current_pos
+	i := player_pos
 	load va - vb
 	va := move_speed_right # just a little gap
 	save va - vb
@@ -398,7 +398,7 @@
 	v0 += 1
 	save v0 - v0
 
-	i := party_current_pos
+	i := player_pos
 	load va - vb
 	vb := 0
 	save va - vb
@@ -444,7 +444,7 @@
 	v0 += -1
 	save v0 - v0
 
-	i := party_current_pos
+	i := player_pos
 	load va - vb
 	vb := 40
 	save va - vb

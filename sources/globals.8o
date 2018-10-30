@@ -41,12 +41,9 @@
 : screen_y 0
 : screen_x 0
 
-: party_current_pos
-	12 12
-
 : player_pos
-: player_x 0x00
-: player_y 0x00
+: player_x 0x24
+: player_y 0x24
 
 : player_hp
 	255

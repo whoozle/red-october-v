@@ -70,9 +70,6 @@
 	va := sfx_index_move
 	jump sfx_play_sync
 
-: hit_test
-	jump map_is_wall
-
 : check_door
 	i := door_pos
 	load v1 - v5
@@ -152,7 +149,7 @@
 	else
 		va += 8
 		vb += 12
-		hit_test
+		map_is_wall
 		va += -8
 		vb += -12
 		if v0 == 0 then va += player_shift
@@ -177,7 +174,7 @@
 		va := 112
 	else
 		vb += 12
-		hit_test
+		map_is_wall
 		vb += -12
 		if v0 == 0 then va += neg_player_shift
 		check_door
@@ -201,7 +198,7 @@
 		vb := 0
 	else
 		vb += 16
-		hit_test
+		map_is_wall
 		vb += -16
 		if v0 == 0 then vb += player_shift
 	end
@@ -224,7 +221,7 @@
 		vb := 48
 	else
 		vb += 10
-		hit_test
+		map_is_wall
 		vb += -10
 		if v0 == 0 then vb += neg_player_shift
 	end
