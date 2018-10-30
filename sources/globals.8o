@@ -42,8 +42,8 @@
 : screen_x 0
 
 : player_pos
-: player_x 0x24
-: player_y 0x24
+: player_x 40
+: player_y 40
 
 : player_hp
 	255
