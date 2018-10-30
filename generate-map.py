@@ -50,7 +50,8 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 	data = [0 for i in xrange(size)]
 	walls_data = [0 for i in xrange(size)]
 	object_screens = {}
-	screens = ["map_object_data_screen_empty" for i in xrange(vscreens * hscreens)]
+	screens = [["map_object_data_screen_empty"] for i in xrange(vscreens * hscreens)]
+	object_counter = 0
 
 	for layer in map_json['layers']:
 		if 'data' in layer:
@@ -80,8 +81,11 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 					object_type_index += 1
 
 				obj_x = x - sx * screen_width
-				obj_y = y - sy * screen_height
-				screen_with_obj_label = "map_object_data_screen_%s" %screen_id
+				obj_y = y - sy * screen_height - h
+				print "TYPE", type_name, "x", obj_x, "y", obj_y, "w", w, "h", h
+				screen_with_obj_label = "map_object_data_screen_%s" %object_counter
+				object_counter += 1
+
 				if type_name == "door":
 					door = lobj['properties']
 					door_x = door['exit_door_x']
@@ -89,10 +93,9 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 					object_screens[screen_with_obj_label] = "0x%02x 0x%02x 0x%02x 0x%02x 0x%02x 0x%02x 0" %(object_types[type_name], obj_x, obj_y, door['screen'], door_x, door_y)
 				else:
 					object_screens[screen_with_obj_label] = "0x%02x 0x%02x 0x%02x 0" %(object_types[type_name], obj_x, obj_y)
-				screens[screen_id] = screen_with_obj_label
+				screens[screen_id] = [screen_with_obj_label] + screens[screen_id]
 		else:
 			print 'unhandled layer %s' %layer
-
 
 	indices = {}
 	object_types = {}
@@ -126,4 +129,5 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 
 	fmap_data.write(': map_object_data\n')
 	for scr in screens:
-		fmap_data.write('offset %s\n' %scr)
+		for scr_obj in scr:
+			fmap_data.write('offset %s\n' %scr_obj)
