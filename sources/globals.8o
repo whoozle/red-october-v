@@ -57,6 +57,16 @@
 : game_finished
 	0
 
+: battle_skill_level
+: battle_attack_level
+	1
+: battle_engi_level
+	1
+: battle_repair_level
+	1
+: battle_hack_level
+	1
+
 : encounters
 	1 1 1 1
 	1 1 1 1

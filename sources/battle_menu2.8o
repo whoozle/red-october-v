@@ -26,16 +26,6 @@
 	:byte text_battle_menu_hack_erase_data
 	:byte text_battle_menu_hack_erase_system
 
-: battle_skill_level
-: battle_attack_level
-	1
-: battle_engi_level
-	1
-: battle_repair_level
-	1
-: battle_hack_level
-	1
-
 : battle_get_current_skill
 	i := battle_menu_current_skill
 	load v0 - v0
