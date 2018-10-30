@@ -1,0 +1,97 @@
+# v0 			v1			v2			v3			v4 - v5			v6
+# [screen x]	[screen y]	[player x]	[player y]	[encounters]	[control sum]
+
+: game_save
+	i := screen_pos
+	load v0 - v1
+	i := player_pos
+	load v2 - v3
+
+	v4 := 0
+	v5 := 0
+	v6 := 0
+	v7 := 1
+	i := encounters
+
+	loop
+		v4 <<= v4
+
+		load v8 - v8
+		i += v7
+		v4 |= v8 #or lsb bit of encounter
+
+		v6 += 1
+		if v6 != 8 then
+	again
+
+	v6 := 0
+	loop
+		v5 <<= v5
+
+		load v8 - v8
+		i += v7
+		v4 |= v8 #or lsb bit of encounter
+
+		v6 += 1
+		if v6 != 8 then
+	again
+
+	v6 := 0xaa
+	v6 += v0
+	v6 += v1
+	v6 += v2
+	v6 += v3
+	v6 += v4
+	v6 += v5
+
+	saveflags v6
+	return
+
+: game_load
+	loadflags v6
+	v6 -= v0
+	v6 -= v1
+	v6 -= v2
+	v6 -= v3
+	v6 -= v4
+	v6 -= v5
+	if v0 != 0xaa begin
+		v0 := 0
+		return
+	end
+
+	i := screen_pos
+	save v0 - v1
+	i := player_pos
+	save v2 - v3
+
+	i := encounters
+
+	v6 := 0
+	v7 := 1
+	loop
+		v8 := 1
+		v8 &= v4
+		save v8 - v8
+
+		i += v7
+		v4 >>= v4
+
+		v6 += 1
+		if v6 != 8 then
+	again
+
+	v6 := 0
+	loop
+		v8 := 1
+		v8 &= v5
+		save v8 - v8
+
+		i += v7
+		v5 >>= v5
+
+		v6 += 1
+		if v6 != 8 then
+	again
+
+	return
