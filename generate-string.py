@@ -3,7 +3,7 @@
 import argparse
 parser = argparse.ArgumentParser(description='Convert string to the sequence of bytes')
 parser.add_argument('text', help='text')
-parser.add_argument('--right-align', help='text', default=0)
+parser.add_argument('--right-align', '-r', help='text', default=0)
 args = parser.parse_args()
 
 ralign = int(args.right_align)

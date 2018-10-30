@@ -74,7 +74,7 @@ $(PREFIX)/texts.8o $(PREFIX)/texts_data.8o: Makefile assets/en.json generate-tex
 		./generate-text.py $(PREFIX) 1000 assets/en.json \
 
 $(PREFIX)/signature.8o: Makefile ./generate-string.py
-		./generate-string.py "DEFINITELY NO FISH HERE ©COWNAMEDSQUIRREL 2018" > $@
+		./generate-string.py -r 65000 "DEFINITELY NO FISH HERE ©COWNAMEDSQUIRREL 2018" > $@
 
 $(PREFIX)/sfx.8o: Makefile ./generate-sfx.py assets/sfx/*.wav
 		echo ":org 0x5800" > $@
