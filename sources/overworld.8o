@@ -124,6 +124,8 @@
 
 
 : hit_test_objects
+	i := workaround_store
+	save v0 - v0
 	i := battle_pos
 	load v1 - v3
 	v5 := 0
@@ -145,12 +147,22 @@
 								i := battle_pos
 								load v1 - v3
 								draw_battle_robot
-								#TODO: start battle
+								i := battle_obj_id
+								load v0 - v0
+								remove_object
+								v1 := 0
+								v2 := 0
+								save_battle
 							else
 								i := power_pos
 								load v1 - v3
 								draw_power_up
-								#TODO: do power up
+								i := power_obj_id
+								load v0 - v0
+								remove_object
+								v1 := 0
+								v2 := 0
+								save_power_up
 							end
 						end
 					end
@@ -166,6 +178,8 @@
 	jump hit_test_impl
 
 	: hit_test_end
+	i := workaround_store
+	load v0 - v0
 	return
 
 
@@ -194,6 +208,8 @@
 				# battle
 				draw_battle_robot
 				save_battle
+				i := battle_obj_id
+				save vb - vb
 			else
 				if v0 == 0x00 begin
 					# reset all object coordinates
@@ -207,9 +223,13 @@
 						# door
 						save_door
 					else
-						# powerup
-						save_power_up
-						draw_power_up
+						if v0 == 0x02 begin
+							# powerup
+							draw_power_up
+							save_power_up
+							i := power_obj_id
+							save vb - vb
+						end
 					end
 				end
 			end
@@ -220,6 +240,20 @@
 	if va >= vc then again
 	return
 
+
+: remove_object
+	i := long map_object_data
+	i += v0
+	i += v0
+	load v0 - v1
+	i := object_to_remove_ptr
+	save v0 - v1
+	0xf0 0x00
+	: object_to_remove_ptr
+	0 0
+	v0 := 0xff
+	save v0 - v0
+	return
 
 : move_right
 	player_draw
@@ -324,3 +358,6 @@
 : door_pos 0x00 0x00 0x00 0x00 0x00
 : power_pos 0x00 0x00 0x00
 : player_door_pos 0x00 0x00
+: battle_obj_id 0x00
+: power_obj_id 0x00
+: workaround_store 0x00
