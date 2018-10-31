@@ -10,6 +10,8 @@
 	v0 := 0
 	save v0 - v0
 
+	check_objects
+
 	loop
 		v0 := OCTO_KEY_W
 		if v0 key then
@@ -211,6 +213,7 @@
 	save_power_up
 
 	vb := 0
+	vc := 0
 	loop
 	i := long map_object_data
 	i += vb
