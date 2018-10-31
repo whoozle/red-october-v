@@ -1,44 +1,34 @@
-# v0 			v1			v2			v3			v4 - v5			v6 					v7
-# [screen x]	[screen y]	[player x]	[player y]	[encounters]	[skills 4x2 bits]	[control sum]
+# v0 			v1			v2			v3 - v4			v5 - v6 			v7
+# [screen id]	[player x]	[player y]	[encounters]	[skills 0-12 bits]	[control sum]
+
+: screen_id
+	0
 
 : game_save
-	i := battle_skill_level
-	load v0 - v3
-	v0 += -1
-	v1 += -1
-	v2 += -1
-	v3 += -1
-
-	v0 <<= v0
-	v0 <<= v0
-	v0 <<= v0
-	v0 <<= v0
-	v0 <<= v0
-	v0 <<= v0
-
-	v1 <<= v1
-	v1 <<= v1
-	v1 <<= v1
-	v1 <<= v1
-
-	v2 <<= v2
-	v2 <<= v2
-
-	v6 := v0
-	v6 |= v1
-	v6 |= v2
-	v6 |= v3
+	map_get_screen_index
+	i := screen_id
+	save v0 - v0
 
 	i := encounters
 	game_save_pack_byte
+	v3 := v0
+
+	game_save_pack_byte
 	v4 := v0
 
+	i := skills
 	game_save_pack_byte
 	v5 := v0
 
-	v7 := 0
+	game_save_pack_byte
+	v6 := v0
 
-	v7 := 0xaa
+	i := screen_id
+	load v0 - v0
+	i := player_pos
+	load v1 - v2
+
+	v7 := 0xab
 	v7 += v0
 	v7 += v1
 	v7 += v2
@@ -46,11 +36,6 @@
 	v7 += v4
 	v7 += v5
 	v7 += v6
-
-	i := screen_pos
-	load v0 - v1
-	i := player_pos
-	load v2 - v3
 
 	saveflags v7
 	return
@@ -65,7 +50,7 @@
 	v7 -= v5
 	v7 -= v6
 
-	if v7 != 0xaa begin
+	if v7 != 0xab begin
 		v0 := 0
 		return
 	end
