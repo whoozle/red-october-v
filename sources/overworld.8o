@@ -6,6 +6,9 @@
 	player_draw
 
 	game_save
+	i := exit_main
+	v0 := 0
+	save v0 - v0
 
 	loop
 		v0 := OCTO_KEY_W
@@ -23,7 +26,10 @@
 		v0 := OCTO_KEY_D
 		if v0 key then
 			move_right
-	again
+
+		i := exit_main
+		load v0 - v0
+	if v0 == 0 then again
 	return
 
 :const player_dir_front 0
@@ -147,14 +153,21 @@
 								i := battle_pos
 								load v1 - v3
 								draw_battle_robot
-								# v3 - battle number
+
 								i := battle_obj_id
 								load v0 - v0
 								remove_object
 								v1 := 0xff
 								v2 := 0xff
 								save_battle
-								# TODO: start battle
+
+								i := exit_main
+								v0 := 1
+								save v0 - v0
+								i := current_battle
+								save v3 - v3
+								va := overlay_battle
+								set_current_overlay
 							else
 								i := power_pos
 								load v1 - v3
@@ -353,7 +366,7 @@
 	player_draw
 	jump move_sfx
 
-
+: exit_main 0x00
 : battle_pos 0xff 0xff 0x00
 : door_pos 0xff 0xff 0x00 0x00 0x00
 : power_pos 0x00 0x00 0x00
