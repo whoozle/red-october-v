@@ -99,3 +99,15 @@
 	v0 |= v1
 	v0 <<= v0
 	return
+
+: map_set_screen_pos_by_id
+	va >>= va
+	v1 := 7
+	v1 &= va
+	v0 := va
+	v0 >>= v0
+	v0 >>= v0
+	v0 >>= v0
+	i := screen_pos
+	save v0 - v1
+	return
