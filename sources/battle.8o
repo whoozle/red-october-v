@@ -128,13 +128,17 @@
 			va := 1
 			battle_enemy_attack_animation
 			battle_draw_hp_bar
+			i := battle_object_damage
+			i += vd
+			load va - va
+			vb := random 0xff
+			f8_mul
 			i := player_hp
-			load v0 - v0
-			v1 := random 0x1f
-			v0 -= v1
+			load v1 - v1
+			v1 -= v0
 			if vf == 0 then
-				v0 := 0
-			save v0 - v0
+				v1 := 0
+			save v1 - v1
 			battle_draw_hp_bar
 #loop end
 		va := 20
