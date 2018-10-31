@@ -77,20 +77,20 @@
 			i := player_pos
 			load vc - vd
 			if vc >= v1 begin
-				v1 += 4
-				if vc <= v1 then
-				if vb >= v2 begin
-					v2 += 8
-					if vb <= v2 begin
-						i := player_pos
-						va := v4
-						vb := v5
-						save va - vb
-						v0 := v3
-						map_scroll_to
-						check_objects
-						i := player_pos
-						load va - vb
+				if vc <= v1 begin
+					v2 += 16
+					if vb >= v2 begin
+						if vb <= v2 begin
+							i := player_door_pos
+							save v4 - v5
+							v0 := v3
+							map_scroll_to
+							check_objects
+							i := player_door_pos
+							load va - vb
+							i := player_pos
+							save va - vb
+						end
 					end
 				end
 			end
@@ -115,18 +115,8 @@
 	: map_current_objects_ptr
 	0 0
 	load v0 - v5
-
 	if v0 == 0x00 begin
 		vc += 1
-		# reset all object coordinates
-		v1 := 0
-		v2 := 0
-		i := battle_pos
-		save v1 - v2
-		i := door_pos
-		save v1 - v2
-		i := power_pos
-		save v1 - v2
 	else
 		if va == vc begin
 			if v0 == 0x01 begin
@@ -136,16 +126,28 @@
 				i := battle_pos
 				save v1 - v2
 			else
-				if v0 == 0x03 begin
-					# door
+				if v0 == 0x00 begin
+					# reset all object coordinates
+					v1 := 0
+					v2 := 0
+					i := battle_pos
+					save v1 - v2
 					i := door_pos
-					save v1 - v5
-				else
-					# powerup
+					save v1 - v2
 					i := power_pos
 					save v1 - v2
-					i := long tile_power_up_data
-					sprite v1 v2 0
+				else
+					if v0 == 0x03 begin
+						# door
+						i := door_pos
+						save v1 - v5
+					else
+						# powerup
+						i := power_pos
+						save v1 - v2
+						i := long tile_power_up_data
+						sprite v1 v2 0
+					end
 				end
 			end
 		end
@@ -173,7 +175,6 @@
 		va += -8
 		vb += -12
 		if v0 == 0 then va += player_shift
-		check_door
 	end
 	save_player_pos
 	v0 := player_dir_right
@@ -255,3 +256,4 @@
 : battle_pos 0x00 0x00
 : door_pos 0x00 0x00 0x00 0x00 0x00
 : power_pos 0x00 0x00
+: player_door_pos 0x00 0x00
