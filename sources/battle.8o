@@ -1,7 +1,7 @@
 :const battle_tick_freq_base	0x10
 :const battle_tick_freq_random	0x0f
-:const battle_dt 0x3f
-:const battle_object_max_speed 192
+:const battle_dt 				50
+:const battle_object_max_speed 	192
 
 : battle_start
 	i := current_battle
@@ -94,18 +94,19 @@
 		if v0 == 0 then
 			jump battle_enemy_tick_next
 
-		i := battle_object_t
-		i += vd
-
-		load v0 - v0
-		v0 += battle_dt
-
 		i := battle_object_speed
 		i += vd
 		load v1 - v1
 
-		if v0 < v1 then
+		i := battle_object_t
+		i += vd
+		load v0 - v0
+		v0 += battle_dt
+
+		if v0 < v1 begin
+			save v0 - v0
 			jump battle_enemy_tick_next
+		end
 
 		v2 := 0
 		loop
@@ -204,9 +205,9 @@
 	jump0 battle_attack_table
 
 : battle_base_damage_table
-	20
 	50
 	80
+	100
 	127
 
 : battle_damage_enemy
