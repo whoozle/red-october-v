@@ -155,7 +155,7 @@
 								draw_battle_robot
 
 								i := battle_obj_id
-								load v0 - v0
+								load va - va
 								remove_object
 								v1 := 0xff
 								v2 := 0xff
@@ -173,7 +173,7 @@
 								load v1 - v3
 								draw_power_up
 								i := power_obj_id
-								load v0 - v0
+								load va - va
 								remove_object
 								v1 := 0xff
 								v2 := 0xff
@@ -256,8 +256,8 @@
 
 : remove_object
 	i := long map_object_data
-	i += v0
-	i += v0
+	i += va
+	i += va
 	load v0 - v1
 	i := object_to_remove_ptr
 	save v0 - v1
@@ -279,12 +279,14 @@
 		load vb - vb
 		va := 0
 	else
+		i := player_pos
+		save va - vb
 		va += 12
 		vb += 12
 		map_is_wall
 		hit_test_objects
-		va += -12
-		vb += -12
+		i := player_pos
+		load va - vb
 		if v0 == 0 then va += player_shift
 	end
 	save_player_pos
@@ -305,10 +307,14 @@
 		load vb - vb
 		va := 112
 	else
+		i := player_pos
+		save va - vb
 		vb += 12
 		map_is_wall
 		hit_test_objects
 		vb += -12
+		i := player_pos
+		load va - vb
 		if v0 == 0 then va += neg_player_shift
 		check_door
 	end
@@ -330,10 +336,14 @@
 		load va - va
 		vb := 0
 	else
+		i := player_pos
+		save va - vb
 		vb += 16
 		map_is_wall
 		hit_test_objects
 		vb += -16
+		i := player_pos
+		load va - vb
 		if v0 == 0 then vb += player_shift
 	end
 	save_player_pos
@@ -354,10 +364,14 @@
 		load va - va
 		vb := 48
 	else
+		i := player_pos
+		save va - vb
 		vb += 10
 		map_is_wall
 		hit_test_objects
 		vb += -10
+		i := player_pos
+		load va - vb
 		if v0 == 0 then vb += neg_player_shift
 	end
 	save_player_pos
