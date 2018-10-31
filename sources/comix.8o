@@ -197,5 +197,50 @@
 	va := 120
 	sleep
 	text_line comix_text_x2 56 text_win_6
+	va := 200
+	sleep
+
 	loop
+	morse_long
+	morse_short
+	morse_long
+	morse_short
+	morse_pause
+	morse_long
+	morse_long
+	morse_short
+	morse_long
+	morse_pause
+	morse_pause
+	morse_pause
+	morse_pause
 	again
+
+: morse_sound
+	0xaa 0xaa 0xaa 0xaa
+	0xaa 0xaa 0xaa 0xaa
+	0xaa 0xaa 0xaa 0xaa
+	0xaa 0xaa 0xaa 0xaa
+
+
+: morse_pause
+	va := 20
+	sleep
+	return
+
+: morse_short_pause
+	va := 9
+	sleep
+	return
+
+: morse_short
+	i := morse_sound
+	vf := 7
+	audio_play_sync_vf
+	jump morse_short_pause
+
+: morse_long
+	i := morse_sound
+	vf := 20
+	audio_play_sync_vf
+	jump morse_short_pause
