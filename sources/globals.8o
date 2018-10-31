@@ -77,6 +77,11 @@
 	1 1 1 1
 	1 1 1 1
 
+: skills
+	0 0 0
+	0 0 0
+	0 0 0
+	0 0 0
 
 : set_current_overlay
 	i := current_overlay
