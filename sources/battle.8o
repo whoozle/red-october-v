@@ -202,25 +202,32 @@
 	80
 	127
 
+: battle_damage_enemy_die
+	va := sfx_index_explosion
+	sfx_play_sync
+
+	battle_object_draw
+	v0 := 0
+	i := battle_object_hp
+	i += vd
+	return
+
+
 : battle_damage_enemy
 	if va == 0 then #MISS
 		return
+
 	i := battle_object_hp
 	i += vd
 	load v0 - v0
 	if v0 == 0 then
-		return
+		battle_damage_enemy_die
 
 	v0 -= va
-	if vf == 0 begin
-		va := sfx_index_explosion
-		sfx_play_sync
-
-		battle_object_draw
-		v0 := 0
-		i := battle_object_hp
-		i += vd
-	end
+	if vf == 0 then
+		battle_damage_enemy_die
+	if v0 == 0 then
+		battle_damage_enemy_die
 	save v0 - v0
 
 	if v0 == 0 then
