@@ -269,6 +269,7 @@
 	return
 
 : move_right
+	load_player_pos
 	player_draw
 	if va >= 112 begin
 		i := player_y
@@ -297,6 +298,7 @@
 
 
 : move_left
+	load_player_pos
 	player_draw
 	if va <= 0 begin
 		i := player_y
@@ -326,6 +328,7 @@
 
 
 : move_down
+	load_player_pos
 	player_draw
 	if vb >= 44 begin
 		i := player_x
@@ -354,6 +357,7 @@
 
 
 : move_up
+	load_player_pos
 	player_draw
 	if vb <= 0 begin
 		i := player_x
