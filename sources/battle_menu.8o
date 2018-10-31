@@ -112,7 +112,6 @@
 				v2 := 0
 				loop
 					load v0
-					dump 0 2
 					v2 |= v0
 					v1 += 1
 					if v1 != 16 then
