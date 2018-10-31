@@ -55,7 +55,7 @@
 		load v2 - v2
 		v2 += -1
 
-		i := long battle_object_base_damage #load speed by type
+		i := long battle_object_base_damage #load damage by type
 		i += v2
 		load v3 - v3
 
