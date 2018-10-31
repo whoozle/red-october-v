@@ -96,10 +96,8 @@
 	comix_intro_2
 	comix_intro_3
 
-	i := current_overlay
-	v0 := 0
-	save v0 - v0
-	return
+	va := overlay_overworld
+	jump set_current_overlay
 
 : comix_game_over
 	i := long tile_crushed_data

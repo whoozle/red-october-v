@@ -4,9 +4,8 @@
 
 	game_load
 	if v0 == 1 begin
-		i := current_overlay
-		v0 := 0
-		save v0 - v0
+		va := overlay_overworld
+		set_current_overlay
 		i := intro_shown
 		v0 := 1
 		save v0 - v0

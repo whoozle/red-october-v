@@ -34,6 +34,10 @@
 :const sfx_index_powerup 4
 :const sfx_index_move 5
 
+:const overlay_overworld 0
+:const overlay_battle 1
+:const overlay_comix 2
+
 : current_overlay
 	0
 

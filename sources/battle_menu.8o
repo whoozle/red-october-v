@@ -106,18 +106,34 @@
 				battle_enemy_tick
 
 			battle_is_active
-			if v0 == 0 begin
-				i := current_overlay
-				v0 := 0
-				save v0 - v0
-				return
+			if v0 == 0 begin #you have won the battle
+				i := encounters
+				v1 := 0
+				v2 := 0
+				loop
+					load v0
+					dump 0 2
+					v2 |= v0
+					v1 += 1
+					if v1 != 16 then
+				again
+
+				if v2 == 0 begin # no encounters left, won the game
+					i := game_finished
+					v0 := 1
+					save v0 - v0
+
+					va := overlay_comix
+					jump set_current_overlay
+				end
+
+				va := overlay_overworld
+				jump set_current_overlay
 			end
 			player_is_alive
 			if v0 == 0 begin
-				i := current_overlay
-				v0 := 2
-				save v0 - v0
-				return
+				va := overlay_comix
+				jump set_current_overlay
 			end
 		end
 	again
