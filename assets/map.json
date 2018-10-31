@@ -214,8 +214,8 @@
                  "type":"battle",
                  "visible":true,
                  "width":16,
-                 "x":472,
-                 "y":496
+                 "x":464,
+                 "y":488
                 }, 
                 {
                  "gid":81,
@@ -310,13 +310,85 @@
                 {
                  "gid":81,
                  "height":16,
+                 "id":108,
+                 "name":"powerup",
+                 "properties":[
+                        {
+                         "name":"power",
+                         "type":"int",
+                         "value":3
+                        }],
+                 "rotation":0,
+                 "type":"powerup",
+                 "visible":true,
+                 "width":16,
+                 "x":560,
+                 "y":88
+                }, 
+                {
+                 "gid":81,
+                 "height":16,
+                 "id":107,
+                 "name":"powerup",
+                 "properties":[
+                        {
+                         "name":"power",
+                         "type":"int",
+                         "value":3
+                        }],
+                 "rotation":0,
+                 "type":"powerup",
+                 "visible":true,
+                 "width":16,
+                 "x":48,
+                 "y":232
+                }, 
+                {
+                 "gid":81,
+                 "height":16,
+                 "id":106,
+                 "name":"powerup",
+                 "properties":[
+                        {
+                         "name":"power",
+                         "type":"int",
+                         "value":3
+                        }],
+                 "rotation":0,
+                 "type":"powerup",
+                 "visible":true,
+                 "width":16,
+                 "x":472,
+                 "y":504
+                }, 
+                {
+                 "gid":81,
+                 "height":16,
+                 "id":105,
+                 "name":"powerup",
+                 "properties":[
+                        {
+                         "name":"power",
+                         "type":"int",
+                         "value":2
+                        }],
+                 "rotation":0,
+                 "type":"powerup",
+                 "visible":true,
+                 "width":16,
+                 "x":168,
+                 "y":400
+                }, 
+                {
+                 "gid":81,
+                 "height":16,
                  "id":62,
                  "name":"powerup",
                  "properties":[
                         {
                          "name":"power",
                          "type":"int",
-                         "value":1
+                         "value":2
                         }],
                  "rotation":0,
                  "type":"powerup",
@@ -352,7 +424,7 @@
                         {
                          "name":"power",
                          "type":"int",
-                         "value":0
+                         "value":1
                         }],
                  "rotation":0,
                  "type":"powerup",
@@ -406,14 +478,14 @@
                         {
                          "name":"power",
                          "type":"int",
-                         "value":3
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"powerup",
                  "visible":true,
                  "width":16,
-                 "x":560.333333333333,
-                 "y":88
+                 "x":144,
+                 "y":184
                 }, 
                 {
                  "gid":81,
@@ -424,7 +496,7 @@
                         {
                          "name":"power",
                          "type":"int",
-                         "value":2
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"powerup",
@@ -442,7 +514,7 @@
                         {
                          "name":"power",
                          "type":"int",
-                         "value":2
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"powerup",
@@ -582,7 +654,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":104,
+ "nextobjectid":109,
  "orientation":"orthogonal",
  "renderorder":"left-down",
  "tiledversion":"1.2.0",
