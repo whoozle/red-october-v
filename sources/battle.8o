@@ -284,6 +284,7 @@
 	save v2 - v2
 
 	battle_get_current_attack
+	v0 += 1
 	va := v0
 	battle_object_attack_animation
 
@@ -309,6 +310,7 @@
 	save v2 - v2
 
 	battle_get_current_attack
+	v0 += 1
 	va := v0
 	battle_object_attack_animation
 
