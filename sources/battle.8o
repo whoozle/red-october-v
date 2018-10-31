@@ -1,6 +1,7 @@
 :const battle_tick_freq_base	0x10
 :const battle_tick_freq_random	0x0f
 :const battle_dt 0x3f
+:const battle_object_max_speed 192
 
 : battle_start
 	i := current_battle
@@ -301,24 +302,31 @@
 
 	return
 
+: battle_hack_scale
+	0x90
+	0xa0
+	0xb0
+	0xc0
+
 : battle_do_hack
 	battle_get_current_attack
-	v0 += 1
-	v1 := 0
-	loop
-		v1 += 10
-		v0 += -1
-		if v0 != 0 then
-	again
+	i := battle_hack_scale
+	i += v0
+	load vb - vb
 
 	i := battle_object_speed
 	i += vd
-	load v2 - v2
+	load va - va
+	f8_mul
+	v0 += v0
+	if vf != 0 then
+		v0 := 255
 
-	v2 += v1
-	if v2 > 192 then
-		v2 := 192
-	save v2 - v2
+	i := battle_object_speed
+	i += vd
+	if v0 > battle_object_max_speed then
+		v0 := battle_object_max_speed
+	save v0 - v0
 
 	battle_get_current_attack
 	v0 += 1
