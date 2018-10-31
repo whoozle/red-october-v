@@ -188,6 +188,12 @@
 	va := v0
 	va >>= va
 
+	v1 := 0
+	v2 := 0
+	save_battle
+	save_door
+	save_power_up
+
 	vb := 0
 	loop
 	i := long map_object_data
@@ -211,25 +217,16 @@
 				i := battle_obj_id
 				save vb - vb
 			else
-				if v0 == 0x00 begin
-					# reset all object coordinates
-					v1 := 0
-					v2 := 0
-					save_battle
+				if v0 == 0x03 begin
+					# door
 					save_door
-					save_power_up
 				else
-					if v0 == 0x03 begin
-						# door
-						save_door
-					else
-						if v0 == 0x02 begin
-							# powerup
-							draw_power_up
-							save_power_up
-							i := power_obj_id
-							save vb - vb
-						end
+					if v0 == 0x02 begin
+						# powerup
+						draw_power_up
+						save_power_up
+						i := power_obj_id
+						save vb - vb
 					end
 				end
 			end
