@@ -22,24 +22,6 @@
                 {
                  "gid":81,
                  "height":16,
-                 "id":28,
-                 "name":"battle",
-                 "properties":[
-                        {
-                         "name":"value",
-                         "type":"int",
-                         "value":1
-                        }],
-                 "rotation":0,
-                 "type":"battle",
-                 "visible":true,
-                 "width":16,
-                 "x":216,
-                 "y":48
-                }, 
-                {
-                 "gid":81,
-                 "height":16,
                  "id":74,
                  "name":"battle",
                  "properties":[
@@ -54,6 +36,24 @@
                  "width":16,
                  "x":48,
                  "y":104
+                }, 
+                {
+                 "gid":81,
+                 "height":16,
+                 "id":28,
+                 "name":"battle",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":1
+                        }],
+                 "rotation":0,
+                 "type":"battle",
+                 "visible":true,
+                 "width":16,
+                 "x":216,
+                 "y":48
                 }, 
                 {
                  "gid":81,
@@ -100,7 +100,7 @@
                         {
                          "name":"value",
                          "type":"int",
-                         "value":2
+                         "value":4
                         }],
                  "rotation":0,
                  "type":"battle",
@@ -118,7 +118,7 @@
                         {
                          "name":"value",
                          "type":"int",
-                         "value":6
+                         "value":5
                         }],
                  "rotation":0,
                  "type":"battle",
@@ -136,7 +136,7 @@
                         {
                          "name":"value",
                          "type":"int",
-                         "value":9
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"battle",
@@ -154,7 +154,7 @@
                         {
                          "name":"value",
                          "type":"int",
-                         "value":4
+                         "value":7
                         }],
                  "rotation":0,
                  "type":"battle",
@@ -190,7 +190,7 @@
                         {
                          "name":"value",
                          "type":"int",
-                         "value":3
+                         "value":9
                         }],
                  "rotation":0,
                  "type":"battle",
@@ -208,7 +208,7 @@
                         {
                          "name":"value",
                          "type":"int",
-                         "value":5
+                         "value":10
                         }],
                  "rotation":0,
                  "type":"battle",
@@ -226,7 +226,7 @@
                         {
                          "name":"value",
                          "type":"int",
-                         "value":6
+                         "value":11
                         }],
                  "rotation":0,
                  "type":"battle",
@@ -234,6 +234,60 @@
                  "width":16,
                  "x":184,
                  "y":400
+                }, 
+                {
+                 "gid":81,
+                 "height":16,
+                 "id":102,
+                 "name":"battle",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":12
+                        }],
+                 "rotation":0,
+                 "type":"battle",
+                 "visible":true,
+                 "width":16,
+                 "x":192,
+                 "y":504
+                }, 
+                {
+                 "gid":81,
+                 "height":16,
+                 "id":101,
+                 "name":"battle",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":13
+                        }],
+                 "rotation":0,
+                 "type":"battle",
+                 "visible":true,
+                 "width":16,
+                 "x":56,
+                 "y":368
+                }, 
+                {
+                 "gid":81,
+                 "height":16,
+                 "id":103,
+                 "name":"battle",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":14
+                        }],
+                 "rotation":0,
+                 "type":"battle",
+                 "visible":true,
+                 "width":16,
+                 "x":88,
+                 "y":208
                 }, 
                 {
                  "gid":81,
@@ -252,60 +306,6 @@
                  "width":16,
                  "x":24,
                  "y":465
-                }, 
-                {
-                 "gid":81,
-                 "height":16,
-                 "id":102,
-                 "name":"battle",
-                 "properties":[
-                        {
-                         "name":"value",
-                         "type":"int",
-                         "value":4
-                        }],
-                 "rotation":0,
-                 "type":"battle",
-                 "visible":true,
-                 "width":16,
-                 "x":192,
-                 "y":504
-                }, 
-                {
-                 "gid":81,
-                 "height":16,
-                 "id":101,
-                 "name":"battle",
-                 "properties":[
-                        {
-                         "name":"value",
-                         "type":"int",
-                         "value":6
-                        }],
-                 "rotation":0,
-                 "type":"battle",
-                 "visible":true,
-                 "width":16,
-                 "x":56,
-                 "y":368
-                }, 
-                {
-                 "gid":81,
-                 "height":16,
-                 "id":103,
-                 "name":"battle",
-                 "properties":[
-                        {
-                         "name":"value",
-                         "type":"int",
-                         "value":7
-                        }],
-                 "rotation":0,
-                 "type":"battle",
-                 "visible":true,
-                 "width":16,
-                 "x":88,
-                 "y":208
                 }, 
                 {
                  "gid":81,
