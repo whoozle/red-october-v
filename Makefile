@@ -29,7 +29,7 @@ assets/tiles/*
 		./generate-texture.py --map1=0 assets/tileset.png tileset 2 8 >> $@
 		./generate-texture.py --map1=3 assets/tiles/highlight_menu.png highlight_menu 2 8 >> $@
 		./generate-texture.py --map0=1 assets/tiles/highlight_16.png highlight_16 2 16 >> $@
-		./generate-texture.py --map0=2 --map2=1 assets/tiles/splash.png splash 2 16 >> $@
+		./generate-texture.py --map0=2 --map2=1 assets/tiles/splash3.png splash 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/tank_front.png robot_tank_front 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/tank_front_b.png robot_tank_front_b 2 16 >> $@
 		./generate-texture.py --map1=0 assets/tiles/engi_front.png robot_engineer_front 2 16 >> $@
@@ -176,6 +176,7 @@ sources/*.8o
 		cat $(PREFIX)/common.8o > $@
 		cat $(PREFIX)/module_main.8o >> $@
 		cat sources/comix.8o >> $@
+		cat sources/tiles.8o >> $@
 		cat $(PREFIX)/texts_data.8o >> $@ #org 0x1000, can be used as guard
 		cat $(PREFIX)/font_data.8o >> $@
 		cat $(PREFIX)/tiles.8o >> $@
@@ -204,7 +205,6 @@ assets/* assets/*/* sources/*.8o
 		cat sources/saveload.8o >> $@
 		cat sources/math.8o >> $@
 		cat sources/tiles.8o >> $@
-		cat sources/splash.8o >> $@
 
 		cat $(PREFIX)/map_data.8o >> $@
 		cat $(PREFIX)/sfx.8o >> $@
