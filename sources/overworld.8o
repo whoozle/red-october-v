@@ -123,6 +123,52 @@
 	return
 
 
+: hit_test_objects
+	i := battle_pos
+	load v1 - v3
+	v5 := 0
+
+	: hit_test_impl
+	if v1 != 0 then
+		if v2 != 0 begin
+			i := player_pos
+			load vc - vd
+			vc += 8
+			vd += 8
+			if vc >= v1 begin
+				v1 += 16
+				if vc <= v1 begin
+					if vd >= v2 begin
+						v2 += 16
+						if vd <= v2 begin
+							if v5 == 0 begin
+								i := battle_pos
+								load v1 - v3
+								draw_battle_robot
+								#TODO: start battle
+							else
+								i := power_pos
+								load v1 - v3
+								draw_power_up
+								#TODO: do power up
+							end
+						end
+					end
+				end
+			end
+		end
+
+	if v5 == 1 then jump hit_test_end
+
+	i := power_pos
+	load v1 - v3
+	v5 := 1
+	jump hit_test_impl
+
+	: hit_test_end
+	return
+
+
 : check_objects
 	map_get_screen_index
 	va := v0
@@ -186,10 +232,11 @@
 		load vb - vb
 		va := 0
 	else
-		va += 8
+		va += 12
 		vb += 12
 		map_is_wall
-		va += -8
+		hit_test_objects
+		va += -12
 		vb += -12
 		if v0 == 0 then va += player_shift
 	end
@@ -213,6 +260,7 @@
 	else
 		vb += 12
 		map_is_wall
+		hit_test_objects
 		vb += -12
 		if v0 == 0 then va += neg_player_shift
 		check_door
@@ -237,6 +285,7 @@
 	else
 		vb += 16
 		map_is_wall
+		hit_test_objects
 		vb += -16
 		if v0 == 0 then vb += player_shift
 	end
@@ -260,6 +309,7 @@
 	else
 		vb += 10
 		map_is_wall
+		hit_test_objects
 		vb += -10
 		if v0 == 0 then vb += neg_player_shift
 	end
