@@ -52,7 +52,7 @@
 : player_hp
 	255
 
-: next_battle
+: current_battle
 	0
 
 : intro_shown

@@ -107,6 +107,14 @@
 
 			battle_is_active
 			if v0 == 0 begin #you have won the battle
+				i := current_battle
+				load v0 - v0
+
+				i := encounters
+				i += v0
+				v0 := 0
+				save v0 - v0 #removing current battle flag
+
 				i := encounters
 				v1 := 0
 				v2 := 0

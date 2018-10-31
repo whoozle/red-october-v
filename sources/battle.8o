@@ -3,7 +3,7 @@
 :const battle_dt 0x3f
 
 : battle_start
-	i := next_battle
+	i := current_battle
 	load v0 - v0
 
 	i := long battle_encounter_table
