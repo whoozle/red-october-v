@@ -115,6 +115,8 @@
 				v0 := 0
 				save v0 - v0 #removing current battle flag
 
+				game_save
+
 				i := encounters
 				v1 := 0
 				v2 := 0
