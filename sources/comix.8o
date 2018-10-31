@@ -89,6 +89,7 @@
 	draw_fullscreen_tile
 	v0 := key
 
+	clear
 	va := 14
 	vb := 30
 	vc := text_intro_1
