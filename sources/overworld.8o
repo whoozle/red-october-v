@@ -131,8 +131,8 @@
 	v5 := 0
 
 	: hit_test_impl
-	if v1 != 0 then
-		if v2 != 0 begin
+	if v1 != 0xff then
+		if v2 != 0xff begin
 			i := player_pos
 			load vc - vd
 			vc += 8
@@ -150,9 +150,10 @@
 								i := battle_obj_id
 								load v0 - v0
 								remove_object
-								v1 := 0
-								v2 := 0
+								v1 := 0xff
+								v2 := 0xff
 								save_battle
+								# TODO: start battle
 							else
 								i := power_pos
 								load v1 - v3
@@ -160,9 +161,10 @@
 								i := power_obj_id
 								load v0 - v0
 								remove_object
-								v1 := 0
-								v2 := 0
+								v1 := 0xff
+								v2 := 0xff
 								save_power_up
+								# TODO: do powerup
 							end
 						end
 					end
@@ -188,8 +190,8 @@
 	va := v0
 	va >>= va
 
-	v1 := 0
-	v2 := 0
+	v1 := 0xff
+	v2 := 0xff
 	save_battle
 	save_door
 	save_power_up
@@ -351,8 +353,8 @@
 	jump move_sfx
 
 
-: battle_pos 0x00 0x00 0x00
-: door_pos 0x00 0x00 0x00 0x00 0x00
+: battle_pos 0xff 0xff 0x00
+: door_pos 0xff 0xff 0x00 0x00 0x00
 : power_pos 0x00 0x00 0x00
 : player_door_pos 0x00 0x00
 : battle_obj_id 0x00
