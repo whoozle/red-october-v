@@ -104,6 +104,21 @@
 			battle_menu_2
 			if v0 != 0 then
 				battle_enemy_tick
+
+			battle_is_active
+			if v0 == 0 begin
+				i := current_overlay
+				v0 := 0
+				save v0 - v0
+				return
+			end
+			player_is_alive
+			if v0 == 0 begin
+				i := current_overlay
+				v0 := 2
+				save v0 - v0
+				return
+			end
 		end
 	again
 

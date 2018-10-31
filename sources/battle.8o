@@ -132,6 +132,8 @@
 			load v0 - v0
 			v1 := random 0x1f
 			v0 -= v1
+			if vf == 0 then
+				v0 := 0
 			save v0 - v0
 			battle_draw_hp_bar
 #loop end
@@ -202,17 +204,6 @@
 	80
 	127
 
-: battle_damage_enemy_die
-	va := sfx_index_explosion
-	sfx_play_sync
-
-	battle_object_draw
-	v0 := 0
-	i := battle_object_hp
-	i += vd
-	return
-
-
 : battle_damage_enemy
 	if va == 0 then #MISS
 		return
@@ -221,13 +212,22 @@
 	i += vd
 	load v0 - v0
 	if v0 == 0 then
-		battle_damage_enemy_die
+		return
 
 	v0 -= va
 	if vf == 0 then
-		battle_damage_enemy_die
-	if v0 == 0 then
-		battle_damage_enemy_die
+		v0 := 0
+
+	if v0 == 0 begin
+		va := sfx_index_explosion
+		sfx_play_sync
+
+		battle_object_draw
+		v0 := 0
+		i := battle_object_hp
+		i += vd
+	end
+
 	save v0 - v0
 
 	if v0 == 0 then

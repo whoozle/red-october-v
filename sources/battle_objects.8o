@@ -1,6 +1,19 @@
 : battle_object_hp_indicator
 	0xc0 0xc0
 
+: battle_is_active
+	i := battle_object_hp
+	load v0 - v3
+	v0 |= v1
+	v0 |= v2
+	v0 |= v3
+	return
+
+: player_is_alive
+	i := player_hp
+	load v0 - v0
+	return
+
 : battle_tick
 	i := battle_tick_last_t
 	load v0 - v0
