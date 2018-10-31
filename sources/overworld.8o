@@ -65,6 +65,31 @@
 	sprite va vb 0
 	return
 
+: save_door
+	i := door_pos
+	save v1 - v5
+	return
+
+: save_battle
+	i := battle_pos
+	save v1 - v3
+	return
+
+: save_power_up
+	i := power_pos
+	save v1 - v3
+	return
+
+: draw_battle_robot
+	i := long tile_robot_engineer_front_data
+	sprite v1 v2 0
+	return
+
+: draw_power_up
+	i := long tile_power_up_data
+	sprite v1 v2 0
+	return
+
 : move_sfx
 	va := sfx_index_move
 	jump sfx_play_sync
@@ -121,32 +146,24 @@
 		if va == vc begin
 			if v0 == 0x01 begin
 				# battle
-				i := long tile_robot_engineer_front_data
-				sprite v1 v2 0
-				i := battle_pos
-				save v1 - v2
+				draw_battle_robot
+				save_battle
 			else
 				if v0 == 0x00 begin
 					# reset all object coordinates
 					v1 := 0
 					v2 := 0
-					i := battle_pos
-					save v1 - v2
-					i := door_pos
-					save v1 - v2
-					i := power_pos
-					save v1 - v2
+					save_battle
+					save_door
+					save_power_up
 				else
 					if v0 == 0x03 begin
 						# door
-						i := door_pos
-						save v1 - v5
+						save_door
 					else
 						# powerup
-						i := power_pos
-						save v1 - v2
-						i := long tile_power_up_data
-						sprite v1 v2 0
+						save_power_up
+						draw_power_up
 					end
 				end
 			end
@@ -253,7 +270,7 @@
 	jump move_sfx
 
 
-: battle_pos 0x00 0x00
+: battle_pos 0x00 0x00 0x00
 : door_pos 0x00 0x00 0x00 0x00 0x00
-: power_pos 0x00 0x00
+: power_pos 0x00 0x00 0x00
 : player_door_pos 0x00 0x00
