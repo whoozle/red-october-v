@@ -147,6 +147,7 @@
 								i := battle_pos
 								load v1 - v3
 								draw_battle_robot
+								# v3 - battle number
 								i := battle_obj_id
 								load v0 - v0
 								remove_object
