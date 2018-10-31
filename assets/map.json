@@ -316,7 +316,7 @@
                         {
                          "name":"power",
                          "type":"int",
-                         "value":3
+                         "value":11
                         }],
                  "rotation":0,
                  "type":"powerup",
@@ -334,7 +334,7 @@
                         {
                          "name":"power",
                          "type":"int",
-                         "value":3
+                         "value":10
                         }],
                  "rotation":0,
                  "type":"powerup",
@@ -352,7 +352,7 @@
                         {
                          "name":"power",
                          "type":"int",
-                         "value":3
+                         "value":9
                         }],
                  "rotation":0,
                  "type":"powerup",
@@ -370,7 +370,7 @@
                         {
                          "name":"power",
                          "type":"int",
-                         "value":2
+                         "value":8
                         }],
                  "rotation":0,
                  "type":"powerup",
@@ -388,7 +388,7 @@
                         {
                          "name":"power",
                          "type":"int",
-                         "value":2
+                         "value":7
                         }],
                  "rotation":0,
                  "type":"powerup",
@@ -406,7 +406,7 @@
                         {
                          "name":"power",
                          "type":"int",
-                         "value":2
+                         "value":6
                         }],
                  "rotation":0,
                  "type":"powerup",
@@ -424,7 +424,7 @@
                         {
                          "name":"power",
                          "type":"int",
-                         "value":1
+                         "value":5
                         }],
                  "rotation":0,
                  "type":"powerup",
@@ -442,7 +442,7 @@
                         {
                          "name":"power",
                          "type":"int",
-                         "value":1
+                         "value":4
                         }],
                  "rotation":0,
                  "type":"powerup",
@@ -460,7 +460,7 @@
                         {
                          "name":"power",
                          "type":"int",
-                         "value":1
+                         "value":3
                         }],
                  "rotation":0,
                  "type":"powerup",
@@ -478,7 +478,7 @@
                         {
                          "name":"power",
                          "type":"int",
-                         "value":0
+                         "value":2
                         }],
                  "rotation":0,
                  "type":"powerup",
@@ -496,7 +496,7 @@
                         {
                          "name":"power",
                          "type":"int",
-                         "value":0
+                         "value":1
                         }],
                  "rotation":0,
                  "type":"powerup",
