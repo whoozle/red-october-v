@@ -82,3 +82,13 @@
 	i := current_overlay
 	save va - va
 	return
+
+: map_get_screen_index
+	i := screen_pos
+	load v0 - v1
+	v0 <<= v0
+	v0 <<= v0
+	v0 <<= v0
+	v0 |= v1
+	v0 <<= v0
+	return
