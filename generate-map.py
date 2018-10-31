@@ -85,12 +85,13 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 				screen_with_obj_label = "map_object_data_screen_%s" %object_counter
 				object_counter += 1
 
+				obj_properties = lobj['properties']
+
 				if type_name == "door":
-					door = lobj['properties']
 					door_x = 0
 					door_y = 0
 					door_screen = 0
-					for door_prop in door:
+					for door_prop in obj_properties:
 						prop_name = door_prop['name']
 						prop_value = door_prop['value']
 						if prop_name == 'exit_door_x':
@@ -100,8 +101,20 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 						if prop_name == 'screen':
 							door_screen = prop_value
 					object_screens[screen_with_obj_label] = "0x%02x 0x%02x 0x%02x 0x%02x 0x%02x 0x%02x 0" %(object_types[type_name], obj_x, obj_y, door_screen, door_x, door_y)
+				elif type_name == "battle":
+					battle_value = 0
+					for battle_prop in obj_properties:
+						prop_name = battle_prop['name']
+						if prop_name == 'value':
+							battle_value = battle_prop['value']
+					object_screens[screen_with_obj_label] = "0x%02x 0x%02x 0x%02x 0x%02x 0" %(object_types[type_name], obj_x, obj_y, battle_value)
 				else:
-					object_screens[screen_with_obj_label] = "0x%02x 0x%02x 0x%02x 0" %(object_types[type_name], obj_x, obj_y)
+					powerup_value = 0
+					for powerup_prop in obj_properties:
+						prop_name = powerup_prop['name']
+						if prop_name == 'power':
+							powerup_value = powerup_prop['value']
+					object_screens[screen_with_obj_label] = "0x%02x 0x%02x 0x%02x 0x%02x 0" %(object_types[type_name], obj_x, obj_y, powerup_value)
 				screens[screen_id] = [screen_with_obj_label] + screens[screen_id]
 		else:
 			print 'unhandled layer %s' %layer
