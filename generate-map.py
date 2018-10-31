@@ -102,12 +102,13 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 							door_screen = prop_value
 					object_screens[screen_with_obj_label] = "0x%02x 0x%02x 0x%02x 0x%02x 0x%02x 0x%02x 0" %(object_types[type_name], obj_x, obj_y, door_screen, door_x, door_y)
 				elif type_name == "battle":
-					battle_value = 0
+					battle_id = 0
 					for battle_prop in obj_properties:
 						prop_name = battle_prop['name']
 						if prop_name == 'value':
-							battle_value = battle_prop['value']
-					object_screens[screen_with_obj_label] = "0x%02x 0x%02x 0x%02x 0x%02x 0" %(object_types[type_name], obj_x, obj_y, battle_value)
+							battle_id = battle_prop['value']
+					print "Parse battle", battle_id
+					object_screens[screen_with_obj_label] = "0x%02x 0x%02x 0x%02x 0x%02x 0" %(object_types[type_name], obj_x, obj_y, battle_id)
 				else:
 					powerup_value = 0
 					for powerup_prop in obj_properties:
