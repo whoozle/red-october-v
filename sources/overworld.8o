@@ -157,8 +157,6 @@
 								draw_battle_robot
 
 								i := battle_obj_id
-								load va - va
-								remove_object
 								v1 := 0xff
 								v2 := 0xff
 								save_battle
@@ -174,15 +172,13 @@
 								i := power_pos
 								load v1 - v3
 								draw_power_up
-								i := power_obj_id
-								load va - va
-								remove_object
 								v1 := 0xff
 								v2 := 0xff
 								save_power_up
 
 								va := v3
 								add_skillpoint
+								game_save
 							end
 						end
 					end
@@ -266,20 +262,6 @@
 	end
 	jump check_objects_loop
 
-
-: remove_object
-	i := long map_object_data
-	i += va
-	i += va
-	load v0 - v1
-	i := object_to_remove_ptr
-	save v0 - v1
-	0xf0 0x00
-	: object_to_remove_ptr
-	0 0
-	v0 := 0xff
-	save v0 - v0
-	return
 
 : move_right
 	load_player_pos

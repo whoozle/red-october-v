@@ -128,7 +128,7 @@
 		end
 
 		vb += 1
-		if vb != 16 then
+		if vb != map_screens then
 	again
 	return
 
