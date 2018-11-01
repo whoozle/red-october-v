@@ -304,8 +304,8 @@
                  "type":"battle",
                  "visible":true,
                  "width":16,
-                 "x":24,
-                 "y":465
+                 "x":32,
+                 "y":480
                 }, 
                 {
                  "gid":81,
