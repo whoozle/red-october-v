@@ -95,10 +95,10 @@ $(PREFIX)/texts.8o \
 $(PREFIX)/map.8o \
 $(PREFIX)/font.8o \
 sources/*.8o
-		cat sources/globals.8o > $@
+		cat $(PREFIX)/map.8o > $@
+		cat sources/globals.8o >> $@
 		cat $(PREFIX)/texts.8o >> $@
 		cat sources/overlay.8o >> $@
-		cat $(PREFIX)/map.8o >> $@
 		cat sources/objects.8o >> $@
 		cat sources/utils.8o >> $@
 		cat sources/text.8o >> $@

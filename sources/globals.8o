@@ -179,6 +179,6 @@
 
 : map_disable_object_next
 		v0 += 1
-		if v0 != 16 then
+		if v0 != map_screens then
 	again
 	return
