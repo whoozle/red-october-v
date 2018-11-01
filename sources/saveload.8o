@@ -76,6 +76,9 @@
 	load va - va
 	map_set_screen_pos_by_id
 
+	game_load_update_battles
+	game_load_update_skills
+
 	v0 := 1
 	return
 
@@ -109,4 +112,40 @@
 		v7 += 1
 		if v7 != 8 then
 	again
+	return
+
+: game_load_update_battles
+	vb := 0
+	loop
+		i := encounters
+		i += vb
+		load v0 - v0
+		if v0 == 0 begin
+			va := 1 #battle
+			game_load_disable_object
+		end
+
+		vb += 1
+		if vb != 16 then
+	again
+	return
+
+: game_load_update_skills
+	vb := 0
+	loop
+		i := skills
+		i += vb
+		load v0 - v0
+		if v0 == 1 begin
+			va := 2 #skill
+			game_load_disable_object
+		end
+
+		vb += 1
+		if vb != 16 then
+	again
+	return
+
+: game_load_disable_object
+	dump 10 11
 	return
