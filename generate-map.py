@@ -49,9 +49,6 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 
 	data = [0 for i in xrange(size)]
 	walls_data = [0 for i in xrange(size)]
-	object_screens = {}
-	screens = [["map_object_data_screen_empty"] for i in xrange(vscreens * hscreens)]
-	object_counter = 0
 
 	for layer in map_json['layers']:
 		if 'data' in layer:
@@ -73,7 +70,6 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 				screen_id = sy * hscreens + sx
 				# print 'screen_id', screen_id, name, x, y
 				screen_objects = objects.setdefault(screen_id, [])
-				screen_objects.append((name, x - sx * screen_width, y - sy * screen_height, w, h))
 
 				if not type_name in object_types:
 					object_types[type_name] = object_type_index
@@ -82,8 +78,6 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 
 				obj_x = x - sx * screen_width
 				obj_y = y - sy * screen_height - h
-				screen_with_obj_label = "map_object_data_screen_%s" %object_counter
-				object_counter += 1
 
 				obj_properties = lobj['properties']
 
@@ -100,7 +94,7 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 							door_y = prop_value
 						if prop_name == 'screen':
 							door_screen = prop_value
-					object_screens[screen_with_obj_label] = "0x%02x 0x%02x 0x%02x 0x%02x 0x%02x 0x%02x 0" %(object_types[type_name], obj_x, obj_y, door_screen, door_x, door_y)
+					screen_objects += (object_types[type_name], obj_x, obj_y, door_screen, door_x, door_y)
 				elif type_name == "battle":
 					battle_id = 0
 					for battle_prop in obj_properties:
@@ -108,15 +102,14 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 						if prop_name == 'value':
 							battle_id = battle_prop['value']
 					print "Parse battle", battle_id
-					object_screens[screen_with_obj_label] = "0x%02x 0x%02x 0x%02x 0x%02x 0" %(object_types[type_name], obj_x, obj_y, battle_id)
+					screen_objects += (object_types[type_name], obj_x, obj_y, battle_id)
 				else:
 					powerup_value = 0
 					for powerup_prop in obj_properties:
 						prop_name = powerup_prop['name']
 						if prop_name == 'power':
 							powerup_value = powerup_prop['value']
-					object_screens[screen_with_obj_label] = "0x%02x 0x%02x 0x%02x 0x%02x 0" %(object_types[type_name], obj_x, obj_y, powerup_value)
-				screens[screen_id] = [screen_with_obj_label] + screens[screen_id]
+					screen_objects += (object_types[type_name], obj_x, obj_y, powerup_value)
 		else:
 			print 'unhandled layer %s' %layer
 
@@ -146,11 +139,13 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 	fmap_data.write(': map_walls_data\n%s\n' % ' '.join(walls_data_packed))
 
 	fmap_data.write(': map_object_data_screen_empty 0\n')
-	for obj in object_screens:
-		fmap_data.write(': %s\n' %obj)
-		fmap_data.write('%s\n' %(object_screens[obj]))
+	for screen_id, object_data in sorted(objects.iteritems()):
+		fmap_data.write(': map_object_data_screen_%d\n' %screen_id)
+		fmap_data.write('%s\n' %(" ".join(map(hex, object_data + [0]))))
 
 	fmap_data.write(': map_object_data\n')
-	for scr in screens:
-		for scr_obj in scr:
-			fmap_data.write('offset %s\n' %scr_obj)
+	for screen_id in xrange(hscreens * vscreens):
+		if screen_id in objects:
+			fmap_data.write('offset map_object_data_screen_%d\n' %screen_id)
+		else:
+			fmap_data.write('offset map_object_data_screen_empty\n')
