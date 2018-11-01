@@ -134,3 +134,45 @@
 	v0 += 1
 	save v0 - v0
 	return
+
+: map_disable_object
+	v0 := 0
+	loop
+		i := long map_object_data
+		i += v0
+		i += v0
+		load v1 - v2
+		i := map_object_data_ptr
+		save v1 - v2
+
+		0xf0 0x00
+		: map_object_data_ptr
+		0 0
+
+: map_disable_object_loop
+		load v1 - v6
+		if v1 == 0 then
+			jump map_disable_object_next
+
+		if v1 == 3 begin #door
+			v7 := 6
+			jump map_disable_object_skip
+		end
+		v7 := 4
+		if va != v1 then # wrong type
+			jump map_disable_object_skip
+
+		if vb == v4 begin
+			v1 := 0xff
+			save v1 - v1
+		end
+
+: map_disable_object_skip
+		i += v7
+		jump map_disable_object_loop
+
+: map_disable_object_next
+		v0 += 1
+		if v0 != 16 then
+	again
+	return
