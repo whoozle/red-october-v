@@ -86,12 +86,14 @@
 	v7 := 0
 	v8 := 1
 	loop
-		v9 := 1
+		v9 := 0x80
 		v9 &= va
+		if v9 != 0 then
+			v9 := 1
 		save v9 - v9
 
 		i += v8
-		va >>= va
+		va <<= va
 
 		v7 += 1
 		if v7 != 8 then
