@@ -139,6 +139,8 @@
 		i += vb
 		load v0 - v0
 		if v0 == 1 begin
+			va := vb
+			add_skillpoint
 			va := 2 #skill
 			game_load_disable_object
 		end
