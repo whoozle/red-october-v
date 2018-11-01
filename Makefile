@@ -180,6 +180,7 @@ sources/*.8o
 		cat $(PREFIX)/module_main.8o >> $@
 		cat sources/comix.8o >> $@
 		cat sources/tiles.8o >> $@
+		cat sources/saveload.8o >> $@
 		cat $(PREFIX)/texts_data.8o >> $@ #org 0x1000, can be used as guard
 		cat $(PREFIX)/font_data.8o >> $@
 		cat $(PREFIX)/tiles.8o >> $@

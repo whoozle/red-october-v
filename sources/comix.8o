@@ -131,7 +131,9 @@
 		v0 := key
 		if v0 == OCTO_KEY_R begin
 			va := 0
-			jump set_current_overlay
+			set_current_overlay
+			game_load
+			return
 		end
 		if v0 == OCTO_KEY_C begin
 			v0 := 0
