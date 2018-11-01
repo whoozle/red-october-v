@@ -177,7 +177,7 @@
 
 		if vb == v4 begin
 			v1 := 0xff
-			save v1
+			save v1 - v1
 		end
 
 : game_load_disable_object_skip

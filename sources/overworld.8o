@@ -261,7 +261,6 @@
 	if v0 == 0x00 then
 		return
 
-	dump 0 5
 	if v0 == 0x01 begin
 		# battle
 		v6 := 4
