@@ -142,6 +142,7 @@
 		i += v0
 		i += v0
 		load v1 - v2
+
 		i := map_object_data_ptr
 		save v1 - v2
 

@@ -46,6 +46,7 @@ with open(args.source) as fi, open(map_data_path, 'w') as fmap_data, open(map_he
 	fmap_header.write(":const map_data_lo 0x%02x\n" %(addr & 0xff))
 	fmap_header.write(':const map_width %d\n' %width)
 	fmap_header.write(':const map_height %d\n' %height)
+	fmap_header.write(':const map_screens %d\n' %(hscreens * vscreens))
 
 	data = [0 for i in xrange(size)]
 	walls_data = [0 for i in xrange(size)]
