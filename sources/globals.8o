@@ -132,6 +132,8 @@
 
 	load v0 - v0
 	v0 += 1
+	if v0 > 4 then
+		v0 := 4
 	save v0 - v0
 	return
 
