@@ -131,6 +131,32 @@
 	return
 
 
+: increase_skill
+
+
+: add_skillpoint
+	i := skills
+	i += va
+	v1 := 1
+	save v1 - v1
+
+	if va <= 2 begin
+		i := battle_attack_level
+	else if va <= 5 begin
+		i := battle_engi_level
+	else if va <= 8 begin
+		i := battle_repair_level
+	else
+		i := battle_hack_level
+	end
+	end
+	end
+
+	load v1 - v1
+	va += 1
+	save v1 - v1
+	return
+
 : hit_test_objects
 	i := workaround_store
 	save v0 - v0
@@ -180,7 +206,9 @@
 								v1 := 0xff
 								v2 := 0xff
 								save_power_up
-								# TODO: do powerup
+
+								va := v3
+								add_skillpoint
 							end
 						end
 					end
