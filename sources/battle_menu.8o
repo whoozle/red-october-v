@@ -108,6 +108,11 @@
 			battle_is_active
 			if v0 == 0 begin #you have won the battle
 				i := current_battle
+				va := 1
+				load vb - vb
+				map_disable_object
+
+				i := current_battle
 				load v0 - v0
 
 				i := encounters
