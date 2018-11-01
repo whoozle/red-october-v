@@ -5,6 +5,14 @@
 	map_render
 	player_draw
 
+	i := first_run
+	load v0 - v0
+	if v0 != 0 begin
+		v0 := 0
+		save v0 - v0
+		game_save
+	end
+
 	i := exit_main
 	v0 := 0
 	save v0 - v0
