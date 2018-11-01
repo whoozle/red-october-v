@@ -5,7 +5,6 @@
 	map_render
 	player_draw
 
-	game_save
 	i := exit_main
 	v0 := 0
 	save v0 - v0
