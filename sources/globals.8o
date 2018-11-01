@@ -111,3 +111,27 @@
 	i := screen_pos
 	save v0 - v1
 	return
+
+: add_skillpoint
+	i := skills
+	i += va
+	v1 := 1
+	save v1 - v1
+	dump 10 10
+
+	if va <= 2 begin
+		i := battle_attack_level
+	else if va <= 5 begin
+		i := battle_engi_level
+	else if va <= 8 begin
+		i := battle_repair_level
+	else
+		i := battle_hack_level
+	end
+	end
+	end
+
+	load v1 - v1
+	v1 += 1
+	save v1 - v1
+	return
