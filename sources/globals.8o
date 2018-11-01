@@ -39,7 +39,7 @@
 :const overlay_comix 2
 
 : current_overlay
-	0
+	2
 
 : screen_pos
 : screen_y 0
@@ -56,7 +56,7 @@
 	0
 
 : intro_shown
-	1
+	0
 
 : game_finished
 	0
